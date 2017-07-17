@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableHighlight} from 'react-native';
-import Colors from '../constants/Colors';
+import {NavigationActions} from 'react-navigation';
+import Colors from '../../constants/Colors';
 
 const listUsers = [
     {
@@ -36,15 +37,23 @@ export default class ListUsersScreen extends React.Component {
         title: 'Login'
     };
 
-    userSelected = () => {
-        console.log('user selected');
-        this.props.navigation.navigate('Home');
+    userSelected = (user) => {
+        console.log('user selected', user);
+        return this.props
+            .navigation
+            .dispatch(NavigationActions.reset(
+                {
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({ routeName: 'Main'})
+                    ]
+                }));
     };
 
     renderUser = ({item}) => {
         return (
             <TouchableHighlight
-                onPress={this.userSelected}
+                onPress={() => this.userSelected(item)}
                 underlayColor={Colors.tintColor}
                 style={styles.item}>
                 <Text>{item.email}</Text>

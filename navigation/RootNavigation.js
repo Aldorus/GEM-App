@@ -2,8 +2,8 @@ import {Notifications} from 'expo';
 import React from 'react';
 import {StackNavigator} from 'react-navigation';
 
-import MainTabNavigator from './MainTabNavigator';
-import ListUsersScreen from '../screens/ListUsersScreen';
+import ExpoDrawerNavigator from './ExpoDrawerNavigator';
+import ListUsersScreen from '../modules/auth/ListUsers.screen';
 
 const RootStackNavigator = StackNavigator(
     {
@@ -11,11 +11,12 @@ const RootStackNavigator = StackNavigator(
             screen: ListUsersScreen
         },
         Main: {
-            screen: MainTabNavigator,
-        },
+            screen: ExpoDrawerNavigator
+        }
     },
     {
         navigationOptions: () => ({
+            mode: 'modal' ,
             headerTitleStyle: {
                 fontWeight: 'normal',
             },
