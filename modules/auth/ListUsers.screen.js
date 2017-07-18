@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, TouchableHighlight} from 'react-native';
+import {AsyncStorage, FlatList, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Colors from '../../constants/Colors';
 
@@ -18,8 +18,6 @@ const listUsers = [
     }
 ];
 
-
-
 const styles = StyleSheet.create({
     item: {
         borderBottomWidth: 1,
@@ -33,21 +31,42 @@ const styles = StyleSheet.create({
 });
 
 export default class ListUsersScreen extends React.Component {
+    state = {
+        asyncStorageChecked: false
+    };
+
     static navigationOptions = {
         title: 'Login'
     };
 
+    componentDidMount() {
+        AsyncStorage.getItem('current_user').then((user) => {
+            if (user) {
+                this.props
+                    .navigation
+                    .dispatch(NavigationActions.reset(
+                        {
+                            index: 0,
+                            actions: [
+                                NavigationActions.navigate({routeName: 'Main'})
+                            ]
+                        }));
+            }
+        });
+    }
+
     userSelected = (user) => {
-        console.log('user selected', user);
-        return this.props
-            .navigation
-            .dispatch(NavigationActions.reset(
-                {
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: 'Main'})
-                    ]
-                }));
+        AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
+            this.props
+                .navigation
+                .dispatch(NavigationActions.reset(
+                    {
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({routeName: 'Main'})
+                        ]
+                    }));
+        });
     };
 
     renderUser = ({item}) => {
@@ -61,13 +80,17 @@ export default class ListUsersScreen extends React.Component {
         );
     };
 
-    render = () => {
+    renderList = () => {
         return (
             <FlatList
                 data={listUsers}
                 renderItem={this.renderUser}
             />
         );
+    };
+
+    render = () => {
+        return this.renderList();
     }
 };
 

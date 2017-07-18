@@ -3,16 +3,17 @@ import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 import {AppLoading} from 'expo';
 import {FontAwesome} from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
-
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
 export default class AppContainer extends React.Component {
     state = {
         appIsReady: false,
+        asyncStorageChecked: false
     };
 
     componentWillMount() {
         this._loadAssetsAsync();
+
     }
 
     async _loadAssetsAsync() {
@@ -42,11 +43,11 @@ export default class AppContainer extends React.Component {
                     {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
                     {Platform.OS === 'android' &&
                     <View style={styles.statusBarUnderlay}/>}
-                    <RootNavigation />
+                    <RootNavigation/>
                 </View>
             );
         } else {
-            return <AppLoading />;
+            return <AppLoading/>;
         }
     }
 }
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     statusBarUnderlay: {
-        height: 24,
         backgroundColor: 'rgba(0,0,0,0.2)',
     },
 });
