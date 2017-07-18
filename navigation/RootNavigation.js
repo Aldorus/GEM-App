@@ -5,6 +5,7 @@ import {StackNavigator} from 'react-navigation';
 import ExpoDrawerNavigator from './ExpoDrawerNavigator';
 import ListUsersScreen from '../modules/auth/ListUsers.screen';
 import AddGemScreen from '../modules/gem/AddGem.screen';
+import SettingsScreen from '../modules/settings/Settings.screen';
 
 const RootStackNavigator = StackNavigator(
     {
@@ -16,6 +17,9 @@ const RootStackNavigator = StackNavigator(
         },
         AddGem: {
             screen: AddGemScreen
+        },
+        Settings: {
+            screen: SettingsScreen
         }
     },
     {

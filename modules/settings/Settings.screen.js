@@ -1,20 +1,20 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
-import {ExpoConfigView} from '@expo/samples';
+import {ScrollView, StyleSheet, Text, AsyncStorage} from 'react-native';
 
 export default class SettingsScreen extends React.Component {
     static navigationOptions = {
         title: 'app.json',
     };
 
+    goToDisconnect = () => {
+        AsyncStorage.removeItem('current_user');
+        this.props.navigation.navigate('Login');
+    };
+
     render() {
         return (
             <ScrollView style={styles.container}>
-
-                {/* Go ahead and delete ExpoConfigView and replace it with your
-                 * content, we just wanted to give you a quick view of your config */}
-                <ExpoConfigView />
-
+                <Text onPress={this.goToDisconnect}>Disconnect</Text>
             </ScrollView>
         );
     }
@@ -23,6 +23,6 @@ export default class SettingsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-    },
+        backgroundColor: '#fff'
+    }
 });

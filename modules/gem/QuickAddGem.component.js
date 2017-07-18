@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import cardStyle from '../../constants/Card.style';
 
 const style = StyleSheet.create({
     container: {
@@ -7,15 +8,7 @@ const style = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
-        margin: 5,
-        padding: 5,
         paddingRight: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 1,
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
@@ -32,7 +25,7 @@ const style = StyleSheet.create({
 export default class QuickAddGemComponent extends Component {
     render() {
         return (
-            <View style={style.container}>
+            <View style={[cardStyle.card, style.container]}>
                 <Image
                     style={style.avatar}
                     source={{uri: 'https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200'}}/>
