@@ -18,6 +18,6 @@ export default DrawerNavigator({
     }
 }, {
     initialRouteName: 'Home',
-    contentComponent:({navigation})=> <ExpoDrawerContent navigation={navigation}/>, //you dont need the routes props, but just in case you wanted to use those instead for the navigation item creation you could
+    contentComponent: ({navigation}) => <ExpoDrawerContent navigation={navigation}/>,
     mode: Platform.OS === 'ios' ? 'modal' : 'card'
 });

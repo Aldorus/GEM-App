@@ -5,6 +5,8 @@ import {FontAwesome} from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
+console.disableYellowBox = true;
+
 export default class AppContainer extends React.Component {
     state = {
         appIsReady: false,

@@ -1,53 +1,74 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
-import { Container, Content, Card, CardItem, Body } from 'native-base';
-
+import {View} from 'react-native';
+import GiftedListView from 'react-native-gifted-listview';
+import FeedElementComponent from './FeedElement.component';
+import QuickAddGemComponent from './QuickAddGem.component';
 
 const listGems = [
     {
-        title: 'Salut'
+        type: 'QuickAddGemComponent'
     },
     {
-        title: 'Ça va'
+        title: 'Salut',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
     },
     {
-        title: 'Bien?'
+        title: 'Ça va',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Bien?',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Salut',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Ça va',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Bien?',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Salut',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Ça va',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+    },
+    {
+        title: 'Bien?',
+        image: `http://placebear.com/g/300/200?key=${Math.random()}`
     }
 ];
 
 export default class FeedComponent extends React.Component {
-    // renderItem = () => {
-    //     return (
-    //
-    //     )
-    // }
+    onFetch = (page = 1, callback, options) => {
+        setTimeout(() => {
+            callback(listGems);
+        });
+    };
+
+    renderRowView = (rowData) => {
+        return rowData.type === 'QuickAddGemComponent' ? <QuickAddGemComponent/> : <FeedElementComponent
+            gemData={rowData}
+        />;
+    };
 
     render() {
         return (
             <View>
-                <Text>Hello</Text>
-                <Card>
-                     <CardItem>
-                         <Body>
-                             <Text style={{fontWeight:'bold',fontSize:17}}>Title</Text>
-                             <Text note style={{fontSize:15}}>Topic</Text>
-                         </Body>
-                     </CardItem>
-                 </Card>
+                <GiftedListView
+                    onFetch={this.onFetch}
+                    refreshable={true}
+                    pagination={true}
+                    rowView={this.renderRowView}
+                />
             </View>
-            // <Container>
-            //     <Content>
-            //         <Card>
-            //             <CardItem>
-            //                 <Body>
-            //                     <Text>
-            //                         Your text here
-            //                     </Text>
-            //                 </Body>
-            //             </CardItem>
-            //         </Card>
-            //     </Content>
-            // </Container>
         );
     }
 }

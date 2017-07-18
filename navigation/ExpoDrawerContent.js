@@ -1,13 +1,15 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text} from 'react-native';
+import ExpoDrawerAvatarComponent from './ExpoDrawerAvatar.component';
 
 export default class ExpoDrawerContent extends React.Component {
     render() {
         return (
-            <View>
+            <ScrollView>
+                <ExpoDrawerAvatarComponent/>
                 <Text>Drawer</Text>
 
-            </View>
+            </ScrollView>
         );
     }
 }
