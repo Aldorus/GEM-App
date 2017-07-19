@@ -1,14 +1,23 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, AsyncStorage} from 'react-native';
+import {NavigationActions} from 'react-navigation';
 
 export default class SettingsScreen extends React.Component {
     static navigationOptions = {
-        title: 'app.json',
+        title: 'Settings',
     };
 
     goToDisconnect = () => {
         AsyncStorage.removeItem('current_user');
-        this.props.navigation.navigate('Login');
+        this.props
+            .navigation
+            .dispatch(NavigationActions.reset(
+                {
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName: 'Login'})
+                    ]
+                }));
     };
 
     render() {

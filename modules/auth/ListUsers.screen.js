@@ -2,6 +2,7 @@ import React from 'react';
 import {AsyncStorage, FlatList, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Colors from '../../constants/Colors';
+import listItemStyle from '../../constants/ListItemStyle';
 
 const listUsers = [
     {
@@ -74,7 +75,7 @@ export default class ListUsersScreen extends React.Component {
             <TouchableHighlight
                 onPress={() => this.userSelected(item)}
                 underlayColor={Colors.tintColor}
-                style={styles.item}>
+                style={listItemStyle.item}>
                 <Text>{item.email}</Text>
             </TouchableHighlight>
         );

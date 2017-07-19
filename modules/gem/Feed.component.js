@@ -6,50 +6,56 @@ import QuickAddGemComponent from './QuickAddGem.component';
 
 const listGems = [
     {
-        type: 'QuickAddGemComponent'
-    },
-    {
         title: 'Salut',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Ça va',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Bien?',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Salut',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Ça va',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Bien?',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Salut',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Ça va',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     },
     {
         title: 'Bien?',
-        image: `http://placebear.com/g/300/200?key=${Math.random()}`
+        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
     }
 ];
 
+const listToDisplay = listGems.slice(0);
+listToDisplay.unshift({
+    type: 'QuickAddGemComponent'
+});
+
 export default class FeedComponent extends React.Component {
-    onFetch = (page = 1, callback, options) => {
+    onFetch = (page = 1, callback) => {
         setTimeout(() => {
-            callback(listGems);
+            console.log('page', page);
+            if(page === 1) {
+                return callback(listToDisplay)
+            }
+            return callback(listGems);
         });
     };
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Colors from '../constants/Colors';
 
 const style = StyleSheet.create({
     container: {
@@ -36,14 +37,14 @@ export class ExpoDrawerRightComponent extends React.Component {
             <View style={style.container}>
                 <Icon
                     name="search"
-                    color="#0D8F4F"
+                    color={Colors.tintColor}
                     size={25}
                     style={style.icon}
                     onPress={this.goToSearch}
                 ></Icon>
                 <Icon
                     name="plus"
-                    color="#0D8F4F"
+                    color={Colors.tintColor}
                     size={25}
                     style={style.icon}
                     onPress={this.goToNewGem}
