@@ -6,7 +6,8 @@ import Colors from '../constants/Colors';
 
 const style = StyleSheet.create({
     container: {
-        paddingRight: 10
+        paddingRight: 10,
+        paddingLeft: 10
     }
 });
 
@@ -27,7 +28,7 @@ export default class ExpoDrawerLeftComponent extends React.Component {
                     color={Colors.tintColor}
                     size={25}
                     onPress={this.openDrawer}
-                ></Icon>
+                />
             </View>
         );
     }

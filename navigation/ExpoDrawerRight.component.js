@@ -18,9 +18,9 @@ const style = StyleSheet.create({
     }
 });
 
-export class ExpoDrawerRightComponent extends React.Component {
+export default class ExpoDrawerRightComponent extends React.Component {
     static propTypes = {
-        navigation: PropTypes.any.isRequired
+        navigation: PropTypes.object.isRequired
     };
 
     goToSearch = () => {
@@ -41,17 +41,15 @@ export class ExpoDrawerRightComponent extends React.Component {
                     size={25}
                     style={style.icon}
                     onPress={this.goToSearch}
-                ></Icon>
+                />
                 <Icon
                     name="plus"
                     color={Colors.tintColor}
                     size={25}
                     style={style.icon}
                     onPress={this.goToNewGem}
-                ></Icon>
+                />
             </View>
         );
     }
 }
-
-export default ExpoDrawerRightComponent;

@@ -7,6 +7,16 @@ import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
 console.disableYellowBox = true;
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    statusBarUnderlay: {
+        backgroundColor: 'rgba(0,0,0,0.2)',
+    },
+});
+
 export default class AppContainer extends React.Component {
     state = {
         appIsReady: false,
@@ -14,11 +24,10 @@ export default class AppContainer extends React.Component {
     };
 
     componentWillMount() {
-        this._loadAssetsAsync();
-
+        this.loadAssetsAsync();
     }
 
-    async _loadAssetsAsync() {
+    async loadAssetsAsync() {
         try {
             await cacheAssetsAsync({
                 images: [require('./assets/images/expo-wordmark.png')],
@@ -48,18 +57,7 @@ export default class AppContainer extends React.Component {
                     <RootNavigation/>
                 </View>
             );
-        } else {
-            return <AppLoading/>;
         }
+        return <AppLoading/>;
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    statusBarUnderlay: {
-        backgroundColor: 'rgba(0,0,0,0.2)',
-    },
-});

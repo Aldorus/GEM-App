@@ -1,12 +1,17 @@
 import React from 'react';
 import {ScrollView, Text, TouchableHighlight} from 'react-native';
+import PropTypes from 'prop-types';
 import ExpoDrawerAvatarComponent from './ExpoDrawerAvatar.component';
 import Colors from '../constants/Colors';
 import ListItemStyle from '../constants/ListItemStyle';
 
 export default class ExpoDrawerContent extends React.Component {
+    static propTypes = {
+        navigation: PropTypes.any.isRequired
+    };
+
     goToSettings = () => {
-        this.props.navigation.navigate('Settings')
+        this.props.navigation.navigate('Settings');
     };
 
     render() {

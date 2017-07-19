@@ -1,6 +1,7 @@
 import React from 'react';
-import {AsyncStorage, FlatList, StyleSheet, Text, TouchableHighlight} from 'react-native';
+import {AsyncStorage, FlatList, Text, TouchableHighlight} from 'react-native';
 import {NavigationActions} from 'react-navigation';
+import PropTypes from 'prop-types';
 import Colors from '../../constants/Colors';
 import listItemStyle from '../../constants/ListItemStyle';
 
@@ -19,19 +20,11 @@ const listUsers = [
     }
 ];
 
-const styles = StyleSheet.create({
-    item: {
-        borderBottomWidth: 1,
-        borderStyle: 'solid',
-        borderBottomColor: 'black',
-        paddingLeft: 18,
-        paddingRight: 10,
-        paddingTop: 15,
-        paddingBottom: 15
-    }
-});
-
 export default class ListUsersScreen extends React.Component {
+    static propTypes = {
+        navigation: PropTypes.any.isRequired
+    };
+
     state = {
         asyncStorageChecked: false
     };
@@ -75,7 +68,8 @@ export default class ListUsersScreen extends React.Component {
             <TouchableHighlight
                 onPress={() => this.userSelected(item)}
                 underlayColor={Colors.tintColor}
-                style={listItemStyle.item}>
+                style={listItemStyle.item}
+            >
                 <Text>{item.email}</Text>
             </TouchableHighlight>
         );
@@ -93,5 +87,4 @@ export default class ListUsersScreen extends React.Component {
     render = () => {
         return this.renderList();
     }
-};
-
+}
