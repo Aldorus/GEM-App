@@ -13,19 +13,18 @@ const style = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
         flexDirection: 'row',
-        // alignSelf: 'stretch',
-        height: 50,
-        width:300
+        alignSelf: 'stretch'
     },
     textWrapper: {
         flexDirection: 'column',
         flex: 1,
-        paddingRight:15,
+        paddingRight: 15,
         paddingBottom: 10
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 30,
+        height: 30,
+        padding: 10,
         marginRight: 8
     }
 });
@@ -39,7 +38,7 @@ export default class FeedElementComponent extends React.Component {
         return (
             <View style={[style.container]}>
                 <Image
-                    borderRadius={50}
+                    borderRadius="15"
                     style={style.image}
                     indicator={ProgressBar}
                     indicatorProps={{

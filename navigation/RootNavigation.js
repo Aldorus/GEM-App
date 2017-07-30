@@ -14,7 +14,18 @@ import TopNavigationGem from './TopNavigationGem.component';
 const RootStackNavigator = ({initialRouteName, screenProps}) => {
     initialRouteName = 'Main';
     const stackNavigatorConfigs = {
-        initialRouteName
+        initialRouteName,
+        cardStyle: {
+            shadowColor: 'white',
+        },
+        navigationOptions: {
+            header: {
+                style: {
+                    elevation: 0,       //remove shadow on Android
+                    shadowOpacity: 0,   //remove shadow on iOS
+                }
+            }
+        }
     };
 
     const routeConfigs = {
@@ -37,7 +48,7 @@ const RootStackNavigator = ({initialRouteName, screenProps}) => {
 
     const CustomNavigator = StackNavigator(routeConfigs, stackNavigatorConfigs);
     console.log(initialRouteName);
-    return <View style={{flex:1, backgroundColor:'blue'}}>
+    return <View style={{flex:1}}>
         <TopNavigationGem/>
         <CustomNavigator screenProps={screenProps}/>
         <BottomNavigationGem/>
