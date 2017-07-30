@@ -1,64 +1,29 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import GiftedListView from 'react-native-gifted-listview';
+import {ListView} from '@shoutem/ui';
 import FeedElementComponent from './FeedElement.component';
-import QuickAddGemComponent from './QuickAddGem.component';
+import QuickAddGemComponent from './QuickSearch.component';
+import listGems from './gem.json';
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 6,
-        paddingBottom: 6
+        flex: 1,
+        alignSelf: 'stretch'
     }
 });
-
-const listGems = [
-    {
-        title: 'Salut',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Ça va',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Bien?',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Salut',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Ça va',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Bien?',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Salut',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Ça va',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    },
-    {
-        title: 'Bien?',
-        image: `http://loremflickr.com/320/240/duck/all?key=${Math.random()}`
-    }
-];
-
 const listToDisplay = listGems.slice(0);
 listToDisplay.unshift({
-    type: 'QuickAddGemComponent'
+    type: 'QuickSearchComponent'
 });
 
 export default class FeedComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     onFetch = (page = 1, callback) => {
         setTimeout(() => {
-            console.log('page', page);
             if (page === 1) {
                 return callback(listToDisplay);
             }
@@ -67,20 +32,25 @@ export default class FeedComponent extends React.Component {
     };
 
     renderRowView = (rowData) => {
-        return rowData.type === 'QuickAddGemComponent' ?
+        console.log(rowData);
+        return rowData.type === 'QuickSearchComponent' ?
             <QuickAddGemComponent/> :
-            <FeedElementComponent
-                gemData={rowData}
-            />;
+            <FeedElementComponent gemData={rowData}/>;
     };
 
     render() {
         return (
             <View style={styles.container}>
-                <GiftedListView
-                    onFetch={this.onFetch}
-                    rowView={this.renderRowView}
-                />
+                <ListView
+                    data={listGems}
+                    renderRow={this.renderRowView}
+                ></ListView>
+
+                {/*<GiftedListView*/}
+                {/*onFetch={this.onFetch}*/}
+                {/*contentOffset={{x:0, y:50}}*/}
+                {/*rowView={this.renderRowView}*/}
+                {/*/>*/}
             </View>
         );
     }

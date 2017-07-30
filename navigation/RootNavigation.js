@@ -1,19 +1,31 @@
 import {Notifications} from 'expo';
 import React from 'react';
+import {View, Text} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
-import ExpoDrawerNavigator from './ExpoDrawerNavigator';
 import ListUsersScreen from '../modules/auth/ListUsers.screen';
 import AddGemScreen from '../modules/gem/AddGem.screen';
 import SettingsScreen from '../modules/settings/Settings.screen';
+import IntroExampleScreen from '../modules/intro/IntroExample.screen';
+import HomeScreen from '../modules/home/Home.screen';
+import BottomNavigationGem from './BottomNavigationGem.component';
+import TopNavigationGem from './TopNavigationGem.component';
 
-const RootStackNavigator = StackNavigator(
-    {
+const RootStackNavigator = ({initialRouteName, screenProps}) => {
+    initialRouteName = 'Main';
+    const stackNavigatorConfigs = {
+        initialRouteName
+    };
+
+    const routeConfigs = {
         Login: {
             screen: ListUsersScreen
         },
+        Intro: {
+            screen: IntroExampleScreen
+        },
         Main: {
-            screen: ExpoDrawerNavigator
+            screen: HomeScreen
         },
         AddGem: {
             screen: AddGemScreen
@@ -21,16 +33,17 @@ const RootStackNavigator = StackNavigator(
         Settings: {
             screen: SettingsScreen
         }
-    },
-    {
-        navigationOptions: {
-            mode: 'modal',
-            headerTitleStyle: {
-                fontWeight: 'normal'
-            }
-        }
-    }
-);
+    };
+
+    const CustomNavigator = StackNavigator(routeConfigs, stackNavigatorConfigs);
+    console.log(initialRouteName);
+    return <View style={{flex:1, backgroundColor:'blue'}}>
+        <TopNavigationGem/>
+        <CustomNavigator screenProps={screenProps}/>
+        <BottomNavigationGem/>
+    </View>;
+//
+};
 
 export default class RootNavigator extends React.Component {
     componentDidMount() {
@@ -63,6 +76,6 @@ export default class RootNavigator extends React.Component {
     };
 
     render() {
-        return <RootStackNavigator/>;
+        return <RootStackNavigator initialRouteName={this.props.forceScreen}/>;
     }
 }

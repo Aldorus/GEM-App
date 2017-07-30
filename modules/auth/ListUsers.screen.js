@@ -17,6 +17,24 @@ const listUsers = [
         email: 'guillaume.roussel@gem.com',
         label: 'Guillaume Roussel',
         group: 'A'
+    },
+    {
+        key: 'c',
+        email: 'guillaume.roussel@gem.com',
+        label: 'Guillaume Roussel',
+        group: 'A'
+    },
+    {
+        key: 'd',
+        email: 'guillaume.roussel@gem.com',
+        label: 'Guillaume Roussel',
+        group: 'A'
+    },
+    {
+        key: 'e',
+        email: 'guillaume.roussel@gem.com',
+        label: 'Guillaume Roussel',
+        group: 'A'
     }
 ];
 
@@ -29,38 +47,20 @@ export default class ListUsersScreen extends React.Component {
         asyncStorageChecked: false
     };
 
-    static navigationOptions = {
-        title: 'Login'
+    goToMainScreen = () => {
+        this.props
+            .navigation
+            .dispatch(NavigationActions.reset(
+                {
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName: 'Main'})
+                    ]
+                }));
     };
 
-    componentDidMount() {
-        AsyncStorage.getItem('current_user').then((user) => {
-            if (user) {
-                this.props
-                    .navigation
-                    .dispatch(NavigationActions.reset(
-                        {
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({routeName: 'Main'})
-                            ]
-                        }));
-            }
-        });
-    }
-
     userSelected = (user) => {
-        AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
-            this.props
-                .navigation
-                .dispatch(NavigationActions.reset(
-                    {
-                        index: 0,
-                        actions: [
-                            NavigationActions.navigate({routeName: 'Main'})
-                        ]
-                    }));
-        });
+        AsyncStorage.setItem('current_user', JSON.stringify(user)).then(this.goToMainScreen);
     };
 
     renderUser = ({item}) => {
@@ -78,6 +78,7 @@ export default class ListUsersScreen extends React.Component {
     renderList = () => {
         return (
             <FlatList
+                style={{flex:1}}
                 data={listUsers}
                 renderItem={this.renderUser}
             />
