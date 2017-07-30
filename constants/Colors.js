@@ -3,6 +3,7 @@ const secondaryTintColor= '#daffff';
 
 export default {
     tintColor,
+    secondaryTintColor,
     colorText: '#000',
     colorBackground: '#FFF',
     gradientStart: tintColor,

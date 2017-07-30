@@ -1,11 +1,23 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {Image, TouchableHighlight} from 'react-native';
 import {NavigationBar} from '@shoutem/ui'
 import {LinearGradient} from 'expo';
 import Colors from '../constants/Colors';
 
 export default class TopNavigationGem extends React.Component {
     static propTypes = {};
+
+    goToParams = () => {
+        console.log('Navbar touched');
+        console.log(this.props.navigation)
+    };
+
+    renderCenterComponent = () => {
+        return <TouchableHighlight underlayColor={Colors.tintColor}
+                                   onPress={this.goToParams}>
+            <Image source={require('../assets/icons/contextual-menu@2x.png')}></Image>
+        </TouchableHighlight>
+    };
 
     render() {
         return (
@@ -16,7 +28,7 @@ export default class TopNavigationGem extends React.Component {
             >
                 <NavigationBar
                     styleName="clear"
-                    centerComponent={<Image source={require('../assets/icons/contextual-menu@2x.png')}></Image>}
+                    centerComponent={this.renderCenterComponent()}
                 />
             </LinearGradient>
         );

@@ -7,13 +7,6 @@ import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
 console.disableYellowBox = true;
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    }
-});
-
 export default class AppContainer extends React.Component {
     asyncStorageChecked = false;
     assetsLoaded = false;
@@ -70,11 +63,7 @@ export default class AppContainer extends React.Component {
     render() {
         if (this.state.appIsReady) {
             const nextScreen = (!this.user) ? 'Login' : 'Main';
-            return (
-                <View style={styles.container}>
-                    <RootNavigation forceScreen={nextScreen}/>
-                </View>
-            );
+            return (<RootNavigation forceScreen={nextScreen}/>);
         }
         return <AppLoading/>;
     }

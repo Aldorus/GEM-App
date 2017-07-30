@@ -1,6 +1,6 @@
 import {Notifications} from 'expo';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
 import ListUsersScreen from '../modules/auth/ListUsers.screen';
@@ -8,16 +8,16 @@ import AddGemScreen from '../modules/gem/AddGem.screen';
 import SettingsScreen from '../modules/settings/Settings.screen';
 import IntroExampleScreen from '../modules/intro/IntroExample.screen';
 import HomeScreen from '../modules/home/Home.screen';
-import BottomNavigationGem from './BottomNavigationGem.component';
-import TopNavigationGem from './TopNavigationGem.component';
+import {TransitionEngine} from './transitions/TransitionEngine';
 
-const RootStackNavigator = ({initialRouteName, screenProps}) => {
+const RootStackNavigator = ({initialRouteName}) => {
     initialRouteName = 'Main';
     const stackNavigatorConfigs = {
         initialRouteName,
         cardStyle: {
-            shadowColor: 'white',
+            shadowColor: 'transparent'
         },
+        transitionConfig: TransitionEngine,
         navigationOptions: {
             header: {
                 style: {
@@ -47,13 +47,9 @@ const RootStackNavigator = ({initialRouteName, screenProps}) => {
     };
 
     const CustomNavigator = StackNavigator(routeConfigs, stackNavigatorConfigs);
-    console.log(initialRouteName);
-    return <View style={{flex:1}}>
-        <TopNavigationGem/>
-        <CustomNavigator screenProps={screenProps}/>
-        <BottomNavigationGem/>
+    return <View style={{flex: 1}}>
+        <CustomNavigator/>
     </View>;
-//
 };
 
 export default class RootNavigator extends React.Component {
@@ -84,6 +80,7 @@ export default class RootNavigator extends React.Component {
         console.log(
             `Push notification ${origin} with data: ${JSON.stringify(data)}`
         );
+
     };
 
     render() {

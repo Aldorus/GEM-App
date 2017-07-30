@@ -2,6 +2,8 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import t from 'tcomb-form-native';
 import AddGemGlobalSearch from './AddGemGlobalSearch.service';
+import TopNavigationGem from '../../navigation/TopNavigationGem.component';
+import BottomNavigationGem from '../../navigation/BottomNavigationGem.component';
 
 const Form = t.form.Form;
 const Gem = t.struct({
@@ -9,16 +11,14 @@ const Gem = t.struct({
 });
 
 export default class AddGemScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+    };
+
     constructor(props) {
         super(props);
         this.state = {};
     }
-
-    static navigationOptions = () => {
-        return {
-            title: 'Add a new Gem'
-        };
-    };
 
     submit = () => {
 
@@ -53,16 +53,19 @@ export default class AddGemScreen extends React.Component {
     render() {
         return (
             <View>
-                <Text>
-                    Share a new Gem
-                </Text>
-                <Form
-                    ref="form"
-                    onChange={this.onChange}
-                    value={this.state.value}
-                    type={Gem}
-                />
-                {this.renderResults()}
+                <TopNavigationGem navigation={this.props.navigation}/>
+                <View style={{flex: 1}}>
+                    <Text>
+                        Share a new Gem
+                    </Text>
+                    <Form
+                        ref="form"
+                        onChange={this.onChange}
+                        value={this.state.value}
+                        type={Gem}
+                    />
+                    {this.renderResults()}
+                </View>
             </View>
         );
     }

@@ -8,12 +8,9 @@ import listGems from './gem.json';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        backgroundColor: 'white'
     }
-});
-const listToDisplay = listGems.slice(0);
-listToDisplay.unshift({
-    type: 'QuickSearchComponent'
 });
 
 export default class FeedComponent extends React.Component {
@@ -32,10 +29,11 @@ export default class FeedComponent extends React.Component {
     };
 
     renderRowView = (rowData) => {
-        console.log(rowData);
-        return rowData.type === 'QuickSearchComponent' ?
-            <QuickAddGemComponent/> :
-            <FeedElementComponent gemData={rowData}/>;
+        return <FeedElementComponent gemData={rowData}/>;
+    };
+
+    renderHeader = () => {
+        return <QuickAddGemComponent/>;
     };
 
     render() {
@@ -43,6 +41,9 @@ export default class FeedComponent extends React.Component {
             <View style={styles.container}>
                 <ListView
                     data={listGems}
+                    autoHideHeader={true}
+                    style={{listContent:{backgroundColor:'transparent'}}}
+                    renderHeader={this.renderHeader}
                     renderRow={this.renderRowView}
                 ></ListView>
 
