@@ -6,6 +6,7 @@ import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import ExternalSearchResults from '../search/ExternalSearchResults.conponent';
 import ExternalSearchPlace from '../search/ExternalSearchPlace.service';
+import ExternalSearchMovie from '../search/ExternalSearchMovie.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -60,10 +61,17 @@ export default class AddGemScreen extends React.Component {
         });
     };
 
+    searchMovies = (value) => {
+        ExternalSearchMovie(value).then((movies) => {
+            this.setState({movies})
+        });
+    };
+
     onChange = (value) => {
         if (value.length > 3) {
             this.searchEntity(value);
             this.searchPlaces(value);
+            this.searchMovies(value);
         }
         this.setState({value});
     };
@@ -73,6 +81,7 @@ export default class AddGemScreen extends React.Component {
         // TODO refactoring here
         this.state.entities ? results = results.concat(this.state.entities) : '';
         this.state.places ? results = results.concat(this.state.places) : '';
+        this.state.movies ? results = results.concat(this.state.movies) : '';
         return results;
     };
 
