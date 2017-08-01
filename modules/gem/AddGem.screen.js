@@ -11,11 +11,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: 'stretch',
-        alignItems: 'center',
-        padding: 10
+        alignItems: 'center'
     },
     image: {
-        bottom: 26
+        bottom: 16
     },
     title: {
         fontSize: 20,
@@ -27,11 +26,14 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 50,
         height: 40,
-        marginTop: 30
+        marginTop: 30,
+        marginLeft: 15,
+        marginRight: 15,
+        alignSelf: 'stretch'
     },
     icon: {
         bottom: 32,
-        left: 12,
+        left: 25,
         alignSelf: 'flex-start'
     }
 });
@@ -89,11 +91,11 @@ export default class AddGemScreen extends React.Component {
                     <Image source={require('../../assets/icons/gem.png')}
                            style={styles.image}/>
                     <Text style={styles.title}>Add a Gem</Text>
-                    <TextInput
-                        placeholder="Find your GEM"
-                        style={styles.input}
-                        onChangeText={this.onChange}
-                    />
+                    <TextInput placeholder="Find your GEM"
+                               style={styles.input}
+                               placeholderTextColor="black"
+                               underlineColorAndroid="transparent"
+                               onChangeText={this.onChange}/>
                     <Image source={require('../../assets/icons/search.png')}
                            style={styles.icon}/>
                     {this.renderResults()}

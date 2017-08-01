@@ -9,7 +9,9 @@ import StyledTitle from '../../components/StyledTitle';
 
 const style = StyleSheet.create({
     container: {
-        margin: 10,
+        margin: 15,
+        marginTop: 8,
+        marginBottom: 8,
         flexDirection: 'row',
         alignSelf: 'stretch'
     },
@@ -37,7 +39,7 @@ export default class FeedElementComponent extends React.Component {
         return (
             <View style={[style.container]}>
                 <Image
-                    borderRadius="15"
+                    borderRadius={15}
                     style={style.image}
                     indicator={ProgressBar}
                     indicatorProps={{

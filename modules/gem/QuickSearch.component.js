@@ -1,52 +1,32 @@
-import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
-import t from 'tcomb-form-native';
+import React from 'react';
+import {Image, StyleSheet, TextInput} from 'react-native';
 import {LinearGradient} from 'expo';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../constants/Colors';
-import _ from 'lodash';
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingRight: 10,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
         marginBottom: 20,
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-        borderRadius: 50
+        marginTop: 20,
+        marginLeft: 15,
+        marginRight: 15,
+        borderRadius: 20
+    },
+    input: {
+        borderRadius: 20,
+        padding: 10,
+        paddingLeft: 50,
+        height: 40,
+        alignSelf: 'stretch'
     },
     icon: {
-        position: 'absolute',
-        left: 15,
-        top: 12
+        position:'absolute',
+        top: 8,
+        left: 12,
+        alignSelf: 'flex-start'
     }
 });
-const Form = t.form.Form;
-const Search = t.struct({
-    search: t.String
-});
-// clone the default stylesheet
-const stylesheetForm = _.cloneDeep(t.form.Form.stylesheet);
-stylesheetForm.textbox.normal.flex = 1;
-stylesheetForm.textbox.normal.height = 50;
-stylesheetForm.textbox.normal.borderRadius = 50;
-stylesheetForm.textbox.normal.borderWidth = 0;
 
-export default class QuickSearchComponent extends Component {
-    formOptions = {
-        auto: 'none',
-        fields: {
-            search: {
-                placeholder: 'Search the Gembox',
-                stylesheet: stylesheetForm
-            }
-        }
-    };
+export default class QuickSearchComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -60,23 +40,16 @@ export default class QuickSearchComponent extends Component {
 
     render() {
         return (
-            <LinearGradient
-                colors={[Colors.gradientStart, Colors.gradientEnd]}
-                end={[1, 0]}
-                style={style.container}
-            >
-                <Form
-                    ref="form"
-                    onChange={this.onChange}
-                    value={this.state.value}
-                    options={this.formOptions}
-                    type={Search}
-                />
-                <Icon
-                    name="search"
-                    size={25}
-                    style={style.icon}
-                />
+            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
+                            end={[1, 0]}
+                            style={styles.container}>
+                <TextInput placeholder="Search the Gembox"
+                           style={styles.input}
+                           placeholderTextColor="black"
+                           underlineColorAndroid="transparent"
+                           onChangeText={this.onChange}/>
+                <Image source={require('../../assets/icons/search.png')}
+                       style={styles.icon}/>
             </LinearGradient>
         );
     }

@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     },
     smallIcon: {},
     bigIcon: {
-        bottom: 20
+        bottom: 30,
+        height: 62
     }
 });
 
