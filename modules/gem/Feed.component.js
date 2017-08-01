@@ -19,15 +19,6 @@ export default class FeedComponent extends React.Component {
         this.state = {};
     }
 
-    onFetch = (page = 1, callback) => {
-        setTimeout(() => {
-            if (page === 1) {
-                return callback(listToDisplay);
-            }
-            return callback(listGems);
-        });
-    };
-
     renderRowView = (rowData) => {
         return <FeedElementComponent gemData={rowData}/>;
     };
@@ -46,12 +37,6 @@ export default class FeedComponent extends React.Component {
                     renderHeader={this.renderHeader}
                     renderRow={this.renderRowView}
                 ></ListView>
-
-                {/*<GiftedListView*/}
-                {/*onFetch={this.onFetch}*/}
-                {/*contentOffset={{x:0, y:50}}*/}
-                {/*rowView={this.renderRowView}*/}
-                {/*/>*/}
             </View>
         );
     }

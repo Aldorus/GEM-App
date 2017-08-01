@@ -62,7 +62,7 @@ export default class AppContainer extends React.Component {
 
     render() {
         if (this.state.appIsReady) {
-            const nextScreen = (!this.user) ? 'Login' : 'Main';
+            const nextScreen = (!this.user) ? 'Login' : 'Home';
             return (<RootNavigation forceScreen={nextScreen}/>);
         }
         return <AppLoading/>;

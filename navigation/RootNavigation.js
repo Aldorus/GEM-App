@@ -17,15 +17,7 @@ const RootStackNavigator = ({initialRouteName}) => {
         cardStyle: {
             shadowColor: 'transparent'
         },
-        transitionConfig: TransitionEngine,
-        navigationOptions: {
-            header: {
-                style: {
-                    elevation: 0,       //remove shadow on Android
-                    shadowOpacity: 0,   //remove shadow on iOS
-                }
-            }
-        }
+        transitionConfig: TransitionEngine
     };
 
     const routeConfigs = {

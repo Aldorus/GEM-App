@@ -1,13 +1,38 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import t from 'tcomb-form-native';
-import AddGemGlobalSearch from './AddGemGlobalSearch.service';
+import {Image, StyleSheet, Text, View, TextInput} from 'react-native';
+import {LinearGradient} from 'expo';
+import AddGemGlobalSearch from '../search/AddGemGlobalSearch.service';
+import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
-import BottomNavigationGem from '../../navigation/BottomNavigationGem.component';
+import ExternalSearchResults from '../search/ExternalSearchResults.conponent';
 
-const Form = t.form.Form;
-const Gem = t.struct({
-    input: t.String
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        padding: 10
+    },
+    image: {
+        bottom: 26
+    },
+    title: {
+        fontSize: 20,
+        backgroundColor: 'transparent'
+    },
+    input: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 10,
+        paddingLeft: 50,
+        height: 40,
+        marginTop: 30
+    },
+    icon: {
+        bottom: 32,
+        left: 12,
+        alignSelf: 'flex-start'
+    }
 });
 
 export default class AddGemScreen extends React.Component {
@@ -20,14 +45,10 @@ export default class AddGemScreen extends React.Component {
         this.state = {};
     }
 
-    submit = () => {
-
-    };
-
     onChange = (value) => {
         console.log('update value', value);
-        if (value.input.length > 3) {
-            AddGemGlobalSearch(value.input).then((response) => {
+        if (value.length > 3) {
+            AddGemGlobalSearch(value).then((response) => {
                 console.log(response);
                 this.setState({response})
             });
@@ -35,37 +56,32 @@ export default class AddGemScreen extends React.Component {
         this.setState({value});
     };
 
-    renderResult = (entry, index) => {
-        console.log('entry to render', entry);
-        if(entry.result.detailedDescription && entry.result.detailedDescription.articleBody) {
-            return <Text key={index}>{JSON.stringify(entry.result['@type'])} : {entry.result.detailedDescription.articleBody}</Text>;
-        }
-        return <Text key={index}>{JSON.stringify(entry.result['@type'])} : {JSON.stringify(entry.result)}</Text>;
-    };
-
     renderResults = () => {
         if (this.state.response) {
-            console.log('result to render');
-            return this.state.response.itemListElement.map(this.renderResult);
+            return <ExternalSearchResults results={this.state.response}/>;
         }
     };
 
     render() {
         return (
-            <View>
-                <TopNavigationGem navigation={this.props.navigation}/>
-                <View style={{flex: 1}}>
-                    <Text>
-                        Share a new Gem
-                    </Text>
-                    <Form
-                        ref="form"
-                        onChange={this.onChange}
-                        value={this.state.value}
-                        type={Gem}
+            <View style={{flex: 1}}>
+                <TopNavigationGem hasHistory={true}
+                                  navigation={this.props.navigation}/>
+                <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
+                                style={styles.container}
+                                end={[1, 0]}>
+                    <Image source={require('../../assets/icons/gem.png')}
+                           style={styles.image}/>
+                    <Text style={styles.title}>Add a Gem</Text>
+                    <TextInput
+                        placeholder="Find your GEM"
+                        style={styles.input}
+                        onChangeText={this.onChange}
                     />
+                    <Image source={require('../../assets/icons/search.png')}
+                           style={styles.icon}/>
                     {this.renderResults()}
-                </View>
+                </LinearGradient>
             </View>
         );
     }

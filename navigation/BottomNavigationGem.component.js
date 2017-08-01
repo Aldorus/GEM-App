@@ -57,7 +57,7 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={this.goToListGems}>
-                    <Image source={require('../assets/icons/gem.png')}/>
+                    <Image source={require('../assets/icons/list-gem.png')}/>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}

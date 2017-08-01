@@ -9,9 +9,7 @@ import StyledTitle from '../../components/StyledTitle';
 
 const style = StyleSheet.create({
     container: {
-        marginBottom: 10,
-        marginLeft: 10,
-        marginRight: 10,
+        margin: 10,
         flexDirection: 'row',
         alignSelf: 'stretch'
     },
@@ -25,7 +23,8 @@ const style = StyleSheet.create({
         width: 30,
         height: 30,
         padding: 10,
-        marginRight: 8
+        marginRight: 8,
+        top: 5
     }
 });
 
