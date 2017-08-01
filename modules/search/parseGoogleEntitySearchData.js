@@ -1,14 +1,15 @@
 const extractMainCategory = (itemElement) => {
     const typeList = itemElement.result['@type'];
     if(typeList.length <= 1) {
-        return typeList.join('-');
+        return typeList.join('');
     }
     return typeList.filter((type) => {
         return type !== 'Thing';
-    }).join('-');
+    }).join(' - ');
 };
 
 export const parseGoogleEntitySearchData = (data) => {
+    console.log('parse entity', data);
     if (data.itemListElement) {
         return data.itemListElement.map((itemElement) => {
             return {

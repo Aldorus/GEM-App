@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View, TextInput} from 'react-native';
+import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import {LinearGradient} from 'expo';
-import AddGemGlobalSearch from '../search/AddGemGlobalSearch.service';
+import ExternalSearchEntity from '../search/ExternalSearchEntity.service';
 import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import ExternalSearchResults from '../search/ExternalSearchResults.conponent';
+import ExternalSearchPlace from '../search/ExternalSearchPlace.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -45,21 +46,36 @@ export default class AddGemScreen extends React.Component {
         this.state = {};
     }
 
+    searchEntity = (value) => {
+        ExternalSearchEntity(value).then((entities) => {
+            this.setState({entities})
+        });
+    };
+
+    searchPlaces = (value) => {
+        ExternalSearchPlace(value).then((places) => {
+            this.setState({places})
+        });
+    };
+
     onChange = (value) => {
-        console.log('update value', value);
         if (value.length > 3) {
-            AddGemGlobalSearch(value).then((response) => {
-                console.log(response);
-                this.setState({response})
-            });
+            this.searchEntity(value);
+            this.searchPlaces(value);
         }
         this.setState({value});
     };
 
+    mergeResults = () => {
+        let results = [];
+        // TODO refactoring here
+        this.state.entities ? results = results.concat(this.state.entities) : '';
+        this.state.places ? results = results.concat(this.state.places) : '';
+        return results;
+    };
+
     renderResults = () => {
-        if (this.state.response) {
-            return <ExternalSearchResults results={this.state.response}/>;
-        }
+        return <ExternalSearchResults results={this.mergeResults()}/>;
     };
 
     render() {

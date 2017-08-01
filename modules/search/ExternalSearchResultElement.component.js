@@ -7,7 +7,8 @@ const style = StyleSheet.create({
     container: {
         flexDirection: 'column',
         flex: 1,
-        paddingLeft: 50
+        paddingLeft: 50,
+        marginBottom: 15
     }
 });
 
