@@ -7,6 +7,7 @@ import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import ExternalSearchResults from '../search/ExternalSearchResults.conponent';
 import ExternalSearchPlace from '../search/ExternalSearchPlace.service';
 import ExternalSearchMovie from '../search/ExternalSearchMovie.service';
+import ExternalSearchBook from '../search/ExternalSearchBook.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -67,11 +68,18 @@ export default class AddGemScreen extends React.Component {
         });
     };
 
+    searchBooks = (value) => {
+        ExternalSearchBook(value).then((books) => {
+            this.setState({books})
+        });
+    };
+
     onChange = (value) => {
         if (value.length > 3) {
             this.searchEntity(value);
             this.searchPlaces(value);
             this.searchMovies(value);
+            this.searchBooks(value);
         }
         this.setState({value});
     };
@@ -82,6 +90,7 @@ export default class AddGemScreen extends React.Component {
         this.state.entities ? results = results.concat(this.state.entities) : '';
         this.state.places ? results = results.concat(this.state.places) : '';
         this.state.movies ? results = results.concat(this.state.movies) : '';
+        this.state.books ? results = results.concat(this.state.books) : '';
         return results;
     };
 

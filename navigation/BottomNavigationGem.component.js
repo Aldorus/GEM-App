@@ -40,7 +40,9 @@ export default class BottomNavigationGem extends React.Component {
     };
 
     goToParams = () => {
-
+        this.props.navigation.navigate('Settings', {
+            transition: 'fromLeft'
+        });
     };
 
     goToLove = () => {

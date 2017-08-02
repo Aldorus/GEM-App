@@ -1,9 +1,21 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {Image, StyleSheet, Text} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import AppIntro from 'react-native-app-intro';
-import Colors from '../../constants/Colors';
 
-export default class IntroExampleScreen extends Component {
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: undefined,
+        height: undefined,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        alignItems: 'center',
+    }
+});
+
+export default class IntroExampleScreen extends React.Component {
     static navigationOptions = {
         header: null // Hide the header
     };
@@ -32,48 +44,23 @@ export default class IntroExampleScreen extends Component {
                 }));
     };
 
-    nextBtnHandle = (index) => {
-        Alert.alert('Next');
-        console.log(index);
-    };
+    renderSlide = () => {
 
-    onSlideChangeHandle = (index, total) => {
-        console.log(index, total);
     };
 
     render() {
-        const pageArray = [{
-            title: 'Share all that you want',
-            description: 'Description 1',
-            img: 'https://goo.gl/Bnc3XP',
-            imgStyle: {
-                height: 80 * 2.5,
-                width: 109 * 2.5,
-            },
-            backgroundColor: Colors.tintColor,
-            fontColor: '#000',
-            level: 10,
-        }, {
-            title: 'Page 2',
-            description: 'Description 2',
-            img: 'https://goo.gl/Bnc3XP',
-            imgStyle: {
-                height: 93 * 2.5,
-                width: 103 * 2.5,
-            },
-            backgroundColor: '#a4b602',
-            fontColor: '#fff',
-            level: 10,
-        }];
-
         return (
-            <AppIntro
-                onNextBtnClick={this.nextBtnHandle}
-                onDoneBtnClick={this.doneBtnHandle}
-                onSkipBtnClick={this.onSkipBtnHandle}
-                onSlideChange={this.onSlideChangeHandle}
-                pageArray={pageArray}
-            />
+            <AppIntro onDoneBtnClick={this.doneBtnHandle}
+                      onSkipBtnClick={this.onSkipBtnHandle}>
+                <Image source={require('../../assets/images/tutoriel-1.png')}
+                       style={styles.container}>
+                    <Text>Welcome to GEM</Text>
+                </Image>
+                <Image source={require('../../assets/images/tutoriel-2.png')}
+                       style={styles.container}>
+                    <Text>Tutoriel Page 2</Text>
+                </Image>
+            </AppIntro>
         );
     }
-}
+};

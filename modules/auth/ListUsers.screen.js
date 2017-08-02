@@ -43,6 +43,10 @@ export default class ListUsersScreen extends React.Component {
         navigation: PropTypes.any.isRequired
     };
 
+    static navigationOptions = {
+        title: 'Connect',
+    };
+
     state = {
         asyncStorageChecked: false
     };
@@ -54,7 +58,7 @@ export default class ListUsersScreen extends React.Component {
                 {
                     index: 0,
                     actions: [
-                        NavigationActions.navigate({routeName: 'Main'})
+                        NavigationActions.navigate({routeName: 'Intro'})
                     ]
                 }));
     };

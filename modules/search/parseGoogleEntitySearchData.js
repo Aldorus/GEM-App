@@ -6,6 +6,7 @@ const extractMainCategory = (itemElement) => {
         return typeList.join('');
     }
 
+    // TODO parse the case 'Harry' who render a category label 'MovieSerie'
     return capitalizeFirstLetter(replaceAll(typeList.filter((type) => {
         return type !== 'Thing';
     })[0], '_', ' '));
