@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
+import {connect} from 'react-redux';
 import FeedElementComponent from './FeedElement.component';
 import QuickAddGemComponent from './QuickSearch.component';
-import listGems from './gem.json';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class FeedComponent extends React.Component {
+export class FeedComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -30,14 +30,20 @@ export default class FeedComponent extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ListView
-                    data={listGems}
-                    autoHideHeader={true}
-                    style={{listContent:{backgroundColor:'transparent'}}}
-                    renderHeader={this.renderHeader}
-                    renderRow={this.renderRowView}
-                ></ListView>
+                <ListView data={this.props.gemStore}
+                          autoHideHeader={true}
+                          style={{listContent: {backgroundColor: 'transparent'}}}
+                          renderHeader={this.renderHeader}
+                          renderRow={this.renderRowView}></ListView>
             </View>
         );
     }
 }
+
+const mapStores = (store) => {
+    return {
+        gemStore: store.gemReducer
+    };
+};
+
+export default connect(mapStores)(FeedComponent);

@@ -1,10 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableHighlight, View} from 'react-native';
+import {connect} from 'react-redux';
+import {Image, StyleSheet, TouchableHighlight} from 'react-native';
 import StyledText from '../../components/StyledText';
 import BoldText from '../../components/BoldText';
 import {DropDownMenu} from '@shoutem/ui'
 import LinearGradient from 'expo/src/LinearGradient.android';
 import Colors from '../../constants/Colors';
+import * as types from '../../constants/ActionTypes';
 
 const styles = StyleSheet.create({
     container: {
@@ -60,20 +62,22 @@ const listSorting = [
 
 const listDisplay = [
     {
+        action: types.DISPLAY_LIST_WITHOUT_IMAGE,
         label: 'Simple list'
     },
     {
+        action: types.DISPLAY_LIST_WITH_IMAGE,
         label: 'List with picture'
     }
 ];
 
-export default class TopSortAndFilter extends React.Component {
+export class TopSortAndFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectCategory: listCategories[0],
             selectSorting: listSorting[0],
-            selectDisplay: listDisplay[0]
+            selectDisplay: this.props.userStore.displayListWithImage ? listDisplay[1] : listDisplay[0]
         };
     }
 
@@ -89,9 +93,20 @@ export default class TopSortAndFilter extends React.Component {
     };
 
     onClose = () => {
-        if(this.props.onCloseContextualPanel) {
+        console.log('Close');
+        if (this.props.onCloseContextualPanel) {
+            console.log('Run Close');
             this.props.onCloseContextualPanel();
         }
+    };
+
+    onDisplayStyleChange = (display) => {
+        console.log('Display change');
+        this.onClose();
+        this.props.dispatch({
+            type: display.action
+        });
+        this.setState({selectDisplay: display});
     };
 
     render() {
@@ -109,8 +124,8 @@ export default class TopSortAndFilter extends React.Component {
                 <DropDownMenu
                     styleName="clear"
                     options={listDisplay}
-                    selectedOption={this.state.selectDisplay ? this.state.selectDisplay : listDisplay[0]}
-                    onOptionSelected={(display) => this.setState({selectDisplay: display})}
+                    selectedOption={this.state.selectDisplay}
+                    onOptionSelected={this.onDisplayStyleChange}
                     titleProperty="label"
                     valueProperty="label"
                     style={this.selectStyles}
@@ -141,3 +156,12 @@ export default class TopSortAndFilter extends React.Component {
         );
     }
 }
+
+const mapStores = (store) => {
+    return {
+        gemStore: store.gemReducer,
+        userStore: store.userReducer
+    };
+};
+
+export default connect(mapStores)(TopSortAndFilter);

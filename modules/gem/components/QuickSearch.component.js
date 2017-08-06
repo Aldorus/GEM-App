@@ -1,7 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, TextInput} from 'react-native';
 import {LinearGradient} from 'expo';
-import Colors from '../../constants/Colors';
+import Colors from '../../../constants/Colors';
+import searchImage from '../../../assets/icons/search.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -49,7 +50,7 @@ export default class QuickSearchComponent extends React.Component {
                            placeholderTextColor="black"
                            underlineColorAndroid="transparent"
                            onChangeText={this.onChange}/>
-                <Image source={require('../../assets/icons/search.png')}
+                <Image source={searchImage}
                        style={styles.icon}/>
             </LinearGradient>
         );

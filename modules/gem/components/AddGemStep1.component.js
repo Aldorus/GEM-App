@@ -1,11 +1,11 @@
 import React from 'react';
 import {Image, Text, TextInput, View, StyleSheet} from 'react-native';
-import ExternalSearchEntity from '../search/ExternalSearchEntity.service';
-import ExternalSearchPlace from '../search/ExternalSearchPlace.service';
-import ExternalSearchMovie from '../search/ExternalSearchMovie.service';
-import ExternalSearchBook from '../search/ExternalSearchBook.service';
-import searchImage from '../../assets/icons/search.png';
-import ExternalSearchResults from '../search/ExternalSearchResults.conponent';
+import ExternalSearchEntity from '../../search/ExternalSearchEntity.service';
+import ExternalSearchPlace from '../../search/ExternalSearchPlace.service';
+import ExternalSearchMovie from '../../search/ExternalSearchMovie.service';
+import ExternalSearchBook from '../../search/ExternalSearchBook.service';
+import searchImage from '../../../assets/icons/search.png';
+import ExternalSearchResults from '../../search/ExternalSearchResults.conponent';
 
 const styles = StyleSheet.create({
     container: {

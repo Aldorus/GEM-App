@@ -1,11 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, View, Platform, BackAndroid} from 'react-native';
 import {LinearGradient} from 'expo';
+import {NavigationActions} from 'react-navigation';
 import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import gemImage from '../../assets/icons/gem.png';
-import AddGemStep1 from './AddGemStep1.component';
-import AddGemStep2 from './AddGemStep2.component';
+import AddGemStep1 from './components/AddGemStep1.component';
+import AddGemStep2 from './components/AddGemStep2.component';
 
 const styles = StyleSheet.create({
     container: {
@@ -47,9 +48,14 @@ export default class AddGemScreen extends React.Component {
     };
 
     backButtonPressed = () => {
-        this.setState({
-            entitySelected: null
-        });
+        if(this.state.entitySelected) {
+            this.setState({
+                entitySelected: null
+            });
+        } else {
+            const backAction = NavigationActions.back();
+            this.props.navigation.dispatch(backAction);
+        }
     };
 
     renderStep1 = () => {

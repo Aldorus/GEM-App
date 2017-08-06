@@ -1,10 +1,26 @@
 import React from 'react';
 import {AsyncStorage} from 'react-native';
 import {AppLoading} from 'expo';
+import {createStore, applyMiddleware} from "redux";
+import {Provider} from "react-redux";
+import thunk from "redux-thunk";
+import {createLogger} from "redux-logger";
+import rootReducer from "./rootReducer";
 import RootNavigation from './navigation/RootNavigation';
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
 console.disableYellowBox = true;
+
+const middleware = [thunk];
+
+if (process.env.NODE_ENV !== 'production') {
+    // middleware.push(createLogger());
+}
+
+const store = createStore(rootReducer,
+    applyMiddleware(...middleware)
+);
+
 
 export default class AppContainer extends React.Component {
     asyncStorageChecked = false;
@@ -72,7 +88,11 @@ export default class AppContainer extends React.Component {
     render() {
         if (this.state.appIsReady) {
             const nextScreen = (!this.user) ? 'Login' : 'Home';
-            return (<RootNavigation forceScreen={nextScreen}/>);
+            return (
+                <Provider store={store}>
+                    <RootNavigation forceScreen={nextScreen}/>
+                </Provider>
+            );
         }
         return <AppLoading/>;
     }

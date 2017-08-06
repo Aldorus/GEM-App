@@ -1,11 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {View} from 'react-native';
-import FeedComponent from '../gem/Feed.component';
+import FeedComponent from '../gem/components/Feed.component';
 import BottomNavigationGem from '../../navigation/BottomNavigationGem.component';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import TopSortAndFilter from '../search/TopSortAndFilter.component';
 
-export default class HomeScreen extends React.Component {
+export class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,3 +48,11 @@ export default class HomeScreen extends React.Component {
         );
     }
 }
+
+const mapStores = (store) => {
+    return {
+
+    };
+};
+
+export default connect(mapStores)(HomeScreen);
