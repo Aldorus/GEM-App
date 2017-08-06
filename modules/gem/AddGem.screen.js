@@ -1,13 +1,11 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Image, StyleSheet, View, Platform, BackAndroid} from 'react-native';
 import {LinearGradient} from 'expo';
-import ExternalSearchEntity from '../search/ExternalSearchEntity.service';
 import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
-import ExternalSearchResults from '../search/ExternalSearchResults.conponent';
-import ExternalSearchPlace from '../search/ExternalSearchPlace.service';
-import ExternalSearchMovie from '../search/ExternalSearchMovie.service';
-import ExternalSearchBook from '../search/ExternalSearchBook.service';
+import gemImage from '../../assets/icons/gem.png';
+import AddGemStep1 from './AddGemStep1.component';
+import AddGemStep2 from './AddGemStep2.component';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,106 +15,68 @@ const styles = StyleSheet.create({
     },
     image: {
         bottom: 16
-    },
-    title: {
-        fontSize: 20,
-        backgroundColor: 'transparent'
-    },
-    input: {
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 10,
-        paddingLeft: 50,
-        height: 40,
-        marginTop: 30,
-        marginLeft: 15,
-        marginRight: 15,
-        alignSelf: 'stretch'
-    },
-    icon: {
-        bottom: 32,
-        left: 25,
-        alignSelf: 'flex-start'
     }
 });
+let listener;
 
 export default class AddGemScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {};
+    componentDidMount() {
+        if (Platform.OS == 'android' && listener == null) {
+            listener = BackAndroid.addEventListener('hardwareBackPress', () => {
+                return this.backButtonPressed()
+            });
+        }
     }
 
-    searchEntity = (value) => {
-        ExternalSearchEntity(value).then((entities) => {
-            this.setState({entities})
+    constructor(props) {
+        super(props);
+        this.state = {
+            entitySelected: false
+        };
+    }
+
+    onElementSelected = (result) => {
+        // TODO save result
+        this.setState({
+            entitySelected: result
         });
     };
 
-    searchPlaces = (value) => {
-        ExternalSearchPlace(value).then((places) => {
-            this.setState({places})
+    backButtonPressed = () => {
+        this.setState({
+            entitySelected: null
         });
     };
 
-    searchMovies = (value) => {
-        ExternalSearchMovie(value).then((movies) => {
-            this.setState({movies})
-        });
-    };
-
-    searchBooks = (value) => {
-        ExternalSearchBook(value).then((books) => {
-            this.setState({books})
-        });
-    };
-
-    onChange = (value) => {
-        if (value.length > 3) {
-            this.searchEntity(value);
-            this.searchPlaces(value);
-            this.searchMovies(value);
-            this.searchBooks(value);
+    renderStep1 = () => {
+        if (!this.state.entitySelected) {
+            return <AddGemStep1 onElementSelected={this.onElementSelected}/>;
         }
-        this.setState({value});
     };
 
-    mergeResults = () => {
-        let results = [];
-        // TODO refactoring here
-        this.state.entities ? results = results.concat(this.state.entities) : '';
-        this.state.places ? results = results.concat(this.state.places) : '';
-        this.state.movies ? results = results.concat(this.state.movies) : '';
-        this.state.books ? results = results.concat(this.state.books) : '';
-        return results;
-    };
-
-    renderResults = () => {
-        return <ExternalSearchResults results={this.mergeResults()}/>;
+    renderStep2 = () => {
+        if (this.state.entitySelected) {
+            return <AddGemStep2 entity={this.state.entitySelected}/>;
+        }
     };
 
     render() {
         return (
             <View style={{flex: 1}}>
                 <TopNavigationGem hasHistory={true}
+                                  backButtonAction={this.backButtonPressed}
                                   navigation={this.props.navigation}/>
                 <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
                                 style={styles.container}
                                 end={[1, 0]}>
-                    <Image source={require('../../assets/icons/gem.png')}
+                    <Image source={gemImage}
                            style={styles.image}/>
-                    <Text style={styles.title}>Add a Gem</Text>
-                    <TextInput placeholder="Find your GEM"
-                               style={styles.input}
-                               placeholderTextColor="black"
-                               underlineColorAndroid="transparent"
-                               onChangeText={this.onChange}/>
-                    <Image source={require('../../assets/icons/search.png')}
-                           style={styles.icon}/>
-                    {this.renderResults()}
+                    {this.renderStep1()}
+                    {this.renderStep2()}
                 </LinearGradient>
             </View>
         );

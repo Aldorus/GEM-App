@@ -1,7 +1,6 @@
 import React from 'react';
-import {AsyncStorage, StyleSheet, View} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import {AppLoading} from 'expo';
-import {FontAwesome} from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 
@@ -44,7 +43,6 @@ export default class AppContainer extends React.Component {
         cacheAssetsAsync({
             images: [require('./assets/images/expo-wordmark.png')],
             fonts: [
-                FontAwesome.font,
                 {'celia': require('./assets/fonts/Celias_Regular.ttf')},
                 {'celia-bold': require('./assets/fonts/Celias_Bold.ttf')},
                 {'celia-light': require('./assets/fonts/Celias_Light.ttf')},

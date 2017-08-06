@@ -2,6 +2,11 @@ import React from 'react';
 import {Image, StyleSheet, TouchableHighlight} from 'react-native';
 import {LinearGradient} from 'expo';
 import Colors from '../constants/Colors';
+import listGemImage from '../assets/icons/list-gem.png';
+import addFriendImage from '../assets/icons/add-friend.png';
+import addGemImage from '../assets/icons/add-gem.png';
+import paramsImage from '../assets/icons/params.png';
+import loveImage from '../assets/icons/love.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -52,38 +57,36 @@ export default class BottomNavigationGem extends React.Component {
     render() {
 
         return (
-            <LinearGradient
-                colors={[Colors.gradientStart, Colors.gradientEnd]}
-                end={[1, 0]}
-                style={styles.container}
-            >
+            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
+                            end={[1, 0]}
+                            style={styles.container}>
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={this.goToListGems}>
-                    <Image source={require('../assets/icons/list-gem.png')}/>
+                    <Image source={listGemImage}/>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={this.goToAddFriend}>
-                    <Image source={require('../assets/icons/add-friend.png')}/>
+                    <Image source={addFriendImage}/>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.bigIcon]}
                                     onPress={this.goToNewGem}>
-                    <Image source={require('../assets/icons/add-gem.png')}/>
+                    <Image source={addGemImage}/>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={this.goToParams}>
-                    <Image source={require('../assets/icons/params.png')}/>
+                    <Image source={paramsImage}/>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={this.goToLove}>
-                    <Image source={require('../assets/icons/love.png')}/>
+                    <Image source={loveImage}/>
                 </TouchableHighlight>
             </LinearGradient>
         );

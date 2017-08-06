@@ -18,7 +18,8 @@ export const parseGoogleEntitySearchData = (data) => {
             return {
                 category: extractMainCategory(itemElement),
                 title: itemElement.result.name,
-                shortLabel: itemElement.result.description
+                shortLabel: itemElement.result.description,
+                image: itemElement.result.image.contentUrl
             };
         })
     }

@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 50,
         height: 40,
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        fontFamily: 'celia'
     },
     icon: {
         position:'absolute',

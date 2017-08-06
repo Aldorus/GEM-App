@@ -1,35 +1,38 @@
 {
-  "expo": {
-    "name": "gem",
-    "description": "No description",
-    "slug": "gem",
-    "privacy": "public",
-    "sdkVersion": "18.0.0",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "./assets/icons/app-icon.png",
-    "androidStatusBarColor": "#FFFFFF",
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#0D8F4F"
-    },
-    "notification": {
-      "icon": "./assets/icons/notification-icon.png",
-      "color": "#000000"
-    },
-    "loading": {
-      "icon": "./assets/icons/loading-icon.png",
-      "hideExponentText": true
-    },
-    "packagerOpts": {
-      "assetExts": ["ttf"]
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "package": "com.guillaume.gem"
+    "expo": {
+        "name": "gem",
+        "description": "No description",
+        "slug": "gem",
+        "privacy": "public",
+        "sdkVersion": "18.0.0",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "primaryColor": "#cccccc",
+        "icon": "./assets/icons/app-icon.png",
+        "androidStatusBarColor": "#FFFFFF",
+        "androidStatusBar": {
+            "barStyle": "light-content",
+            "backgroundColor": "#0D8F4F"
+        },
+        "notification": {
+            "icon": "./assets/icons/notification-icon.png",
+            "color": "#000000"
+        },
+        "loading": {
+            "icon": "./assets/icons/loading-icon.png",
+            "hideExponentText": true
+        },
+        "packagerOpts": {
+            "assetExts": [
+                "ttf"
+            ]
+        },
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.guillaume.gem"
+        },
+        "android": {
+            "package": "com.guillaume.gem"
+        }
     }
-  }
 }

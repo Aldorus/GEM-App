@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flex: 1,
+        padding: 20,
         paddingTop: 30,
-        paddingBottom: 20,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -58,12 +58,22 @@ const listSorting = [
     }
 ];
 
+const listDisplay = [
+    {
+        label: 'Simple list'
+    },
+    {
+        label: 'List with picture'
+    }
+];
+
 export default class TopSortAndFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectCategory: listCategories[0],
-            selectSorting: listSorting[0]
+            selectSorting: listSorting[0],
+            selectDisplay: listDisplay[0]
         };
     }
 
@@ -71,7 +81,7 @@ export default class TopSortAndFilter extends React.Component {
         selectedOption: {
             backgroundColor: 'white',
             borderRadius: 20,
-            width: 200
+            width: 300
         },
         modal: {
             backgroundColor: 'white'
@@ -94,6 +104,18 @@ export default class TopSortAndFilter extends React.Component {
                     <Image source={require('../../assets/icons/close.png')}/>
                 </TouchableHighlight>
                 <StyledText style={styles.padding}>Sort & Filter</StyledText>
+
+                <BoldText style={styles.padding}>List display</BoldText>
+                <DropDownMenu
+                    styleName="clear"
+                    options={listDisplay}
+                    selectedOption={this.state.selectDisplay ? this.state.selectDisplay : listDisplay[0]}
+                    onOptionSelected={(display) => this.setState({selectDisplay: display})}
+                    titleProperty="label"
+                    valueProperty="label"
+                    style={this.selectStyles}
+                />
+
                 <BoldText style={styles.padding}>Show</BoldText>
                 <DropDownMenu
                     styleName="clear"
@@ -104,6 +126,7 @@ export default class TopSortAndFilter extends React.Component {
                     valueProperty="label"
                     style={this.selectStyles}
                 />
+
                 <BoldText style={styles.padding}>Sort by</BoldText>
                 <DropDownMenu
                     styleName="clear"

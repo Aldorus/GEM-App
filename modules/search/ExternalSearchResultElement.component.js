@@ -1,12 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableHighlight} from 'react-native';
 import StyledText from '../../components/StyledText';
 import StyledTitle from '../../components/StyledTitle';
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
+    highlight: {
+        alignSelf: 'stretch'
+    },
     container: {
-        flexDirection: 'column',
-        flex: 1,
         marginBottom: 15,
         paddingLeft: 65,
         paddingRight: 15
@@ -14,13 +15,32 @@ const style = StyleSheet.create({
 });
 
 export default class ExternalSearchResultElement extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: false
+        };
+    }
+
+    pressed = (result) => {
+        this.setState({
+            selected: true
+        });
+        if(this.props.elementPressed) {
+            this.props.elementPressed(result);
+        }
+    };
+
     render() {
         return (
-            <View style={[style.container]}>
-                <StyledText>{this.props.result.category}</StyledText>
-                <StyledTitle numberOfLines={1}>{this.props.result.title}</StyledTitle>
-                <StyledText>{this.props.result.shortLabel}</StyledText>
-            </View>
+            <TouchableHighlight onPress={() => this.pressed(this.props.result)}
+                                style={styles.highlight}>
+                <View style={[styles.container]}>
+                    <StyledText>{this.props.result.category}</StyledText>
+                    <StyledTitle numberOfLines={1}>{this.props.result.title}</StyledTitle>
+                    <StyledText>{this.props.result.shortLabel}</StyledText>
+                </View>
+            </TouchableHighlight>
         );
     }
 }

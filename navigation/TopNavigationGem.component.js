@@ -4,6 +4,8 @@ import {NavigationBar} from '@shoutem/ui'
 import {NavigationActions} from 'react-navigation';
 import {LinearGradient} from 'expo';
 import Colors from '../constants/Colors';
+import contextualMenuImage from '../assets/icons/contextual-menu.png';
+import backImage from '../assets/icons/back.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,15 +25,19 @@ export default class TopNavigationGem extends React.Component {
     };
 
     goBack = () => {
-        const backAction = NavigationActions.back();
-        this.props.navigation.dispatch(backAction);
+        if(this.props.backButtonAction) {
+            this.props.backButtonAction();
+        } else {
+            const backAction = NavigationActions.back();
+            this.props.navigation.dispatch(backAction);
+        }
     };
 
 
     renderCenterComponent = () => {
         return <TouchableHighlight underlayColor={Colors.tintColor}
                                    onPress={this.openContextualPanel}>
-            <Image source={require('../assets/icons/contextual-menu.png')}/>
+            <Image source={contextualMenuImage}/>
         </TouchableHighlight>;
     };
 
@@ -39,7 +45,7 @@ export default class TopNavigationGem extends React.Component {
         return <TouchableHighlight underlayColor={Colors.tintColor}
                                    onPress={this.goBack}
                                    style={{marginLeft: 10}}>
-            <Image source={require('../assets/icons/back.png')}/>
+            <Image source={backImage}/>
         </TouchableHighlight>;
     };
 
