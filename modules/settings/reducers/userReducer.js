@@ -1,5 +1,5 @@
 import * as types from "../../../constants/ActionTypes";
-import {copyObject} from '../../../utilities/object.utils';
+import {copyObject} from '../../../utilities/extends/object.utils';
 let defaultValue = {};
 
 export const userReducer = (state = defaultValue, action) => {

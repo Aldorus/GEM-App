@@ -8,7 +8,7 @@ import AddGemScreen from '../modules/gem/AddGem.screen';
 import SettingsScreen from '../modules/settings/Settings.screen';
 import IntroExampleScreen from '../modules/intro/IntroExample.screen';
 import HomeScreen from '../modules/home/Home.screen';
-import {TransitionEngine} from './transitions/TransitionEngine';
+import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
 
 const RootStackNavigator = ({initialRouteName}) => {
     initialRouteName = 'Main';

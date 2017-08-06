@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import {Button, DropDownMenu} from '@shoutem/ui'
-import {shuffleArray} from '../../../utilities/array.utils';
+import {shuffleArray} from '../../../utilities/extends/array.utils';
 import Colors from '../../../constants/Colors';
 import ExternalSearchResultElement from '../../search/ExternalSearchResultElement.component';
 import CreateGem from '../services/CreateGem.service';

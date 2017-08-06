@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter} from '../../utilities/string.utils';
+import {capitalizeFirstLetter} from '../../utilities/extends/string.utils';
 
 export const parseOmdbMovieSearchData = (data) => {
     if (data.Search) {
