@@ -1,4 +1,4 @@
-import {parseOmdbMovieSearchData} from './parseOmdbMovieSearchData';
+import {parseOmdbMovieSearchData} from '../parsers/parseOmdbMovieSearchData';
 
 export default function ExternalSearchMovie(value) {
     return fetch(`http://www.omdbapi.com/?s=${value}&apikey=7637c59e`)

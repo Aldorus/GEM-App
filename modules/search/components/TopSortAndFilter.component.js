@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Image, StyleSheet, TouchableHighlight} from 'react-native';
-import StyledText from '../../components/StyledText';
-import BoldText from '../../components/BoldText';
+import StyledText from '../../../components/StyledText';
+import BoldText from '../../../components/BoldText';
 import {DropDownMenu} from '@shoutem/ui'
 import LinearGradient from 'expo/src/LinearGradient.android';
-import Colors from '../../constants/Colors';
-import * as types from '../../constants/ActionTypes';
+import Colors from '../../../constants/Colors';
+import * as types from '../../../constants/ActionTypes';
+import close from '../../../assets/icons/close.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -116,7 +117,7 @@ export class TopSortAndFilter extends React.Component {
                             end={[1, 0]}>
                 <TouchableHighlight underlayColor={Colors.tintColor}
                                     onPress={this.onClose}>
-                    <Image source={require('../../assets/icons/close.png')}/>
+                    <Image source={close}/>
                 </TouchableHighlight>
                 <StyledText style={styles.padding}>Sort & Filter</StyledText>
 

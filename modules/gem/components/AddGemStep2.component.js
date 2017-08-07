@@ -6,7 +6,7 @@ import ProgressBar from 'react-native-progress/Circle';
 import {Button, DropDownMenu} from '@shoutem/ui'
 import {shuffleArray} from '../../../utilities/extends/array.utils';
 import Colors from '../../../constants/Colors';
-import ExternalSearchResultElement from '../../search/ExternalSearchResultElement.component';
+import ExternalSearchResultElement from '../../search/components/ExternalSearchResultElement.component';
 import CreateGem from '../services/CreateGem.service';
 import * as types from '../../../constants/ActionTypes';
 

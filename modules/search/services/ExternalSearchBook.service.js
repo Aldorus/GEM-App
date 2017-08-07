@@ -1,4 +1,4 @@
-import {parseGoogleBookSearchData} from './parseGoogleBookSearchData';
+import {parseGoogleBookSearchData} from '../parsers/parseGoogleBookSearchData';
 
 export default function ExternalSearchBook(value) {
     // TODO replace the key

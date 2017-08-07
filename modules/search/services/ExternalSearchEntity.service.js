@@ -1,4 +1,4 @@
-import {parseGoogleEntitySearchData} from './parseGoogleEntitySearchData';
+import {parseGoogleEntitySearchData} from '../parsers/parseGoogleEntitySearchData';
 
 export default function ExternalSearchEntity(value) {
     return fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${value}&key=AIzaSyByEvdNxZqKVHZphCkeW4o0j1gR3INSLSg&limit=1&indent=True`)

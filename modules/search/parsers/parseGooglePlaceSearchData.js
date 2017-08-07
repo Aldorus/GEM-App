@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter, replaceAll} from '../../utilities/extends/string.utils';
+import {capitalizeFirstLetter, replaceAll} from '../../../utilities/extends/string.utils';
 
 const extractMainCategory = (result) => {
     const typeList = result.types;

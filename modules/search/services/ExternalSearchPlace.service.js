@@ -1,4 +1,4 @@
-import {parseGooglePlaceSearchData} from './parseGooglePlaceSearchData';
+import {parseGooglePlaceSearchData} from '../parsers/parseGooglePlaceSearchData';
 
 export default function ExternalSearchPlace(value) {
     // TODO get the current geoloc

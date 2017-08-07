@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, TouchableHighlight} from 'react-native';
-import StyledText from '../../components/StyledText';
-import StyledTitle from '../../components/StyledTitle';
+import StyledText from '../../../components/StyledText';
+import StyledTitle from '../../../components/StyledTitle';
 
 const styles = StyleSheet.create({
     highlight: {

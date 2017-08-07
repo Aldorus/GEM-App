@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import FeedComponent from '../gem/components/Feed.component';
 import BottomNavigationGem from '../../navigation/BottomNavigationGem.component';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
-import TopSortAndFilter from '../search/TopSortAndFilter.component';
+import TopSortAndFilter from '../search/components/TopSortAndFilter.component';
 
 export class HomeScreen extends React.Component {
     constructor(props) {

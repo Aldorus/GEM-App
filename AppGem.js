@@ -38,7 +38,22 @@ export class AppGem extends React.Component {
 
     loadAssetsAsync() {
         cacheAssetsAsync({
-            images: [require('./assets/images/expo-wordmark.png')],
+            images: [
+                require('./assets/images/expo-wordmark.png'),
+                require('./assets/icons/add-friend@2x.png'),
+                require('./assets/icons/add-gem@2x.png'),
+                require('./assets/icons/app-icon.png'),
+                require('./assets/icons/back@2x.png'),
+                require('./assets/icons/close@2x.png'),
+                require('./assets/icons/contextual-menu@2x.png'),
+                require('./assets/icons/gem@2x.png'),
+                require('./assets/icons/list-gem@2x.png'),
+                require('./assets/icons/loading-icon.png'),
+                require('./assets/icons/love@2x.png'),
+                require('./assets/icons/notification-icon.png'),
+                require('./assets/icons/params@2x.png'),
+                require('./assets/icons/search@2x.png')
+            ],
             fonts: [
                 {'celia': require('./assets/fonts/Celias_Regular.ttf')},
                 {'celia-bold': require('./assets/fonts/Celias_Bold.ttf')},
