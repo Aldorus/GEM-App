@@ -1,8 +1,7 @@
 import {parseOmdbMovieSearchData} from './parseOmdbMovieSearchData';
 
 export default function ExternalSearchMovie(value) {
-    // TODO replace the key
-    return fetch(`http://www.omdbapi.com/?s=${value}&apikey=c6c0355`)
+    return fetch(`http://www.omdbapi.com/?s=${value}&apikey=7637c59e`)
         .then((response) => response.json())
         .then(parseOmdbMovieSearchData);
 }

@@ -10,7 +10,7 @@ export const gemReducer = (state = defaultValue, action) => {
             break;
         case types.ADD_GEM:
             const stateCopy = state.slice(0);
-            stateCopy.push(action.gem);
+            stateCopy.unshift(action.gem);
             state = stateCopy;
             break;
         default:

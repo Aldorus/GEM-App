@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, View, Platform, BackAndroid} from 'react-native';
+import {BackAndroid, Image, Platform, StyleSheet, View} from 'react-native';
 import {LinearGradient} from 'expo';
 import {NavigationActions} from 'react-navigation';
 import Colors from '../../constants/Colors';
@@ -48,7 +48,7 @@ export default class AddGemScreen extends React.Component {
     };
 
     backButtonPressed = () => {
-        if(this.state.entitySelected) {
+        if (this.state.entitySelected) {
             this.setState({
                 entitySelected: null
             });
@@ -66,7 +66,7 @@ export default class AddGemScreen extends React.Component {
 
     renderStep2 = () => {
         if (this.state.entitySelected) {
-            return <AddGemStep2 entity={this.state.entitySelected}/>;
+            return <AddGemStep2 entity={this.state.entitySelected} navigation={this.props.navigation}/>;
         }
     };
 

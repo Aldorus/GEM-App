@@ -1,44 +1,14 @@
 import React from 'react';
 import {AsyncStorage, FlatList, Text, TouchableHighlight} from 'react-native';
+import {connect} from 'react-redux';
 import {NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
 import Colors from '../../constants/Colors';
 import listItemStyle from '../../constants/ListItemStyle';
+import listUsers from './users.json';
+import * as types from '../../constants/ActionTypes';
 
-const listUsers = [
-    {
-        key: 'a',
-        email: 'guillaume.roussel@gem.com',
-        label: 'Guillaume Roussel',
-        group: 'A'
-    },
-    {
-        key: 'b',
-        email: 'guillaume.roussel@gem.com',
-        label: 'Guillaume Roussel',
-        group: 'A'
-    },
-    {
-        key: 'c',
-        email: 'guillaume.roussel@gem.com',
-        label: 'Guillaume Roussel',
-        group: 'A'
-    },
-    {
-        key: 'd',
-        email: 'guillaume.roussel@gem.com',
-        label: 'Guillaume Roussel',
-        group: 'A'
-    },
-    {
-        key: 'e',
-        email: 'guillaume.roussel@gem.com',
-        label: 'Guillaume Roussel',
-        group: 'A'
-    }
-];
-
-export default class ListUsersScreen extends React.Component {
+export class ListUsersScreen extends React.Component {
     static propTypes = {
         navigation: PropTypes.any.isRequired
     };
@@ -64,16 +34,20 @@ export default class ListUsersScreen extends React.Component {
     };
 
     userSelected = (user) => {
-        AsyncStorage.setItem('current_user', JSON.stringify(user)).then(this.goToMainScreen);
+        AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
+            this.props.dispatch({
+                type: types.LOAD_USER,
+                user: user
+            });
+            this.goToMainScreen();
+        });
     };
 
     renderUser = ({item}) => {
         return (
-            <TouchableHighlight
-                onPress={() => this.userSelected(item)}
-                underlayColor={Colors.tintColor}
-                style={listItemStyle.item}
-            >
+            <TouchableHighlight onPress={() => this.userSelected(item)}
+                                underlayColor={Colors.tintColor}
+                                style={listItemStyle.item}>
                 <Text>{item.email}</Text>
             </TouchableHighlight>
         );
@@ -81,11 +55,9 @@ export default class ListUsersScreen extends React.Component {
 
     renderList = () => {
         return (
-            <FlatList
-                style={{flex:1}}
-                data={listUsers}
-                renderItem={this.renderUser}
-            />
+            <FlatList style={{flex:1}}
+                      data={listUsers}
+                      renderItem={this.renderUser}/>
         );
     };
 
@@ -93,3 +65,11 @@ export default class ListUsersScreen extends React.Component {
         return this.renderList();
     }
 }
+
+const mapStores = (store) => {
+    return {
+        userStore: store.userReducer
+    }
+};
+
+export default connect(mapStores)(ListUsersScreen)

@@ -47,13 +47,17 @@ export class FeedElementComponent extends React.Component {
     };
 
     renderImageGem = () => {
-        if (this.props.userStore.displayListWithImage) {
+        if (this.props.userStore.displayListWithImage && this.props.gemData.picture) {
             return <ImageLoader indicator={ProgressBar}
                                 style={styles.image}
                                 indicatorProps={{
-                                    color: Colors.colorBackground
+                                    color: Colors.colorText
                                 }} source={{uri: this.props.gemData.picture}}/>;
         }
+    };
+
+    renderLocation = () => {
+        return this.props.gemData.location ? ` in ${this.props.gemData.location}` : '';
     };
 
     render() {
@@ -76,7 +80,9 @@ export class FeedElementComponent extends React.Component {
                     <View style={styles.textWrapper}>
                         <StyledText>{this.props.gemData.category}</StyledText>
                         <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
-                        <StyledText>{this.props.gemData.shortLabel}</StyledText>
+                        <StyledText>
+                            {this.props.gemData.user} says {this.props.gemData.word}
+                            {this.renderLocation()}</StyledText>
                     </View>
                 </View>
                 {this.renderImageGem()}

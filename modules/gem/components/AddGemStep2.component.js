@@ -1,12 +1,14 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
+import {connect} from 'react-redux';
 import ProgressBar from 'react-native-progress/Circle';
 import {Button, DropDownMenu} from '@shoutem/ui'
 import {shuffleArray} from '../../../utilities/extends/array.utils';
 import Colors from '../../../constants/Colors';
 import ExternalSearchResultElement from '../../search/ExternalSearchResultElement.component';
 import CreateGem from '../services/CreateGem.service';
+import * as types from '../../../constants/ActionTypes';
 
 const styles = StyleSheet.create({
     scroll: {
@@ -54,38 +56,44 @@ const styles = StyleSheet.create({
 
 const listWords = shuffleArray([
     {
-        label: 'To Die For'
+        label: 'To Die For',
+        word: 'it\'s To Die For'
     },
     {
-        label: 'WTF'
+        label: 'WTF',
+        word: 'it\'s WTF'
     },
     {
-        label: 'Seriously WTF'
+        label: 'Seriously WTF',
+        word: 'it\'s Seriously WTF'
     },
     {
-        label: 'Awesome'
+        label: 'Awesome',
+        word: 'it\'s Awesome'
     },
     {
-        label: 'Must Try'
+        label: 'The Best Thing Ever',
+        word: 'it\'s The Best Thing Ever'
     },
     {
-        label: 'The Best Thing Ever'
+        label: 'Must Try',
+        word: 'it\'s a Must Try'
     },
     {
-        label: 'Must Try'
+        label: 'Holy shit...',
+        word: 'Holy shit...'
     },
     {
-        label: 'Holy shit...'
+        label: 'Dude, really',
+        word: 'Dude, really'
     },
     {
-        label: 'Dude, really'
-    },
-    {
-        label: 'Whaaaaaaaaaa'
+        label: 'Whaaaaaaaaaa',
+        word: 'Whaaaaaaaaaa'
     }
 ]);
 
-export default class AddGemStep2 extends React.Component {
+export class AddGemStep2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -105,15 +113,25 @@ export default class AddGemStep2 extends React.Component {
     };
 
     createTheGem = () => {
+        console.log('Hell', this.state);
         const newGem = this.props.entity;
-        newGem.word = this.state.selectedWord;
+        newGem.user = this.props.userStore.firstname;
+        newGem.avatar = this.props.userStore.avatar;
+        newGem.word = this.state.selectedWord.word;
         newGem.comment = this.state.comment;
-        CreateGem(newGem).then(() => {
+        // TODO connect to webservice
+        // CreateGem(newGem).then((newGem) => {
             console.log('gem created');
-        });
+            this.props.dispatch({
+                type: types.ADD_GEM,
+                gem: newGem
+            });
+            this.props.navigation.navigate('Main');
+        // });
     };
 
     render = () => {
+        console.log('User store', this.props.userStore);
         return <ScrollView style={styles.scroll}>
             <View style={styles.container}>
                 <ExternalSearchResultElement result={this.props.entity}/>
@@ -125,7 +143,7 @@ export default class AddGemStep2 extends React.Component {
                         selectedOption={this.state.selectedWord ? this.state.selectedWord : listWords[0]}
                         onOptionSelected={(word) => this.setState({selectedWord: word})}
                         titleProperty="label"
-                        valueProperty="label"
+                        valueProperty="word"
                         style={this.selectStyles}
                     />
                 </View>
@@ -152,3 +170,11 @@ export default class AddGemStep2 extends React.Component {
         </ScrollView>
     };
 }
+
+const mapStores = (store) => {
+    return {
+        userStore: store.userReducer
+    }
+};
+
+export default connect(mapStores)(AddGemStep2);

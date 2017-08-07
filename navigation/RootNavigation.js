@@ -11,7 +11,6 @@ import HomeScreen from '../modules/home/Home.screen';
 import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
 
 const RootStackNavigator = ({initialRouteName}) => {
-    initialRouteName = 'Main';
     const stackNavigatorConfigs = {
         initialRouteName,
         cardStyle: {
