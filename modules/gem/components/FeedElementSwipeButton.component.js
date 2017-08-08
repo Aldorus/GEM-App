@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableHighlight, Image} from 'react-native';
+import {StyleSheet, TouchableHighlight, Image, View} from 'react-native';
 import {LinearGradient} from 'expo';
 import Colors from '../../../constants/Colors';
 import listGemImage from '../../../assets/icons/list-gem@2x.png';
@@ -32,9 +32,7 @@ export class FeedElementSwipeButton extends React.Component {
 
     render() {
         return (
-            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
-                            end={[1, 0]}
-                            style={styles.container}>
+            <View style={styles.container}>
                 <TouchableHighlight style={[styles.button]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={this.goToListGems}>
@@ -50,7 +48,7 @@ export class FeedElementSwipeButton extends React.Component {
                                     onPress={this.goToShare}>
                     <Image source={shareImage}/>
                 </TouchableHighlight>
-            </LinearGradient>
+            </View>
 
         );
     }

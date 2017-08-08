@@ -1,14 +1,17 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableHighlight, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
+import {LinearGradient} from 'expo';
 import Swipeout from 'react-native-swipeout';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
-import {FeedElementSwipeButton} from './FeedElementSwipeButton.component';
+import listGemImage from '../../../assets/icons/list-gem@2x.png';
+import loveImage from '../../../assets/icons/love@2x.png';
+import shareImage from '../../../assets/icons/share@2x.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -34,12 +37,33 @@ const styles = StyleSheet.create({
     image: {
         alignSelf: 'stretch',
         height: 200
+    },
+    swipeButton: {
+        flex: 1,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
 const swipeoutBtns = [
     {
-        component: <FeedElementSwipeButton/>
+        component: <TouchableHighlight style={styles.swipeButton}>
+            <Image source={listGemImage}/>
+        </TouchableHighlight>,
+        backgroundColor: Colors.tintColor
+    },
+    {
+        component: <TouchableHighlight style={styles.swipeButton}>
+            <Image source={loveImage}/>
+        </TouchableHighlight>,
+        backgroundColor: Colors.tintColor
+    },
+    {
+        component: <TouchableHighlight style={styles.swipeButton}>
+            <Image source={shareImage}/>
+        </TouchableHighlight>,
+        backgroundColor: Colors.tintColor
     }
 ];
 
@@ -65,35 +89,41 @@ export class FeedElementComponent extends React.Component {
 
     render() {
         return (
-            <Swipeout right={swipeoutBtns}
-                      backgroundColor="white">
-                <View style={{
-                    flexDirection: 'column',
-                    alignSelf: 'stretch',
-                    marginBottom: 8
-                }}>
-                    <View style={[styles.container]}>
-                        <ImageLoader
-                            borderRadius={15}
-                            style={styles.avatar}
-                            indicator={ProgressBar}
-                            indicatorProps={{
-                                color: Colors.colorText
-                            }}
-                            source={{uri: this.props.gemData.avatar}}
-                        />
-                        <View style={styles.textWrapper}>
-                            <StyledText>{this.props.gemData.category}</StyledText>
-                            <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
-                            <StyledText>
-                                {this.props.gemData.user} says {this.props.gemData.word}
-                                {this.renderLocation()}</StyledText>
+            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
+                            end={[1, 0]}
+                            style={{
+                                flexDirection: 'column',
+                                alignSelf: 'stretch'
+                            }}>
+                <Swipeout right={swipeoutBtns}
+                          backgroundColor="white">
+                    <View style={{
+                        flexDirection: 'column',
+                        alignSelf: 'stretch',
+                        marginBottom: 8
+                    }}>
+                        <View style={[styles.container]}>
+                            <ImageLoader
+                                borderRadius={15}
+                                style={styles.avatar}
+                                indicator={ProgressBar}
+                                indicatorProps={{
+                                    color: Colors.colorText
+                                }}
+                                source={{uri: this.props.gemData.avatar}}
+                            />
+                            <View style={styles.textWrapper}>
+                                <StyledText>{this.props.gemData.category}</StyledText>
+                                <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
+                                <StyledText>
+                                    {this.props.gemData.user} says {this.props.gemData.word}
+                                    {this.renderLocation()}</StyledText>
+                            </View>
                         </View>
+                        {this.renderImageGem()}
                     </View>
-                    {this.renderImageGem()}
-                </View>
-            </Swipeout>
-
+                </Swipeout>
+            </LinearGradient>
         );
     }
 }
