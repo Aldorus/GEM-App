@@ -17,7 +17,9 @@
         "spaced-comment": ["off"],
         "react/forbid-prop-types": ["off"],
         "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-indent-props": ["off"],
+        "react/jsx-first-prop-new-line": ["off"],
+        "react/jsx-closing-bracket-location": [1, "props-aligned"],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-tag-spacing": ["error", {
             "closingSlash": "never",

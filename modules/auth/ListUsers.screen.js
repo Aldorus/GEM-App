@@ -5,8 +5,8 @@ import {NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
 import Colors from '../../constants/Colors';
 import listItemStyle from '../../constants/ListItemStyle';
-import listUsers from './users.json';
 import * as types from '../../constants/ActionTypes';
+import {getAllUsers} from './users.service';
 
 export class ListUsersScreen extends React.Component {
     static propTypes = {
@@ -19,6 +19,14 @@ export class ListUsersScreen extends React.Component {
 
     state = {
         asyncStorageChecked: false
+    };
+
+    componentWillMount = () => {
+        getAllUsers().then((listUsers) => {
+            this.setState({
+                listUsers
+            });
+        });
     };
 
     goToMainScreen = () => {
@@ -37,10 +45,14 @@ export class ListUsersScreen extends React.Component {
         AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
             this.props.dispatch({
                 type: types.LOAD_USER,
-                user: user
+                user
             });
             this.goToMainScreen();
         });
+    };
+
+    keyExtractor = (item) => {
+        return item.id;
     };
 
     renderUser = ({item}) => {
@@ -55,8 +67,9 @@ export class ListUsersScreen extends React.Component {
 
     renderList = () => {
         return (
-            <FlatList style={{flex:1}}
-                      data={listUsers}
+            <FlatList style={{flex: 1}}
+                      data={this.state.listUsers}
+                      keyExtractor={this.keyExtractor}
                       renderItem={this.renderUser}/>
         );
     };
@@ -69,7 +82,7 @@ export class ListUsersScreen extends React.Component {
 const mapStores = (store) => {
     return {
         userStore: store.userReducer
-    }
+    };
 };
 
-export default connect(mapStores)(ListUsersScreen)
+export default connect(mapStores)(ListUsersScreen);
