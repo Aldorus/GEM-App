@@ -2,7 +2,7 @@ import {capitalizeFirstLetter, replaceAll} from '../../../utilities/extends/stri
 
 const extractMainCategory = (itemElement) => {
     const typeList = itemElement.result['@type'];
-    if(typeList.length <= 1) {
+    if (typeList.length <= 1) {
         return typeList.join('');
     }
 
@@ -19,9 +19,9 @@ export const parseGoogleEntitySearchData = (data) => {
                 category: extractMainCategory(itemElement),
                 title: itemElement.result.name,
                 shortLabel: itemElement.result.description,
-                image: itemElement.result.image.contentUrl
+                image: itemElement.result.image ? itemElement.result.image.contentUrl : ''
             };
-        })
+        });
     }
     return [];
 };

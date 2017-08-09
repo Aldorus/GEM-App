@@ -9,6 +9,7 @@
         "jsx": true
     },
     "rules": {
+        "max-len": ["warn", 140],
         "object-curly-spacing": ["error", "never"],
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "arrow-body-style": ["error", "always"],

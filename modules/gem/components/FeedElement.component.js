@@ -110,13 +110,13 @@ export class FeedElementComponent extends React.Component {
                                 indicatorProps={{
                                     color: Colors.colorText
                                 }}
-                                source={{uri: this.props.gemData.avatar}}
+                                source={{uri: this.props.gemData.user.avatar_thumbnail_url}}
                             />
                             <View style={styles.textWrapper}>
                                 <StyledText>{this.props.gemData.category}</StyledText>
                                 <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
                                 <StyledText>
-                                    {this.props.gemData.user} says {this.props.gemData.word}
+                                    {this.props.gemData.user.first_name} says {this.props.gemData.word}
                                     {this.renderLocation()}</StyledText>
                             </View>
                         </View>

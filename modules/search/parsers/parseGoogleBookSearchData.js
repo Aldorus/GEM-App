@@ -5,7 +5,7 @@ export const parseGoogleBookSearchData = (data) => {
             return {
                 category: 'Book',
                 title: item.volumeInfo.title,
-                shortLabel: item.volumeInfo.authors.join(' - '),
+                shortLabel: item.volumeInfo.authors ? item.volumeInfo.authors.join(' - ') : '',
                 image: item.volumeInfo.imageLinks.thumbnail
             };
         });
