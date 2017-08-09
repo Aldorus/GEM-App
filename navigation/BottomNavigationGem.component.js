@@ -2,11 +2,11 @@ import React from 'react';
 import {Image, StyleSheet, TouchableHighlight} from 'react-native';
 import {LinearGradient} from 'expo';
 import Colors from '../constants/Colors';
-import listGemImage from '../assets/icons/list-gem.png';
-import addFriendImage from '../assets/icons/add-friend.png';
-import addGemImage from '../assets/icons/add-gem.png';
-import paramsImage from '../assets/icons/params.png';
-import loveImage from '../assets/icons/love.png';
+import listGemImage from '../assets/icons/list-gem@2x.png';
+import addFriendImage from '../assets/icons/add-friend@2x.png';
+import addGemImage from '../assets/icons/add-gem@2x.png';
+import paramsImage from '../assets/icons/params@2x.png';
+import loveImage from '../assets/icons/love@2x.png';
 
 const styles = StyleSheet.create({
     container: {

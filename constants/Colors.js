@@ -6,6 +6,7 @@ export default {
     secondaryTintColor,
     colorText: '#000',
     colorBackground: '#FFF',
+    white: '#FFF',
     gradientStart: tintColor,
     gradientEnd: secondaryTintColor
 };

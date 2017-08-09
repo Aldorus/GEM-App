@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {ImagePicker} from 'expo';
+import {Button} from '@shoutem/ui';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import Colors from '../../constants/Colors';
-import {ImagePicker} from 'expo';
-import {Button} from '@shoutem/ui';
 
 const styles = StyleSheet.create({
     button: {
@@ -69,10 +69,22 @@ export default class PicturePicker extends React.Component {
                     alignSelf: 'stretch'
                 }}>
                     <Button onPress={this.onPressGallery}
+                            style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: Colors.white
+                            }}
                             styleName="clear">
                         <Text style={styles.button}>Gallery</Text>
                     </Button>
                     <Button onPress={this.onPressCamera}
+                            style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: Colors.secondaryTintColor
+                            }}
                             styleName="clear">
                         <Text style={styles.button}>Camera</Text>
                     </Button>

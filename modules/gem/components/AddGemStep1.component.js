@@ -1,10 +1,10 @@
 import React from 'react';
-import {Image, Text, TextInput, View, StyleSheet} from 'react-native';
+import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import ExternalSearchEntity from '../../search/services/ExternalSearchEntity.service';
 import ExternalSearchPlace from '../../search/services/ExternalSearchPlace.service';
 import ExternalSearchMovie from '../../search/services/ExternalSearchMovie.service';
 import ExternalSearchBook from '../../search/services/ExternalSearchBook.service';
-import searchImage from '../../../assets/icons/search.png';
+import searchImage from '../../../assets/icons/search@2x.png';
 import ExternalSearchResults from '../../search/components/ExternalSearchResults.conponent';
 
 const styles = StyleSheet.create({
@@ -44,37 +44,14 @@ export default class AddGemStep1 extends React.Component {
         };
     }
 
-    searchEntity = (value) => {
-        ExternalSearchEntity(value).then((entities) => {
-            this.setState({entities})
+    onElementSelected = (result) => {
+        // TODO save result
+        this.setState({
+            entitySelected: result
         });
-    };
-
-    searchPlaces = (value) => {
-        ExternalSearchPlace(value).then((places) => {
-            this.setState({places})
-        });
-    };
-
-    searchMovies = (value) => {
-        ExternalSearchMovie(value).then((movies) => {
-            this.setState({movies})
-        });
-    };
-
-    searchBooks = (value) => {
-        ExternalSearchBook(value).then((books) => {
-            this.setState({books})
-        });
-    };
-
-    mergeResults = () => {
-        let results = [];
-        this.state.entities ? results = results.concat(this.state.entities) : '';
-        this.state.places ? results = results.concat(this.state.places) : '';
-        this.state.movies ? results = results.concat(this.state.movies) : '';
-        this.state.books ? results = results.concat(this.state.books) : '';
-        return results;
+        if (this.props.onElementSelected) {
+            this.props.onElementSelected(result);
+        }
     };
 
     onChange = (value) => {
@@ -87,27 +64,51 @@ export default class AddGemStep1 extends React.Component {
         this.setState({value});
     };
 
-    onElementSelected = (result) => {
-        // TODO save result
-        this.setState({
-            entitySelected: result
+    searchEntity = (value) => {
+        ExternalSearchEntity(value).then((entities) => {
+            this.setState({entities});
         });
-        if (this.props.onElementSelected) {
-            this.props.onElementSelected(result);
-        }
+    };
+
+    searchPlaces = (value) => {
+        ExternalSearchPlace(value).then((places) => {
+            this.setState({places});
+        });
+    };
+
+    searchMovies = (value) => {
+        ExternalSearchMovie(value).then((movies) => {
+            this.setState({movies});
+        });
+    };
+
+    searchBooks = (value) => {
+        ExternalSearchBook(value).then((books) => {
+            this.setState({books});
+        });
+    };
+
+    mergeResults = () => {
+        let results = [];
+        this.state.entities ? results = results.concat(this.state.entities) : '';
+        this.state.places ? results = results.concat(this.state.places) : '';
+        this.state.movies ? results = results.concat(this.state.movies) : '';
+        this.state.books ? results = results.concat(this.state.books) : '';
+        return results;
     };
 
     render = () => {
-        return <View style={styles.container}>
+        return (<View style={styles.container}>
             <Text style={styles.title}>Add a Gem</Text>
             <TextInput placeholder="Find your GEM"
                        style={styles.input}
+                       autoFocus={true}
                        placeholderTextColor="black"
                        underlineColorAndroid="transparent"
                        onChangeText={this.onChange}/>
             <Image source={searchImage}
                    style={styles.icon}/>
             <ExternalSearchResults results={this.mergeResults()} onElementSelected={this.onElementSelected}/>
-        </View>
-    }
+        </View>);
+    };
 }

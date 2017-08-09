@@ -34,7 +34,7 @@ export class FeedComponent extends React.Component {
                           autoHideHeader={true}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderHeader={this.renderHeader}
-                          renderRow={this.renderRowView}></ListView>
+                          renderRow={this.renderRowView}/>
             </View>
         );
     }

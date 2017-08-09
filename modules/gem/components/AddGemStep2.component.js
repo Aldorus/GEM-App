@@ -63,15 +63,10 @@ export class AddGemStep2 extends React.Component {
         };
     }
 
-    selectStyles = {
-        selectedOption: {
-            backgroundColor: 'white',
-            borderRadius: 20,
-            width: 300
-        },
-        modal: {
-            backgroundColor: 'white'
-        }
+    onSelectImage = (uri) => {
+        this.setState({
+            picture: uri
+        });
     };
 
     createTheGem = () => {
@@ -94,10 +89,15 @@ export class AddGemStep2 extends React.Component {
         // });
     };
 
-    onSelectImage = (uri) => {
-        this.setState({
-            picture: uri
-        });
+    selectStyles = {
+        selectedOption: {
+            backgroundColor: 'white',
+            borderRadius: 20,
+            width: 300
+        },
+        modal: {
+            backgroundColor: 'white'
+        }
     };
 
     render = () => {
@@ -119,13 +119,14 @@ export class AddGemStep2 extends React.Component {
                         style={this.selectStyles}
                     />
                 </View>
-                <PicturePicker image={this.state.picture} onSelectImage={this.onSelectImage}/>
+                <PicturePicker image={this.state.picture}
+                               onSelectImage={this.onSelectImage}/>
                 <TextInput placeholder="Add your comment"
                            style={[styles.input]}
+                           multiline={true}
                            onChangeText={(comment) => this.setState({comment})}
                            value={this.state.comment}
                            placeholderTextColor="black"
-                           multiline={true}
                            underlineColorAndroid="transparent"/>
                 <Button onPress={this.createTheGem}
                         styleName="clear">
