@@ -97,10 +97,4 @@ export class AppGem extends React.Component {
     }
 }
 
-const mapStores = (store) => {
-    return {
-        userStore: store.userReducer
-    }
-};
-
-export default connect(mapStores)(AppGem)
+export default connect()(AppGem);

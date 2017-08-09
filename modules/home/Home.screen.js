@@ -31,7 +31,7 @@ export class HomeScreen extends React.Component {
     };
 
     renderSortingPanel = () => {
-        if(this.state.displaySorting) {
+        if (this.state.displaySorting) {
             return <TopSortAndFilter onCloseContextualPanel={this.onCloseContextualPanel}/>;
         }
     };
@@ -50,9 +50,7 @@ export class HomeScreen extends React.Component {
 }
 
 const mapStores = (store) => {
-    return {
-
-    };
+    return {};
 };
 
 export default connect(mapStores)(HomeScreen);

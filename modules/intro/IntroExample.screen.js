@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import AppIntro from 'react-native-app-intro';
+import {connect} from 'react-redux';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class IntroExampleScreen extends React.Component {
+export class IntroExampleScreen extends React.Component {
     static navigationOptions = {
         header: null // Hide the header
     };
@@ -63,4 +64,6 @@ export default class IntroExampleScreen extends React.Component {
             </AppIntro>
         );
     }
-};
+}
+
+export default connect()(IntroExampleScreen);

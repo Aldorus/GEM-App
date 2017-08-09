@@ -5,8 +5,8 @@ import {NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
 import Colors from '../../constants/Colors';
 import listItemStyle from '../../constants/ListItemStyle';
-import * as types from '../../constants/ActionTypes';
 import {getAllUsers} from './users.service';
+import * as types from '../../constants/ActionTypes';
 
 export class ListUsersScreen extends React.Component {
     static propTypes = {
@@ -43,6 +43,7 @@ export class ListUsersScreen extends React.Component {
 
     userSelected = (user) => {
         AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
+            console.log('Current user saved');
             this.props.dispatch({
                 type: types.LOAD_USER,
                 user
@@ -79,10 +80,4 @@ export class ListUsersScreen extends React.Component {
     }
 }
 
-const mapStores = (store) => {
-    return {
-        userStore: store.userReducer
-    };
-};
-
-export default connect(mapStores)(ListUsersScreen);
+export default connect()(ListUsersScreen);
