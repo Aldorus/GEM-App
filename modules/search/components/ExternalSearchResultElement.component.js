@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, TouchableHighlight} from 'react-native';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
+import Colors from '../../../constants/Colors';
 
 const styles = StyleSheet.create({
     highlight: {
@@ -34,6 +35,7 @@ export default class ExternalSearchResultElement extends React.Component {
     render() {
         return (
             <TouchableHighlight onPress={() => this.pressed(this.props.result)}
+                                underlayColor={Colors.white}
                                 style={styles.highlight}>
                 <View style={[styles.container]}>
                     <StyledText>{this.props.result.category}</StyledText>

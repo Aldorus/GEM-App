@@ -73,6 +73,7 @@ export default class BottomNavigationGem extends React.Component {
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.bigIcon]}
+                                    underlayColor="transparent"
                                     onPress={this.goToNewGem}>
                     <Image source={addGemImage}/>
                 </TouchableHighlight>

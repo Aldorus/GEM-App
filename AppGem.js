@@ -7,8 +7,6 @@ import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 import * as types from './constants/ActionTypes';
 
 export class AppGem extends React.Component {
-    asyncStorageChecked = false;
-    assetsLoaded = false;
     state = {
         appIsReady: false
     };
@@ -17,6 +15,25 @@ export class AppGem extends React.Component {
         this.loadAssetsAsync();
         this.getCurrentUser();
     }
+
+    getCurrentUser = () => {
+        AsyncStorage.getItem('current_user').then((user) => {
+            this.user = JSON.parse(user);
+            this.props.dispatch({
+                type: types.LOAD_USER,
+                user: this.user
+            });
+            this.setAsyncStorageChecked();
+        });
+    };
+
+    setAppToReady = () => {
+        if (this.assetsLoaded && this.asyncStorageChecked) {
+            this.setState({
+                appIsReady: true
+            });
+        }
+    };
 
     setAsyncStorageChecked = () => {
         this.asyncStorageChecked = true;
@@ -28,13 +45,8 @@ export class AppGem extends React.Component {
         this.setAppToReady();
     };
 
-    setAppToReady = () => {
-        if (this.assetsLoaded && this.asyncStorageChecked) {
-            this.setState({
-                appIsReady: true
-            });
-        }
-    };
+    asyncStorageChecked = false;
+    assetsLoaded = false;
 
     loadAssetsAsync() {
         cacheAssetsAsync({
@@ -74,17 +86,6 @@ export class AppGem extends React.Component {
             ],
         }).then(this.setAssetsLoaded);
     }
-
-    getCurrentUser = () => {
-        AsyncStorage.getItem('current_user').then((user) => {
-            this.user = JSON.parse(user);
-            this.props.dispatch({
-                type: types.LOAD_USER,
-                user: this.user
-            });
-            this.setAsyncStorageChecked();
-        });
-    };
 
     render() {
         if (this.state.appIsReady) {

@@ -32,7 +32,9 @@ const styles = StyleSheet.create({
     },
     was: {
         justifyContent: 'center',
-        width: 50
+        width: 50,
+        marginLeft: 5,
+        marginRight: 5
     },
     wordContainer: {
         marginBottom: 10,

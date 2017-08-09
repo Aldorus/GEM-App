@@ -40,12 +40,12 @@ export default class AddGemStep1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            entitySelected: false
+            entitySelected: false,
+            results: []
         };
     }
 
     onElementSelected = (result) => {
-        // TODO save result
         this.setState({
             entitySelected: result
         });
@@ -65,36 +65,25 @@ export default class AddGemStep1 extends React.Component {
     };
 
     searchEntity = (value) => {
-        ExternalSearchEntity(value).then((entities) => {
-            this.setState({entities});
-        });
+        ExternalSearchEntity(value).then(this.mergeResults);
     };
 
     searchPlaces = (value) => {
-        ExternalSearchPlace(value).then((places) => {
-            this.setState({places});
-        });
+        ExternalSearchPlace(value).then(this.mergeResults);
     };
 
     searchMovies = (value) => {
-        ExternalSearchMovie(value).then((movies) => {
-            this.setState({movies});
-        });
+        ExternalSearchMovie(value).then(this.mergeResults);
     };
 
     searchBooks = (value) => {
-        ExternalSearchBook(value).then((books) => {
-            this.setState({books});
-        });
+        ExternalSearchBook(value).then(this.mergeResults);
     };
 
-    mergeResults = () => {
-        let results = [];
-        this.state.entities ? results = results.concat(this.state.entities) : '';
-        this.state.places ? results = results.concat(this.state.places) : '';
-        this.state.movies ? results = results.concat(this.state.movies) : '';
-        this.state.books ? results = results.concat(this.state.books) : '';
-        return results;
+    mergeResults = (partialResult) => {
+        this.setState({
+            results: this.state.results.concat(partialResult)
+        });
     };
 
     render = () => {
@@ -108,7 +97,7 @@ export default class AddGemStep1 extends React.Component {
                        onChangeText={this.onChange}/>
             <Image source={searchImage}
                    style={styles.icon}/>
-            <ExternalSearchResults results={this.mergeResults()} onElementSelected={this.onElementSelected}/>
+            <ExternalSearchResults results={this.state.results} onElementSelected={this.onElementSelected}/>
         </View>);
     };
 }

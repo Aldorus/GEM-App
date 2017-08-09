@@ -35,18 +35,18 @@ export default class TopNavigationGem extends React.Component {
 
 
     renderCenterComponent = () => {
-        return <TouchableHighlight underlayColor={Colors.tintColor}
+        return (<TouchableHighlight underlayColor={Colors.tintColor}
                                    onPress={this.openContextualPanel}>
             <Image source={contextualMenuImage}/>
-        </TouchableHighlight>;
+        </TouchableHighlight>);
     };
 
     renderLeftComponent = () => {
-        return <TouchableHighlight underlayColor={Colors.tintColor}
+        return (<TouchableHighlight underlayColor={Colors.tintColor}
                                    onPress={this.goBack}
                                    style={{marginLeft: 10}}>
             <Image source={backImage}/>
-        </TouchableHighlight>;
+        </TouchableHighlight>);
     };
 
     renderWithHistory = () => {
