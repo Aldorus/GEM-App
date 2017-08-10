@@ -18,26 +18,23 @@ const styles = StyleSheet.create({
         bottom: 16
     }
 });
-let listener;
 
 export default class AddGemScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
 
-    componentDidMount() {
-        if (Platform.OS == 'android' && listener == null) {
-            listener = BackAndroid.addEventListener('hardwareBackPress', () => {
-                return this.backButtonPressed()
-            });
-        }
-    }
-
     constructor(props) {
         super(props);
         this.state = {
             entitySelected: false
         };
+    }
+
+    componentDidMount() {
+        if (Platform.OS === 'android' && this.listener === null) {
+            this.listener = BackAndroid.addEventListener('hardwareBackPress', this.backButtonPressed);
+        }
     }
 
     onElementSelected = (result) => {
@@ -62,12 +59,14 @@ export default class AddGemScreen extends React.Component {
         if (!this.state.entitySelected) {
             return <AddGemStep1 onElementSelected={this.onElementSelected}/>;
         }
+        return null;
     };
 
     renderStep2 = () => {
         if (this.state.entitySelected) {
             return <AddGemStep2 entity={this.state.entitySelected} navigation={this.props.navigation}/>;
         }
+        return null;
     };
 
     render() {

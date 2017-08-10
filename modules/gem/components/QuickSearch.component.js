@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         fontFamily: 'celia'
     },
     icon: {
-        position:'absolute',
+        position: 'absolute',
         top: 8,
         left: 12,
         alignSelf: 'flex-start'

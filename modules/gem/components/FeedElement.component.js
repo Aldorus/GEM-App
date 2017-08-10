@@ -74,7 +74,7 @@ export class FeedElementComponent extends React.Component {
     };
 
     renderImageGem = () => {
-        if (this.props.userStore.displayListWithImage && this.props.gemData.picture) {
+        if (this.props.userStore && this.props.userStore.displayListWithImage && this.props.gemData.picture) {
             return <ImageLoader indicator={ProgressBar}
                                 style={styles.image}
                                 indicatorProps={{

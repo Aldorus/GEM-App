@@ -8,6 +8,7 @@ import AddGemScreen from '../modules/gem/AddGem.screen';
 import SettingsScreen from '../modules/settings/Settings.screen';
 import IntroExampleScreen from '../modules/intro/IntroExample.screen';
 import HomeScreen from '../modules/home/Home.screen';
+import ListSaveScreen from '../modules/save/ListSave.screen';
 import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
 
 const RootStackNavigator = ({initialRouteName}) => {
@@ -34,6 +35,9 @@ const RootStackNavigator = ({initialRouteName}) => {
         },
         Settings: {
             screen: SettingsScreen
+        },
+        ListSave: {
+            screen: ListSaveScreen
         }
     };
 

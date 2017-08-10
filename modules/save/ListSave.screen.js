@@ -1,10 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
-import {connect} from 'react-redux';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import {FeedElementComponent} from '../gem/components/FeedElement.component';
-import QuickSearchComponent from '../gem/components/QuickSearch.component';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,7 +13,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export class HomeScreen extends AbstractGemScreen {
+export class ListSaveScreen extends AbstractGemScreen {
     static navigationOptions = {
         header: null
     };
@@ -23,27 +22,21 @@ export class HomeScreen extends AbstractGemScreen {
         return <FeedElementComponent gemData={rowData}/>;
     };
 
-    renderHeader = () => {
-        return <QuickSearchComponent/>;
-    };
-
     render() {
         return super.render(
             <View style={styles.container}>
-                <ListView data={this.props.gemStore}
-                          autoHideHeader={true}
+                <ListView data={this.props.saveStore}
                           style={{listContent: {backgroundColor: 'transparent'}}}
-                          renderHeader={this.renderHeader}
                           renderRow={this.renderRowView}/>
             </View>
-        );
+        , true);
     }
 }
 
 const mapStores = (store) => {
     return {
-        gemStore: store.gemReducer
+        saveStore: store.saveReducer
     };
 };
 
-export default connect(mapStores)(HomeScreen);
+export default connect(mapStores)(ListSaveScreen);

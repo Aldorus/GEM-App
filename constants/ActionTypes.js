@@ -2,6 +2,9 @@
 export const LOAD_GEM_SUCCESS = 'LOAD_GEM_SUCCESS';
 export const ADD_GEM = 'ADD_GEM';
 
+// SAVED GEM
+export const LOAD_SAVED_GEM_SUCCESS = 'LOAD_SAVED_GEM_SUCCESS';
+export const ADD_SAVED_GEM = 'ADD_SAVED_GEM';
 
 // USER PREFERENCES
 export const LOAD_USER = 'LOAD_USER';

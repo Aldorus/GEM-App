@@ -37,7 +37,9 @@ export default class BottomNavigationGem extends React.Component {
     };
 
     goToListGems = () => {
-
+        this.props.navigation.navigate('Main', {
+            transition: 'fromRight'
+        });
     };
 
     goToAddFriend = () => {
@@ -51,7 +53,9 @@ export default class BottomNavigationGem extends React.Component {
     };
 
     goToLove = () => {
-
+        this.props.navigation.navigate('ListSave', {
+            transition: 'fromLeft'
+        });
     };
 
     render() {
