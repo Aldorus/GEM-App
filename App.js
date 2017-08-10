@@ -2,7 +2,7 @@ import React from 'react';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {createLogger} from 'redux-logger';
+import {Segment} from 'expo';
 import rootReducer from './rootReducer';
 import AppGem from './AppGem';
 
@@ -20,6 +20,12 @@ const store = createStore(rootReducer,
 
 
 export default class AppContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        Segment.initializeIOS('85sM2EwiuAfwQhMRQ1yEmnhPpYuCbvQ1');
+        Segment.track('Application Opened');
+    }
+
     render() {
         return (
             <Provider store={store}>

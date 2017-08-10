@@ -8,7 +8,6 @@ import * as types from '../../../constants/ActionTypes';
 import listWords from './listWords.json';
 import PicturePicker from '../../picture/PicturePicker.component';
 
-const shuffledListWords = shuffleArray(listWords);
 const styles = StyleSheet.create({
     scroll: {
         alignSelf: 'stretch',
@@ -60,7 +59,6 @@ export class AddGemStep2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedWord: shuffledListWords[0],
             picture: props.entity.image
         };
     }
@@ -103,7 +101,7 @@ export class AddGemStep2 extends React.Component {
     };
 
     render = () => {
-        console.log('User store', this.props.userStore);
+        const shuffleListWords = shuffleArray(listWords);
         return (<ScrollView style={styles.scroll}>
             <View style={styles.container}>
                 <ExternalSearchResultElement result={this.props.entity}/>
@@ -111,8 +109,8 @@ export class AddGemStep2 extends React.Component {
                     <Text style={styles.was}>Was...</Text>
                     <DropDownMenu
                         styleName="clear"
-                        options={shuffledListWords}
-                        selectedOption={this.state.selectedWord ? this.state.selectedWord : shuffledListWords[0]}
+                        options={shuffleListWords}
+                        selectedOption={this.state.selectedWord ? this.state.selectedWord : shuffleListWords[0]}
                         onOptionSelected={(word) => {
                             return this.setState({selectedWord: word});
                         }}

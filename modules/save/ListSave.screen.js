@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Segment} from 'expo';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
@@ -18,6 +19,11 @@ export class ListSaveScreen extends AbstractGemScreen {
         header: null
     };
 
+    componentDidMount = () => {
+        super.componentDidMount();
+        Segment.track('ListSave page');
+    };
+
     renderRowView = (rowData) => {
         return <FeedElementComponent gemData={rowData}/>;
     };
@@ -29,7 +35,7 @@ export class ListSaveScreen extends AbstractGemScreen {
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderRow={this.renderRowView}/>
             </View>
-        , true);
+            , true);
     }
 }
 

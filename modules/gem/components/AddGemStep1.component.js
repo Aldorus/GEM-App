@@ -56,33 +56,38 @@ export default class AddGemStep1 extends React.Component {
 
     onChange = (value) => {
         if (value.length > 3) {
-            this.searchEntity(value);
-            this.searchPlaces(value);
-            this.searchMovies(value);
-            this.searchBooks(value);
+            Promise.all([
+                this.searchEntity(value),
+                this.searchPlaces(value),
+                this.searchMovies(value),
+                this.searchBooks(value)
+            ]).then(this.mergeResults);
         }
         this.setState({value});
     };
 
     searchEntity = (value) => {
-        ExternalSearchEntity(value).then(this.mergeResults);
+        return ExternalSearchEntity(value);
     };
 
     searchPlaces = (value) => {
-        ExternalSearchPlace(value).then(this.mergeResults);
+        return ExternalSearchPlace(value);
     };
 
     searchMovies = (value) => {
-        ExternalSearchMovie(value).then(this.mergeResults);
+        return ExternalSearchMovie(value);
     };
 
     searchBooks = (value) => {
-        ExternalSearchBook(value).then(this.mergeResults);
+        return ExternalSearchBook(value);
     };
 
-    mergeResults = (partialResult) => {
+    mergeResults = (partialResults) => {
+        const results = partialResults.reduce((accu, partial) => {
+            return accu.concat(partial);
+        }, []);
         this.setState({
-            results: this.state.results.concat(partialResult)
+            results
         });
     };
 

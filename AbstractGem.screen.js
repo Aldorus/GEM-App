@@ -1,6 +1,6 @@
 import React from 'react';
 import {BackAndroid, Platform, View} from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import {NavigationActions} from 'react-navigation';
 import BottomNavigationGem from './navigation/BottomNavigationGem.component';
 import TopNavigationGem from './navigation/TopNavigationGem.component';
 import TopSortAndFilter from './modules/search/components/TopSortAndFilter.component';

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import {connect} from 'react-redux';
+import {Segment} from 'expo';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import {FeedElementComponent} from '../gem/components/FeedElement.component';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
@@ -17,6 +18,11 @@ const styles = StyleSheet.create({
 export class HomeScreen extends AbstractGemScreen {
     static navigationOptions = {
         header: null
+    };
+
+    componentDidMount = () => {
+        super.componentDidMount();
+        Segment.track('Home page');
     };
 
     renderRowView = (rowData) => {
