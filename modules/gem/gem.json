@@ -3,7 +3,7 @@
         "category": "Restaurant",
         "title": "Atelier Septembre",
         "location": "Copenhagen",
-        "word": "it's To Die For",
+        "word": "it's \"To Die For\"",
         "picture": "http://loremflickr.com/320/240/duck/all",
         "user": {
             "first_name": "Guillaume",
@@ -27,7 +27,7 @@
         "avatar": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200",
         "category": "Book",
         "title": "Altas Obscura: An explorer's guide to the world's hidden wonders",
-        "word": "it's Awesome",
+        "word": "it's \"Awesome\"",
         "picture": "http://loremflickr.com/320/240/duck/all",
         "user": {
             "first_name": "Guillaume",

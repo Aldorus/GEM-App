@@ -8,5 +8,7 @@ export default {
     colorBackground: '#FFF',
     white: '#FFF',
     gradientStart: tintColor,
-    gradientEnd: secondaryTintColor
+    gradientEnd: secondaryTintColor,
+    gradientAlternativeStart: '#d4d7fe',
+    gradientAlternativeEnd: '#d6f2ff'
 };

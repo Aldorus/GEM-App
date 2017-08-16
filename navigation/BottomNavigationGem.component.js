@@ -2,10 +2,13 @@ import React from 'react';
 import {Image, StyleSheet, TouchableHighlight} from 'react-native';
 import {LinearGradient} from 'expo';
 import Colors from '../constants/Colors';
-import listGemImage from '../assets/icons/list-gem@2x.png';
-import addFriendImage from '../assets/icons/add-friend@2x.png';
+import listGemOnImage from '../assets/icons/list-gem-on@2x.png';
+import listGemOffImage from '../assets/icons/list-gem-off@2x.png';
+import addFriendOffImage from '../assets/icons/add-friend-off@2x.png';
+import addFriendOnImage from '../assets/icons/add-friend-on@2x.png';
 import addGemImage from '../assets/icons/add-gem@2x.png';
-import paramsImage from '../assets/icons/params@2x.png';
+import paramsOffImage from '../assets/icons/params-off@2x.png';
+import paramsOnImage from '../assets/icons/params-on@2x.png';
 import loveImage from '../assets/icons/love@2x.png';
 
 const styles = StyleSheet.create({
@@ -36,44 +39,57 @@ export default class BottomNavigationGem extends React.Component {
         });
     };
 
-    goToListGems = () => {
-        this.props.navigation.navigate('Main', {
-            transition: 'fromRight'
-        });
+    goToListGems = (state) => {
+        if (this.props.stateName !== state) {
+            this.props.navigation.navigate('Main', {
+                transition: 'fromRight'
+            });
+        }
     };
 
-    goToAddFriend = () => {
-
+    goToAddFriend = (state) => {
+        if (this.props.stateName !== state) {
+            this.props.navigation.navigate('AddFriends', {
+                transition: 'fromLeft'
+            });
+        }
     };
 
-    goToParams = () => {
-        this.props.navigation.navigate('Settings', {
-            transition: 'fromLeft'
-        });
+    goToParams = (state) => {
+        if (this.props.stateName !== state) {
+            this.props.navigation.navigate('Settings', {
+                transition: 'fromLeft'
+            });
+        }
     };
 
-    goToLove = () => {
-        this.props.navigation.navigate('ListSave', {
-            transition: 'fromLeft'
-        });
+    goToLove = (state) => {
+        if (this.props.stateName !== state) {
+            this.props.navigation.navigate('ListSave', {
+                transition: 'fromLeft'
+            });
+        }
+    };
+
+    renderImage = (state, imageOn, imageOff) => {
+        return this.props.stateName === state ? <Image source={imageOn}/> : <Image source={imageOff}/>;
     };
 
     render() {
-
         return (
             <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
                             end={[1, 0]}
                             style={styles.container}>
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
-                                    onPress={this.goToListGems}>
-                    <Image source={listGemImage}/>
+                                    onPress={() => this.goToListGems('home')}>
+                    {this.renderImage('home', listGemOnImage, listGemOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
-                                    onPress={this.goToAddFriend}>
-                    <Image source={addFriendImage}/>
+                                    onPress={() => this.goToAddFriend('addFriend')}>
+                    {this.renderImage('addFriend', addFriendOnImage, addFriendOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.bigIcon]}
@@ -84,14 +100,14 @@ export default class BottomNavigationGem extends React.Component {
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
-                                    onPress={this.goToParams}>
-                    <Image source={paramsImage}/>
+                                    onPress={() => this.goToParams('params')}>
+                    {this.renderImage('params', paramsOnImage, paramsOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
-                                    onPress={this.goToLove}>
-                    <Image source={loveImage}/>
+                                    onPress={() => this.goToLove('saved')}>
+                    {this.renderImage('saved', loveImage, loveImage)}
                 </TouchableHighlight>
             </LinearGradient>
         );

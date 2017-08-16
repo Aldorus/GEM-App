@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 });
 
 export class HomeScreen extends AbstractGemScreen {
+    stateName = 'home';
     static navigationOptions = {
         header: null
     };

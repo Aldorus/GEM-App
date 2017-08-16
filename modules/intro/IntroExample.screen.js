@@ -54,7 +54,38 @@ export class IntroExampleScreen extends React.Component {
                 to share and save{'\n'}
                 5 stars experiences{'\n\n'}
                 (Because life's too short{'\n'}
-                to bother with less){'\n'}
+                to bother with less)
+            </StyledText>
+        </GradientBackground>);
+    };
+
+    renderSlide2 = () => {
+        return (<GradientBackground style={styles.container}>
+            <StyledText style={{
+                textAlign: 'center'
+            }}>
+                Discover{'\n'}
+                5 stars your friends{'\n'}
+                wish you would{'\n'}
+                experiment{'\n\n'}
+                (You know, to have exciting{'\n'}
+                to talk about, next time{'\n'}
+                you meet)
+            </StyledText>
+        </GradientBackground>);
+    };
+
+    renderSlide3 = () => {
+        return (<GradientBackground style={styles.container}>
+            <StyledText style={{
+                textAlign: 'center'
+            }}>
+                Save{'\n'}
+                future Gems{'\n'}
+                to keep track of all{'\n'}
+                the amazing things{'\n'}
+                your life awaits.{'\n\n'}
+                (Then Gem it!)
             </StyledText>
         </GradientBackground>);
     };
@@ -64,11 +95,8 @@ export class IntroExampleScreen extends React.Component {
             <AppIntro onDoneBtnClick={this.doneBtnHandle}
                       onSkipBtnClick={this.onSkipBtnHandle}>
                 {this.renderSlide1()}
-
-                <Image source={require('../../assets/images/tutoriel-2.png')}
-                       style={styles.container}>
-                    <Text>Tutoriel Page 2</Text>
-                </Image>
+                {this.renderSlide2()}
+                {this.renderSlide3()}
             </AppIntro>
         );
     }

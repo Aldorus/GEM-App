@@ -50,10 +50,11 @@ export default class AbstractGemScreen extends React.Component {
                 <TopNavigationGem hasHistory={hasHistory}
                                   backButtonAction={this.backButtonPressed}
                                   navigation={this.props.navigation}
+                                  title={this.titleState}
                                   onOpenContextualPanel={this.onOpenContextualPanel}/>
                 {this.renderSortingPanel()}
                 {child}
-                <BottomNavigationGem navigation={this.props.navigation}/>
+                <BottomNavigationGem navigation={this.props.navigation} stateName={this.stateName}/>
             </View>
         );
     }

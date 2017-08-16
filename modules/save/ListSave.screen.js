@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
 });
 
 export class ListSaveScreen extends AbstractGemScreen {
+    stateName = 'saved';
+    titleState = 'Your Gem Box';
     static navigationOptions = {
         header: null
     };
@@ -34,8 +36,7 @@ export class ListSaveScreen extends AbstractGemScreen {
                 <ListView data={this.props.saveStore}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderRow={this.renderRowView}/>
-            </View>
-            , true);
+            </View>, true);
     }
 }
 

@@ -10,6 +10,7 @@ import IntroExampleScreen from '../modules/intro/IntroExample.screen';
 import HomeScreen from '../modules/home/Home.screen';
 import ListSaveScreen from '../modules/save/ListSave.screen';
 import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
+import {AddFriendsScreen} from '../modules/friend/ListFriends.screen';
 
 const RootStackNavigator = ({initialRouteName}) => {
     const stackNavigatorConfigs = {
@@ -32,6 +33,9 @@ const RootStackNavigator = ({initialRouteName}) => {
         },
         AddGem: {
             screen: AddGemScreen
+        },
+        AddFriends: {
+            screen: AddFriendsScreen
         },
         Settings: {
             screen: SettingsScreen

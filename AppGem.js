@@ -52,20 +52,23 @@ export class AppGem extends React.Component {
         cacheAssetsAsync({
             images: [
                 require('./assets/images/expo-wordmark.png'),
-                require('./assets/icons/add-friend@2x.png'),
+                require('./assets/icons/add-friend-off@2x.png'),
+                require('./assets/icons/add-friend-on@2x.png'),
                 require('./assets/icons/add-gem@2x.png'),
                 require('./assets/icons/app-icon.png'),
                 require('./assets/icons/back@2x.png'),
                 require('./assets/icons/close@2x.png'),
                 require('./assets/icons/contextual-menu@2x.png'),
                 require('./assets/icons/gem@2x.png'),
-                require('./assets/icons/list-gem@2x.png'),
+                require('./assets/icons/list-gem-off@2x.png'),
+                require('./assets/icons/list-gem-on@2x.png'),
                 require('./assets/icons/loading-icon.png'),
                 require('./assets/icons/love@2x.png'),
-                require('./assets/icons/notification-icon.png'),
-                require('./assets/icons/params@2x.png'),
+                require('./assets/icons/params-off@2x.png'),
+                require('./assets/icons/params-on@2x.png'),
+                require('./assets/icons/params-off-notif@2x.png'),
                 require('./assets/icons/search@2x.png'),
-                require('./assets/icons/share@2x.png')
+                require('./assets/icons/share-ios@2x.png')
             ],
             fonts: [
                 {'celia': require('./assets/fonts/Celias_Regular.ttf')},

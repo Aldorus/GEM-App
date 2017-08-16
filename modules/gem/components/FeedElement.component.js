@@ -9,9 +9,10 @@ import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
-import listGemImage from '../../../assets/icons/list-gem@2x.png';
+import listGemImage from '../../../assets/icons/list-gem-off@2x.png';
 import loveImage from '../../../assets/icons/love@2x.png';
-import shareImage from '../../../assets/icons/share@2x.png';
+import shareImageIOS from '../../../assets/icons/share-ios@2x.png';
+import GradientBackground from '../../../components/GradientBackground';
 
 const styles = StyleSheet.create({
     container: {
@@ -48,21 +49,27 @@ const styles = StyleSheet.create({
 
 const swipeoutBtns = [
     {
-        component: <TouchableHighlight style={styles.swipeButton}>
-            <Image source={listGemImage}/>
-        </TouchableHighlight>,
+        component: <GradientBackground style={styles.swipeButton} alternative>
+            <TouchableHighlight style={styles.swipeButton}>
+                <Image source={listGemImage}/>
+            </TouchableHighlight>
+        </GradientBackground>,
         backgroundColor: Colors.tintColor
     },
     {
-        component: <TouchableHighlight style={styles.swipeButton}>
-            <Image source={loveImage}/>
-        </TouchableHighlight>,
+        component: <GradientBackground style={styles.swipeButton} alternative>
+            <TouchableHighlight style={styles.swipeButton}>
+                <Image source={loveImage}/>
+            </TouchableHighlight>
+        </GradientBackground>,
         backgroundColor: Colors.tintColor
     },
     {
-        component: <TouchableHighlight style={styles.swipeButton}>
-            <Image source={shareImage}/>
-        </TouchableHighlight>,
+        component: <GradientBackground style={styles.swipeButton} alternative>
+            <TouchableHighlight style={styles.swipeButton}>
+                <Image source={shareImageIOS}/>
+            </TouchableHighlight>
+        </GradientBackground>,
         backgroundColor: Colors.tintColor
     }
 ];
@@ -113,11 +120,11 @@ export class FeedElementComponent extends React.Component {
                                 source={{uri: this.props.gemData.user.avatar_thumbnail_url}}
                             />
                             <View style={styles.textWrapper}>
-                                <StyledText>{this.props.gemData.category}</StyledText>
+                                <StyledText>{this.props.gemData.category}{this.renderLocation()}</StyledText>
                                 <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
                                 <StyledText>
                                     {this.props.gemData.user.first_name} says {this.props.gemData.word}
-                                    {this.renderLocation()}</StyledText>
+                                </StyledText>
                             </View>
                         </View>
                         {this.renderImageGem()}

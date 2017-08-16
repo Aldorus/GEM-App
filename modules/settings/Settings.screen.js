@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, StyleSheet, Text, AsyncStorage} from 'react-native';
+import {Segment} from 'expo';
+import {AsyncStorage, ScrollView, StyleSheet, Text} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import ListItemStyle from '../../constants/ListItemStyle';
+import AbstractGemScreen from '../../AbstractGem.screen';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,13 +13,20 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class SettingsScreen extends React.Component {
+export default class SettingsScreen extends AbstractGemScreen {
+    stateName = 'params';
+    titleState = 'Parameters';
     static propTypes = {
         navigation: PropTypes.any.isRequired
     };
 
     static navigationOptions = {
-        title: 'Settings',
+        header: null
+    };
+
+    componentDidMount = () => {
+        super.componentDidMount();
+        Segment.track('Settings page');
     };
 
     goToDisconnect = () => {
@@ -34,13 +43,13 @@ export default class SettingsScreen extends React.Component {
     };
 
     render() {
-        return (
+        return super.render(
             <ScrollView style={styles.container}>
                 <Text
                     style={ListItemStyle.item}
                     onPress={this.goToDisconnect}
                 >Disconnect</Text>
             </ScrollView>
-        );
+            , true);
     }
 }

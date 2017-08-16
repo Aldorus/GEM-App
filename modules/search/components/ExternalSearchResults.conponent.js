@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import ExternalSearchResultElement from './ExternalSearchResultElement.component';
+import NoResultElement from './NoResultElement.component';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,6 +32,10 @@ export default class ExternalSearchResults extends React.Component {
         return <ExternalSearchResultElement result={rowData} elementPressed={this.elementSelected}/>;
     };
 
+    renderHeader = () => {
+        return this.props.results.length ? <NoResultElement elementPressed={this.elementSelected}/> : <View/>;
+    };
+
     render() {
         return (
             <View style={[styles.container, {
@@ -42,6 +47,7 @@ export default class ExternalSearchResults extends React.Component {
                                   backgroundColor: 'transparent'
                               }
                           }}
+                          renderHeader={this.renderHeader}
                           renderRow={this.renderRowView}/>
             </View>
         );

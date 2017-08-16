@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, TouchableHighlight, View, StyleSheet} from 'react-native';
+import {Image, TouchableHighlight, View, StyleSheet, Text} from 'react-native';
 import {NavigationBar} from '@shoutem/ui'
 import {NavigationActions} from 'react-navigation';
 import {LinearGradient} from 'expo';
@@ -34,11 +34,15 @@ export default class TopNavigationGem extends React.Component {
     };
 
 
-    renderCenterComponent = () => {
+    renderCenterIconComponent = () => {
         return (<TouchableHighlight underlayColor={Colors.tintColor}
                                    onPress={this.openContextualPanel}>
             <Image source={contextualMenuImage}/>
         </TouchableHighlight>);
+    };
+
+    renderCenterTextComponent = () => {
+        return <Text style={{fontSize: 16}}>{this.props.title}</Text>;
     };
 
     renderLeftComponent = () => {
@@ -51,11 +55,15 @@ export default class TopNavigationGem extends React.Component {
 
     renderWithHistory = () => {
         return (
-            <View style={{height: 70, alignSelf: 'stretch', backgroundColor: 'white'}}>
+            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
+                            end={[1, 0]}
+                            style={styles.container}>
                 <NavigationBar hasHistory={this.props.hasHistory}
                                styleName="clear"
+                               centerComponent={this.renderCenterTextComponent()}
                                leftComponent={this.renderLeftComponent()}/>
-            </View>
+
+            </LinearGradient>
         );
     };
 
@@ -65,7 +73,7 @@ export default class TopNavigationGem extends React.Component {
                             end={[1, 0]}
                             style={styles.container}>
                 <NavigationBar styleName="clear"
-                               centerComponent={this.renderCenterComponent()}/>
+                               centerComponent={this.renderCenterIconComponent()}/>
             </LinearGradient>
         );
     };
