@@ -14,7 +14,7 @@ export default class AbstractGemScreen extends React.Component {
     }
 
     componentDidMount() {
-        if (this.hasHistory && Platform.OS === 'android' && this.listener === null) {
+        if (this.navigationOptions.hasHistory && Platform.OS === 'android' && this.listener === null) {
             this.listener = BackAndroid.addEventListener('hardwareBackPress', this.backButtonPressed);
         }
     }
@@ -43,18 +43,24 @@ export default class AbstractGemScreen extends React.Component {
         return null;
     };
 
-    render(child, hasHistory) {
-        this.hasHistory = hasHistory;
+    renderBottom = () => {
+        if (this.navigationOptions.bottom === false) {
+            return null;
+        }
+        return <BottomNavigationGem navigation={this.props.navigation} stateName={this.navigationOptions.stateName}/>;
+    };
+
+    render(child) {
         return (
             <View style={{flex: 1}}>
-                <TopNavigationGem hasHistory={hasHistory}
+                <TopNavigationGem navigationOptions={this.navigationOptions}
                                   backButtonAction={this.backButtonPressed}
                                   navigation={this.props.navigation}
                                   title={this.titleState}
                                   onOpenContextualPanel={this.onOpenContextualPanel}/>
                 {this.renderSortingPanel()}
                 {child}
-                <BottomNavigationGem navigation={this.props.navigation} stateName={this.stateName}/>
+                {this.renderBottom()}
             </View>
         );
     }

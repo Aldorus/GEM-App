@@ -7,14 +7,22 @@ import Colors from '../../constants/Colors';
 import listItemStyle from '../../constants/ListItemStyle';
 import {getAllUsers} from './users.service';
 import * as types from '../../constants/ActionTypes';
+import AbstractGemScreen from '../../AbstractGem.screen';
 
-export class ListUsersScreen extends React.Component {
-    static propTypes = {
-        navigation: PropTypes.any.isRequired
+export class ListUsersScreen extends AbstractGemScreen {
+    navigationOptions = {
+        titleState: 'Connexion',
+        bottom: false,
+        hasHistory: false,
+        stateName: 'connexion'
     };
 
     static navigationOptions = {
-        title: 'Connect',
+        header: null
+    };
+
+    static propTypes = {
+        navigation: PropTypes.any.isRequired
     };
 
     state = {
@@ -27,6 +35,9 @@ export class ListUsersScreen extends React.Component {
                 listUsers
             });
         });
+        // this.setState({
+        //     listUsers: users
+        // });
     };
 
     goToMainScreen = () => {
@@ -76,7 +87,7 @@ export class ListUsersScreen extends React.Component {
     };
 
     render = () => {
-        return this.renderList();
+        return super.render(this.renderList());
     }
 }
 

@@ -101,4 +101,4 @@ export class AppGem extends React.Component {
     }
 }
 
-export default connect()(AppGem);
+export default AppGemRedux = connect()(AppGem);

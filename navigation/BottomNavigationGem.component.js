@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, TouchableHighlight} from 'react-native';
 import {LinearGradient} from 'expo';
+import {NavigationActions} from 'react-navigation';
 import Colors from '../constants/Colors';
 import listGemOnImage from '../assets/icons/list-gem-on@2x.png';
 import listGemOffImage from '../assets/icons/list-gem-off@2x.png';
@@ -41,33 +42,69 @@ export default class BottomNavigationGem extends React.Component {
 
     goToListGems = (state) => {
         if (this.props.stateName !== state) {
-            this.props.navigation.navigate('Main', {
-                transition: 'fromRight'
-            });
+            this.props
+                .navigation
+                .dispatch(NavigationActions.reset(
+                    {
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: 'Main',
+                                transition: 'opacity'
+                            })
+                        ]
+                    }));
         }
     };
 
     goToAddFriend = (state) => {
         if (this.props.stateName !== state) {
-            this.props.navigation.navigate('AddFriends', {
-                transition: 'fromLeft'
-            });
+            this.props
+                .navigation
+                .dispatch(NavigationActions.reset(
+                    {
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: 'AddFriends',
+                                transition: 'opacity'
+                            })
+                        ]
+                    }));
         }
     };
 
     goToParams = (state) => {
         if (this.props.stateName !== state) {
-            this.props.navigation.navigate('Settings', {
-                transition: 'fromLeft'
-            });
+            this.props
+                .navigation
+                .dispatch(NavigationActions.reset(
+                    {
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: 'Settings',
+                                transition: 'opacity'
+                            })
+                        ]
+                    }));
         }
     };
 
     goToLove = (state) => {
         if (this.props.stateName !== state) {
-            this.props.navigation.navigate('ListSave', {
-                transition: 'fromLeft'
-            });
+            this.props
+                .navigation
+                .dispatch(NavigationActions.reset(
+                    {
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: 'ListSave',
+                                transition: 'opacity'
+                            })
+                        ]
+                    }));
         }
     };
 

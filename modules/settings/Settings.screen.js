@@ -14,8 +14,11 @@ const styles = StyleSheet.create({
 });
 
 export default class SettingsScreen extends AbstractGemScreen {
-    stateName = 'params';
-    titleState = 'Parameters';
+    navigationOptions = {
+        stateName: 'params',
+        hasHistory: false
+    };
+
     static propTypes = {
         navigation: PropTypes.any.isRequired
     };

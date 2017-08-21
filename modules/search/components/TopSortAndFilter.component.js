@@ -94,20 +94,18 @@ export class TopSortAndFilter extends React.Component {
     };
 
     onClose = () => {
-        console.log('Close');
         if (this.props.onCloseContextualPanel) {
-            console.log('Run Close');
             this.props.onCloseContextualPanel();
         }
     };
 
     onDisplayStyleChange = (display) => {
-        console.log('Display change');
-        this.onClose();
+        console.log('Display', display);
         this.props.dispatch({
             type: display.action
         });
         this.setState({selectDisplay: display});
+        this.onClose();
     };
 
     render() {

@@ -1,13 +1,20 @@
 import {AsyncStorage} from 'react-native';
+import {copyObject} from './extends/object.utils';
 
-export const gemFetch = (url, options) => {
+export const gemFetch = (url, options = {}) => {
     return AsyncStorage.getItem('current_user').then((user) => {
+        const optionsCopy = copyObject(options);
         if (!options.headers) {
-            options.headers = {};
+            optionsCopy.headers = {};
         }
-        options.headers.Authorization = `Bearer ${user.accessToken}`;
-        return fetch(url, options).then((response) => {
-            return response.json();
+        if (user && user.accessToken) {
+            optionsCopy.headers.Authorization = `Bearer ${user.accessToken}`;
+        }
+        return fetch(url, optionsCopy).then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response);
         });
     });
 };

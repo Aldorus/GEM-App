@@ -12,11 +12,7 @@
         "androidStatusBarColor": "#FFFFFF",
         "androidStatusBar": {
             "barStyle": "light-content",
-            "backgroundColor": "#0D8F4F"
-        },
-        "notification": {
-            "icon": "./assets/icons/notification-icon.png",
-            "color": "#000000"
+            "backgroundColor": "#d4d6fe"
         },
         "loading": {
             "icon": "./assets/icons/loading-icon.png",
@@ -33,6 +29,18 @@
         },
         "android": {
             "package": "com.guillaume.gem"
+        },
+        "hooks": {
+            "postPublish": [
+                {
+                    "file": "sentry-expo/upload-sourcemaps",
+                    "config": {
+                        "organization": "Aldorus",
+                        "project": "GEM",
+                        "authToken": "7824a9dffc58408e9af386cda7df43ae140c53e587184283a69c3d2928a6d9d2"
+                    }
+                }
+            ]
         }
     }
 }

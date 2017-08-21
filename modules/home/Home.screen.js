@@ -6,6 +6,7 @@ import {Segment} from 'expo';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import {FeedElementComponent} from '../gem/components/FeedElement.component';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
+import {copyObject} from '../../utilities/extends/object.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,7 +17,11 @@ const styles = StyleSheet.create({
 });
 
 export class HomeScreen extends AbstractGemScreen {
-    stateName = 'home';
+    navigationOptions = {
+        stateName: 'home',
+        hasHistory: false
+    };
+
     static navigationOptions = {
         header: null
     };
@@ -27,7 +32,7 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     renderRowView = (rowData) => {
-        return <FeedElementComponent gemData={rowData}/>;
+        return <FeedElementComponent gemData={rowData} userStore={this.props.userStore}/>;
     };
 
     renderHeader = () => {
@@ -35,9 +40,11 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     render() {
+        // TODO may cause some trouble for the performance
+        const gemStoreCopy = copyObject(this.props.gemStore);
         return super.render(
             <View style={styles.container}>
-                <ListView data={this.props.gemStore}
+                <ListView data={gemStoreCopy}
                           autoHideHeader={true}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderHeader={this.renderHeader}
@@ -49,7 +56,8 @@ export class HomeScreen extends AbstractGemScreen {
 
 const mapStores = (store) => {
     return {
-        gemStore: store.gemReducer
+        gemStore: store.gemReducer,
+        userStore: store.userReducer
     };
 };
 

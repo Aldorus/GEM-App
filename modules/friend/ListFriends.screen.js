@@ -13,8 +13,10 @@ const styles = StyleSheet.create({
 });
 
 export class AddFriendsScreen extends AbstractGemScreen {
-    stateName = 'addFriend';
-    titleState = 'Friends box';
+    navigationOptions = {
+        hasHistory: false,
+        stateName: 'addFriend'
+    };
     static navigationOptions = {
         header: null
     };

@@ -1,9 +1,8 @@
 import {Config} from '../../constants/Config';
+import {gemFetch} from '../../utilities/authFetch.service';
 
 export const getAllUsers = () => {
-    return fetch(`${Config.WS_ROOT}users`).then((response) => {
-        return response.json();
-    }).then((parsedResponse) => {
+    return gemFetch(`${Config.WS_ROOT}users`).then((parsedResponse) => {
         return parsedResponse.users;
     });
 };

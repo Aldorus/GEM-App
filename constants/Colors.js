@@ -1,5 +1,5 @@
 const tintColor = '#d4d6fe';
-const secondaryTintColor= '#daffff';
+const secondaryTintColor = '#daffff';
 
 export default {
     tintColor,

@@ -54,12 +54,14 @@ const styles = StyleSheet.create({
         color: 'black'
     }
 });
+const shuffleListWords = shuffleArray(listWords);
 
 export class AddGemStep2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            picture: props.entity.image
+            picture: props.entity.image,
+            selectedWord: shuffleListWords[0]
         };
     }
 
@@ -101,7 +103,6 @@ export class AddGemStep2 extends React.Component {
     };
 
     render = () => {
-        const shuffleListWords = shuffleArray(listWords);
         return (<ScrollView style={styles.scroll}>
             <View style={styles.container}>
                 <ExternalSearchResultElement result={this.props.entity}/>

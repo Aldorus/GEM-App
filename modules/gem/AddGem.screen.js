@@ -72,7 +72,11 @@ export default class AddGemScreen extends React.Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <TopNavigationGem hasHistory={true}
+                <TopNavigationGem navigationOptions={{
+                    hasHistory: true,
+                    titleState: ' ',
+                    noBackground: true
+                }}
                                   backButtonAction={this.backButtonPressed}
                                   navigation={this.props.navigation}/>
                 <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}

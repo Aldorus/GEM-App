@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, TouchableHighlight, View, StyleSheet, Text} from 'react-native';
+import {Image, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {NavigationBar} from '@shoutem/ui'
 import {NavigationActions} from 'react-navigation';
 import {LinearGradient} from 'expo';
@@ -10,22 +10,28 @@ import backImage from '../assets/icons/back.png';
 const styles = StyleSheet.create({
     container: {
         height: 70,
-        alignSelf: 'stretch'}
+        alignSelf: 'stretch'
+    }
 });
 
 export default class TopNavigationGem extends React.Component {
     static propTypes = {};
 
     openContextualPanel = () => {
-        console.log('Navbar touched');
-        console.log(this.props.navigation);
         if (this.props.onOpenContextualPanel) {
             this.props.onOpenContextualPanel();
         }
     };
 
+    getGradient = () => {
+        if (this.props.navigationOptions.noBackground === true) {
+            return [Colors.white, Colors.white];
+        }
+        return [Colors.gradientStart, Colors.gradientEnd];
+    };
+
     goBack = () => {
-        if(this.props.backButtonAction) {
+        if (this.props.backButtonAction) {
             this.props.backButtonAction();
         } else {
             const backAction = NavigationActions.back();
@@ -33,52 +39,36 @@ export default class TopNavigationGem extends React.Component {
         }
     };
 
-
-    renderCenterIconComponent = () => {
+    renderCenterComponent = () => {
+        if (this.props.navigationOptions.titleState) {
+            return <Text style={{fontSize: 16}}>{this.props.navigationOptions.titleState}</Text>;
+        }
         return (<TouchableHighlight underlayColor={Colors.tintColor}
-                                   onPress={this.openContextualPanel}>
+                                    onPress={this.openContextualPanel}>
             <Image source={contextualMenuImage}/>
         </TouchableHighlight>);
     };
 
-    renderCenterTextComponent = () => {
-        return <Text style={{fontSize: 16}}>{this.props.title}</Text>;
-    };
-
     renderLeftComponent = () => {
-        return (<TouchableHighlight underlayColor={Colors.tintColor}
-                                   onPress={this.goBack}
-                                   style={{marginLeft: 10}}>
-            <Image source={backImage}/>
-        </TouchableHighlight>);
-    };
-
-    renderWithHistory = () => {
-        return (
-            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
-                            end={[1, 0]}
-                            style={styles.container}>
-                <NavigationBar hasHistory={this.props.hasHistory}
-                               styleName="clear"
-                               centerComponent={this.renderCenterTextComponent()}
-                               leftComponent={this.renderLeftComponent()}/>
-
-            </LinearGradient>
-        );
-    };
-
-    renderWithoutHistory = () => {
-        return (
-            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
-                            end={[1, 0]}
-                            style={styles.container}>
-                <NavigationBar styleName="clear"
-                               centerComponent={this.renderCenterIconComponent()}/>
-            </LinearGradient>
-        );
+        if (this.props.navigationOptions.hasHistory) {
+            return (<TouchableHighlight underlayColor={Colors.tintColor}
+                                        onPress={this.goBack}
+                                        style={{marginLeft: 10}}>
+                <Image source={backImage}/>
+            </TouchableHighlight>);
+        }
+        return null;
     };
 
     render() {
-        return this.props.hasHistory ? this.renderWithHistory() : this.renderWithoutHistory();
+        return (
+            <LinearGradient colors={this.getGradient()}
+                            end={[1, 0]}
+                            style={styles.container}>
+                <NavigationBar styleName="clear"
+                               centerComponent={this.renderCenterComponent()}
+                               leftComponent={this.renderLeftComponent()}/>
+            </LinearGradient>
+        );
     }
 }
