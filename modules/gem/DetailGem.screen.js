@@ -1,13 +1,11 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import AbstractGemScreen from '../../AbstractGem.screen';
-import {FeedElementComponent} from './components/FeedElement.component';
+import FeedElementComponent from './components/FeedElement.component';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignSelf: 'stretch',
-        alignItems: 'center'
+        flex: 1
     }
 });
 
@@ -24,7 +22,7 @@ export default class DetailGemScreen extends AbstractGemScreen {
 
     render() {
         return super.render(
-            <View style={{flex: 1}}>
+            <View style={styles.container}>
                 <FeedElementComponent
                     displayWithImage={true}
                     gemData={this.props.navigation.state.params.gem}

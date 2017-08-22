@@ -5,7 +5,7 @@ import {StackNavigator} from 'react-navigation';
 
 import ListUsersScreen from '../modules/auth/ListUsers.screen';
 import AddGemScreen from '../modules/gem/AddGem.screen';
-import SettingsScreen from '../modules/settings/Settings.screen';
+import ProfileScreen from '../modules/profile/Profile.screen';
 import IntroExampleScreen from '../modules/intro/IntroExample.screen';
 import HomeScreen from '../modules/home/Home.screen';
 import ListSaveScreen from '../modules/save/ListSave.screen';
@@ -38,8 +38,8 @@ const RootStackNavigator = ({initialRouteName}) => {
         AddFriends: {
             screen: AddFriendsScreen
         },
-        Settings: {
-            screen: SettingsScreen
+        Profile: {
+            screen: ProfileScreen
         },
         ListSave: {
             screen: ListSaveScreen
@@ -50,9 +50,9 @@ const RootStackNavigator = ({initialRouteName}) => {
     };
 
     const CustomNavigator = StackNavigator(routeConfigs, stackNavigatorConfigs);
-    return <View style={{flex: 1}}>
+    return (<View style={{flex: 1}}>
         <CustomNavigator/>
-    </View>;
+    </View>);
 };
 
 export default class RootNavigator extends React.Component {

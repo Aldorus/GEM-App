@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export class SettingsScreen extends AbstractGemScreen {
+export class ProfileScreen extends AbstractGemScreen {
     navigationOptions = {
         stateName: 'params',
         hasHistory: false,
@@ -45,6 +45,21 @@ export class SettingsScreen extends AbstractGemScreen {
     static navigationOptions = {
         header: null
     };
+
+    constructor(props) {
+        super(props);
+        if (props.navigation.state && props.navigation.state.params && props.navigation.state.params.user) {
+            this.state = {
+                user: props.navigation.state.params.user,
+                yourself: false
+            };
+        } else {
+            this.state = {
+                user: props.userStore,
+                yourself: true
+            };
+        }
+    }
 
     componentDidMount = () => {
         super.componentDidMount();
@@ -64,6 +79,27 @@ export class SettingsScreen extends AbstractGemScreen {
                 }));
     };
 
+    scrollViewOption = () => {
+        return (<ScrollView style={styles.container}>
+            <Text
+                style={ListItemStyle.item}
+                onPress={this.goToDisconnect}
+            >
+                Disconnect
+            </Text>
+        </ScrollView>);
+    };
+
+    scrollViewGem = () => {
+        return (<ScrollView style={styles.container}>
+            <Text
+                style={ListItemStyle.item}
+            >
+                GEM 1
+            </Text>
+        </ScrollView>);
+    };
+
     render() {
         return super.render(
             <View style={styles.container}>
@@ -74,19 +110,12 @@ export class SettingsScreen extends AbstractGemScreen {
                                  indicatorProps={{
                                      color: Colors.colorText
                                  }}
-                                 source={{uri: this.props.userStore.avatar_url}}/>
+                                 source={{uri: this.state.user.avatar_url}}/>
                     <StyledText>
-                        {this.props.userStore.first_name} {this.props.userStore.last_name}
+                        {this.state.user.first_name} {this.state.user.last_name}
                     </StyledText>
                 </GradientBackground>
-                <ScrollView style={styles.container}>
-                    <Text
-                        style={ListItemStyle.item}
-                        onPress={this.goToDisconnect}
-                    >
-                        Disconnect
-                    </Text>
-                </ScrollView>
+                {this.state.yourself ? this.scrollViewOption() : this.scrollViewGem()}
             </View>, true);
     }
 }
@@ -97,4 +126,4 @@ const mapStores = (store) => {
     };
 };
 
-export default connect(mapStores)(SettingsScreen);
+export default connect(mapStores)(ProfileScreen);

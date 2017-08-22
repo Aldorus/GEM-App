@@ -83,7 +83,7 @@ export default class BottomNavigationGem extends React.Component {
                         index: 0,
                         actions: [
                             NavigationActions.navigate({
-                                routeName: 'Settings',
+                                routeName: 'Profile',
                                 transition: 'opacity'
                             })
                         ]

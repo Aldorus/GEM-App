@@ -6,7 +6,7 @@ export default class BoldText extends React.Component {
         return (
             <Text
                 {...this.props}
-                style={[this.props.style, {fontFamily: 'celia', fontSize: 12}]}
+                style={[{fontFamily: 'celia-bold', fontSize: 14}, this.props.style]}
             />
         );
     }

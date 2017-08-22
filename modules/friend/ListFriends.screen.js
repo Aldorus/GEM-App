@@ -34,8 +34,15 @@ export class AddFriendsScreen extends AbstractGemScreen {
         });
     };
 
+    onUserSelected = (user) => {
+        this.props.navigation.navigate(
+            'Profile',
+            {user}
+        );
+    };
+
     renderUser = (item) => {
-        return <UserElementComponent user={item}/>;
+        return <UserElementComponent user={item} onUserSelected={this.onUserSelected}/>;
     };
 
     renderHeader = () => {
