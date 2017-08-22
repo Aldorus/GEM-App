@@ -45,7 +45,7 @@ export default class QuickSearchComponent extends React.Component {
             <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
                             end={[1, 0]}
                             style={styles.container}>
-                <TextInput placeholder="Search the Gembox"
+                <TextInput placeholder={this.props.label || 'Search the Gembox'}
                            style={styles.input}
                            placeholderTextColor="black"
                            underlineColorAndroid="transparent"

@@ -6,3 +6,11 @@ export const getAllUsers = () => {
         return parsedResponse.users;
     });
 };
+
+export const getAllFriends = (userGroup) => {
+    return gemFetch(`${Config.WS_ROOT}users`).then((parsedResponse) => {
+        return parsedResponse.users.filter((user)=> {
+            return user.group === userGroup;
+        });
+    });
+};

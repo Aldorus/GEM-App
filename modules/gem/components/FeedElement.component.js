@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, TouchableHighlight, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
-import {LinearGradient} from 'expo';
 import Swipeout from 'react-native-swipeout';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,6 +9,7 @@ import Colors from '../../../constants/Colors';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
 import {feedElementSwipeButton} from './feedElementSwipeButton';
+import GradientBackground from '../../../components/GradientBackground';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,19 +38,27 @@ const styles = StyleSheet.create({
     }
 });
 
-export class FeedElementComponent extends React.Component {
+export default class FeedElementComponent extends React.Component {
     static propTypes = {
         gemData: PropTypes.object.isRequired
     };
 
     goOnGem = () => {
-        console.log('Go On Gem');
+        if (this.props.onClick) {
+            this.props.onClick(this.props.gemData);
+        }
+    };
 
+    userHasPreferenceDisplayWithImage = () => {
+        return this.props.userStore && this.props.userStore.displayListWithImage;
+    };
+
+    componentNeedToBeDisplayWithImage = () => {
+        return this.props.displayWithImage;
     };
 
     renderImageGem = () => {
-        console.log('user store', this.props.userStore)
-        if (this.props.userStore && this.props.userStore.displayListWithImage && this.props.gemData.picture) {
+        if ((this.userHasPreferenceDisplayWithImage() || this.componentNeedToBeDisplayWithImage()) && this.props.gemData.picture) {
             return (<ImageLoader indicator={ProgressBar}
                                  style={styles.image}
                                  indicatorProps={{
@@ -73,7 +81,7 @@ export class FeedElementComponent extends React.Component {
                          indicatorProps={{
                              color: Colors.colorText
                          }}
-                         source={{uri: this.props.gemData.user.avatar_thumbnail_url}}/>
+                         source={{uri: this.props.gemData.user.avatar_url}}/>
             <View style={styles.textWrapper}>
                 <StyledText>{this.props.gemData.category}{this.renderLocation()}</StyledText>
                 <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
@@ -85,14 +93,8 @@ export class FeedElementComponent extends React.Component {
     };
 
     render() {
-        console.log('New render');
         return (
-            <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
-                            end={[1, 0]}
-                            style={{
-                                flexDirection: 'column',
-                                alignSelf: 'stretch'
-                            }}>
+            <GradientBackground>
                 <Swipeout right={feedElementSwipeButton}
                           backgroundColor="white">
                     <View style={{
@@ -106,13 +108,7 @@ export class FeedElementComponent extends React.Component {
                         {this.renderImageGem()}
                     </View>
                 </Swipeout>
-            </LinearGradient>
+            </GradientBackground>
         );
     }
 }
-
-const mapStores = (store) => {
-    return {};
-};
-
-export default connect(mapStores)(FeedElementComponent);

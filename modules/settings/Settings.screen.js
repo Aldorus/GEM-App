@@ -1,22 +1,41 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Segment} from 'expo';
-import {AsyncStorage, ScrollView, StyleSheet, Text} from 'react-native';
+import ImageLoader from 'react-native-image-progress';
+import ProgressBar from 'react-native-progress/Circle';
+import {AsyncStorage, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {NavigationActions} from 'react-navigation';
+import GradientBackground from '../../components/GradientBackground';
 import ListItemStyle from '../../constants/ListItemStyle';
 import AbstractGemScreen from '../../AbstractGem.screen';
+import StyledText from '../../components/StyledText';
+import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        alignSelf: 'stretch',
         backgroundColor: '#fff'
+    },
+    gradient: {
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        paddingBottom: 20
+    },
+    avatar: {
+        width: 80,
+        height: 80,
+        paddingTop: 50,
+        marginBottom: 10
     }
 });
 
-export default class SettingsScreen extends AbstractGemScreen {
+export class SettingsScreen extends AbstractGemScreen {
     navigationOptions = {
         stateName: 'params',
-        hasHistory: false
+        hasHistory: false,
+        titleState: ' '
     };
 
     static propTypes = {
@@ -47,12 +66,35 @@ export default class SettingsScreen extends AbstractGemScreen {
 
     render() {
         return super.render(
-            <ScrollView style={styles.container}>
-                <Text
-                    style={ListItemStyle.item}
-                    onPress={this.goToDisconnect}
-                >Disconnect</Text>
-            </ScrollView>
-            , true);
+            <View style={styles.container}>
+                <GradientBackground style={styles.gradient}>
+                    <ImageLoader borderRadius={40}
+                                 style={styles.avatar}
+                                 indicator={ProgressBar}
+                                 indicatorProps={{
+                                     color: Colors.colorText
+                                 }}
+                                 source={{uri: this.props.userStore.avatar_url}}/>
+                    <StyledText>
+                        {this.props.userStore.first_name} {this.props.userStore.last_name}
+                    </StyledText>
+                </GradientBackground>
+                <ScrollView style={styles.container}>
+                    <Text
+                        style={ListItemStyle.item}
+                        onPress={this.goToDisconnect}
+                    >
+                        Disconnect
+                    </Text>
+                </ScrollView>
+            </View>, true);
     }
 }
+
+const mapStores = (store) => {
+    return {
+        userStore: store.userReducer
+    };
+};
+
+export default connect(mapStores)(SettingsScreen);

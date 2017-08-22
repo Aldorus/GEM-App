@@ -1,42 +1,58 @@
-[
-    {
-        "key": "43561728904987",
-        "email": "guillaume.roussel@gem.com",
-        "first_name": "Guillaume",
-        "last_name": "Roussel",
-        "avatar": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200",
-        "group": "A"
-    },
-    {
-        "key": "9302857",
-        "email": "guillaume.roussel@gem.com",
-        "first_name": "Guillaume",
-        "last_name": "Roussel",
-        "avatar": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200",
-        "group": "A"
-    },
-    {
-        "key": "098765",
-        "email": "guillaume.roussel@gem.com",
-        "first_name": "Guillaume",
-        "last_name": "Roussel",
-        "avatar": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200",
-        "group": "A"
-    },
-    {
-        "key": "4567890",
-        "email": "guillaume.roussel@gem.com",
-        "first_name": "Guillaume",
-        "last_name": "Roussel",
-        "avatar": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200",
-        "group": "A"
-    },
-    {
-        "key": "394739",
-        "email": "guillaume.roussel@gem.com",
-        "first_name": "Guillaume",
-        "last_name": "Roussel",
-        "avatar": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200",
-        "group": "A"
-    }
-]
+{
+    "users": [
+        {
+            "id": "4f74bd9b-4c3e-4d8f-86bf-d68d34e20475",
+            "first_name": "Luc",
+            "last_name": "Lesperance",
+            "email": "luc.lesperance@outlook.com",
+            "group": "group_b",
+            "avatar_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/4f74bd9b-4c3e-4d8f-86bf-d68d34e20475_jpg",
+            "avatar_thumbnail_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/thumbnail.jpg"
+        },
+        {
+            "id": "1fd3b24e-79fe-4bd1-83a1-47fe28811d67",
+            "first_name": "Carl",
+            "last_name": "Robichaud",
+            "email": "carlrobichaud@me.com",
+            "group": "group_b",
+            "avatar_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/1fd3b24e-79fe-4bd1-83a1-47fe28811d67_jpg",
+            "avatar_thumbnail_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/thumbnail.jpg"
+        },
+        {
+            "id": "8769787a-caef-4bc3-9104-b335f13319d9",
+            "first_name": "Marion Isabelle",
+            "last_name": "Muszynski",
+            "email": "marionisabelle@me.com",
+            "group": "group_b",
+            "avatar_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/8769787a-caef-4bc3-9104-b335f13319d9_jpg",
+            "avatar_thumbnail_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/thumbnail.jpg"
+        },
+        {
+            "id": "512d2cbe-e4aa-443d-9412-7d439da19445",
+            "first_name": "ludovic",
+            "last_name": "Maire",
+            "email": "ludovic.maire@gmail.com",
+            "group": "group_b",
+            "avatar_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/512d2cbe-e4aa-443d-9412-7d439da19445_jpg",
+            "avatar_thumbnail_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/thumbnail.jpg"
+        },
+        {
+            "id": "e000edf9-774c-4044-9602-755ca2dd39cf",
+            "first_name": "Guillaume",
+            "last_name": "Roussel",
+            "email": "roussel.guillaume.gr@gmail.com",
+            "group": "group_b",
+            "avatar_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/e000edf9-774c-4044-9602-755ca2dd39cf_jpg",
+            "avatar_thumbnail_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/thumbnail.jpg"
+        },
+        {
+            "id": "6a03a01c-079a-4668-ac05-2841b048796e",
+            "first_name": "Jeremy",
+            "last_name": "Marques",
+            "email": "jeremy.marques@gmail.com",
+            "group": "group_b",
+            "avatar_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/6a03a01c-079a-4668-ac05-2841b048796e_jpg",
+            "avatar_thumbnail_url": "https://www-gemapi.s3.amazonaws.com/uploads/avatars/thumbnail.jpg"
+        }
+    ]
+}
