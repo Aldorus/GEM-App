@@ -46,24 +46,9 @@ export class ProfileScreen extends AbstractGemScreen {
         header: null
     };
 
-    constructor(props) {
-        super(props);
-        if (props.navigation.state && props.navigation.state.params && props.navigation.state.params.user) {
-            this.state = {
-                user: props.navigation.state.params.user,
-                yourself: false
-            };
-        } else {
-            this.state = {
-                user: props.userStore,
-                yourself: true
-            };
-        }
-    }
-
     componentDidMount = () => {
         super.componentDidMount();
-        Segment.track('Settings page');
+        Segment.track('Profile page');
     };
 
     goToDisconnect = () => {
@@ -90,16 +75,6 @@ export class ProfileScreen extends AbstractGemScreen {
         </ScrollView>);
     };
 
-    scrollViewGem = () => {
-        return (<ScrollView style={styles.container}>
-            <Text
-                style={ListItemStyle.item}
-            >
-                GEM 1
-            </Text>
-        </ScrollView>);
-    };
-
     render() {
         return super.render(
             <View style={styles.container}>
@@ -110,12 +85,12 @@ export class ProfileScreen extends AbstractGemScreen {
                                  indicatorProps={{
                                      color: Colors.colorText
                                  }}
-                                 source={{uri: this.state.user.avatar_url}}/>
+                                 source={{uri: this.props.userStore.avatar_url}}/>
                     <StyledText>
-                        {this.state.user.first_name} {this.state.user.last_name}
+                        {this.props.userStore.first_name} {this.props.userStore.last_name}
                     </StyledText>
                 </GradientBackground>
-                {this.state.yourself ? this.scrollViewOption() : this.scrollViewGem()}
+                {this.scrollViewOption()}
             </View>, true);
     }
 }

@@ -11,6 +11,7 @@ import HomeScreen from '../modules/home/Home.screen';
 import ListSaveScreen from '../modules/save/ListSave.screen';
 import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
 import AddFriendsScreen from '../modules/friend/ListFriends.screen';
+import DetailFriendScreen from '../modules/friend/DetailFriend.screen';
 import DetailGemScreen from '../modules/gem/DetailGem.screen';
 
 const RootStackNavigator = ({initialRouteName}) => {
@@ -46,6 +47,9 @@ const RootStackNavigator = ({initialRouteName}) => {
         },
         DetailGem: {
             screen: DetailGemScreen
+        },
+        DetailFriend: {
+            screen: DetailFriendScreen
         }
     };
 

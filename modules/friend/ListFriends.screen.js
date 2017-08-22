@@ -36,7 +36,7 @@ export class AddFriendsScreen extends AbstractGemScreen {
 
     onUserSelected = (user) => {
         this.props.navigation.navigate(
-            'Profile',
+            'DetailFriend',
             {user}
         );
     };
