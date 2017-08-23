@@ -4,7 +4,7 @@ import {Segment} from 'expo';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
-import {FeedElementComponent} from '../gem/components/FeedElement.component';
+import FeedElementComponent from '../gem/components/FeedElement.component';
 
 const styles = StyleSheet.create({
     container: {

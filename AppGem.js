@@ -1,6 +1,7 @@
 import React from 'react';
 import {AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
+import {Segment} from 'expo';
 import {AppLoading} from 'expo';
 import RootNavigation from './navigation/RootNavigation';
 import cacheAssetsAsync from './utilities/cacheAssetsAsync';
@@ -23,6 +24,7 @@ export class AppGem extends React.Component {
                 type: types.LOAD_USER,
                 user: this.user
             });
+            Segment.identifyWithTraits(this.user.id, this.user);
             this.setAsyncStorageChecked();
         });
     };
