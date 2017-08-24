@@ -1,7 +1,8 @@
 import * as types from '../../../constants/ActionTypes';
 import listGems from '../gem.json';
 
-let defaultValue = listGems;
+// let defaultValue = listGems;
+const defaultValue = [];
 
 export const gemReducer = (state = defaultValue, action) => {
     switch (action.type) {

@@ -5,7 +5,7 @@ import {NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
 import Colors from '../../constants/Colors';
 import listItemStyle from '../../constants/ListItemStyle';
-import {getAllUsers} from './users.service';
+import {authenticate, getAllUsers} from './users.service';
 import * as types from '../../constants/ActionTypes';
 import AbstractGemScreen from '../../AbstractGem.screen';
 
@@ -53,8 +53,13 @@ export class ListUsersScreen extends AbstractGemScreen {
     };
 
     userSelected = (user) => {
-        AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
-            console.log('Current user saved');
+        console.log('User selected');
+        return authenticate(user).then(this.saveTheUserToLocalStorage);
+    };
+
+    saveTheUserToLocalStorage = (user) => {
+        console.log('user to save', user);
+        return AsyncStorage.setItem('current_user', JSON.stringify(user)).then(() => {
             this.props.dispatch({
                 type: types.LOAD_USER,
                 user
@@ -62,6 +67,7 @@ export class ListUsersScreen extends AbstractGemScreen {
             this.goToMainScreen();
         });
     };
+
 
     keyExtractor = (item) => {
         return item.id;

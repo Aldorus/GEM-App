@@ -7,12 +7,14 @@ import StyledTitle from '../../../components/StyledTitle';
 const styles = StyleSheet.create({
     highlight: {
         alignSelf: 'stretch',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginBottom: 10
     },
     container: {
         marginBottom: 15,
         paddingLeft: 65,
-        paddingRight: 15
+        paddingRight: 15,
+        paddingTop: 10
     }
 });
 

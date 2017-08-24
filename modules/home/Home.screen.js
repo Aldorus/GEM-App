@@ -7,6 +7,9 @@ import AbstractGemScreen from '../../AbstractGem.screen';
 import FeedElementComponent from '../gem/components/FeedElement.component';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
 import {copyArray} from '../../utilities/extends/object.utils';
+import {getAllGems} from '../gem/services/gem.service';
+import * as types from '../../constants/ActionTypes';
+import listGems from '../gem/gem.json';
 
 const styles = StyleSheet.create({
     container: {
@@ -24,6 +27,16 @@ export class HomeScreen extends AbstractGemScreen {
 
     static navigationOptions = {
         header: null
+    };
+
+    componentWillMount = () => {
+        super.componentDidMount();
+        getAllGems().then((gems) => {
+            this.props.dispatch({
+                type: types.LOAD_GEM_SUCCESS,
+                gems: listGems
+            });
+        });
     };
 
     componentDidMount = () => {

@@ -37,6 +37,7 @@
         "describe": false,
         "it": false,
         "expect": false,
-        "fetch": false
+        "fetch": false,
+        "FormData": false
     }
 }

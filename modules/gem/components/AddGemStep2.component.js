@@ -81,7 +81,7 @@ export class AddGemStep2 extends React.Component {
         newGem.comment = this.state.comment;
         newGem.picture = this.state.picture;
         // TODO connect to webservice
-        // CreateGem(newGem).then((newGem) => {
+        // createGem(newGem).then((newGem) => {
         console.log('gem created');
         this.props.dispatch({
             type: types.ADD_GEM,
