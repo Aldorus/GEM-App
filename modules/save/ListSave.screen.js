@@ -24,11 +24,6 @@ export class ListSaveScreen extends AbstractGemScreen {
         header: null
     };
 
-    componentDidMount = () => {
-        super.componentDidMount();
-        Segment.track('ListSave page');
-    };
-
     renderRowView = (rowData) => {
         return <FeedElementComponent gemData={rowData}/>;
     };

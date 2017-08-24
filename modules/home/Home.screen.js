@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import {connect} from 'react-redux';
-import {Segment} from 'expo';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import FeedElementComponent from '../gem/components/FeedElement.component';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
@@ -29,6 +28,13 @@ export class HomeScreen extends AbstractGemScreen {
         header: null
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false
+        };
+    }
+
     componentWillMount = () => {
         super.componentDidMount();
         getAllGems().then((gems) => {
@@ -39,16 +45,23 @@ export class HomeScreen extends AbstractGemScreen {
         });
     };
 
-    componentDidMount = () => {
-        super.componentDidMount();
-        Segment.track('Home page');
-    };
-
     clickOnGem = (gem) => {
         this.props.navigation.navigate(
             'DetailGem',
             {gem}
         );
+    };
+
+    refreshList = () => {
+        return getAllGems().then((gems) => {
+            this.setState({
+                loading: false
+            });
+            this.props.dispatch({
+                type: types.LOAD_GEM_SUCCESS,
+                gems: listGems
+            });
+        });
     };
 
     renderRowView = (rowData) => {
@@ -64,12 +77,15 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     render() {
+        console.log('Rebuild')
         // TODO may cause some trouble for the performance
         const gemStoreCopy = copyArray(this.props.gemStore);
         return super.render(
             <View style={styles.container}>
                 <ListView data={gemStoreCopy}
                           autoHideHeader={true}
+                          loading={this.state.loading}
+                          onRefresh={this.refreshList}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderHeader={this.renderHeader}
                           renderRow={this.renderRowView}/>

@@ -74,15 +74,11 @@ export class AddGemStep2 extends React.Component {
     createTheGem = () => {
         const newGem = this.props.entity;
         newGem.user = this.props.userStore;
-        // TODO place the correct url here (null pointer)
-        newGem.user.avatar_thumbnail_url = 'https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200';
-        newGem.user.avatar_url = 'https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200';
         newGem.word = this.state.selectedWord.word;
         newGem.comment = this.state.comment;
         newGem.picture = this.state.picture;
-        // TODO connect to webservice
-        // createGem(newGem).then((newGem) => {
-        console.log('gem created');
+        // createGem(newGem).then((newGemResponse) => {
+        console.log('gem created', newGem);
         this.props.dispatch({
             type: types.ADD_GEM,
             gem: newGem

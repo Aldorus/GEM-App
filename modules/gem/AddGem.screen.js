@@ -2,6 +2,7 @@ import React from 'react';
 import {BackAndroid, Image, Platform, StyleSheet, View} from 'react-native';
 import {LinearGradient} from 'expo';
 import {NavigationActions} from 'react-navigation';
+import {Segment} from 'expo';
 import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import gemImage from '../../assets/icons/gem.png';
@@ -35,6 +36,7 @@ export default class AddGemScreen extends React.Component {
         if (Platform.OS === 'android' && this.listener === null) {
             this.listener = BackAndroid.addEventListener('hardwareBackPress', this.backButtonPressed);
         }
+        Segment.track('screen: addGem');
     }
 
     onElementSelected = (result) => {
@@ -42,6 +44,10 @@ export default class AddGemScreen extends React.Component {
         this.setState({
             entitySelected: result
         });
+    };
+
+    onNewResult = () => {
+        this.props.navigation.navigate('AddNewGem');
     };
 
     backButtonPressed = () => {
@@ -57,7 +63,10 @@ export default class AddGemScreen extends React.Component {
 
     renderStep1 = () => {
         if (!this.state.entitySelected) {
-            return <AddGemStep1 onElementSelected={this.onElementSelected}/>;
+            return (<AddGemStep1
+                onElementSelected={this.onElementSelected}
+                onNewResult={this.onNewResult}
+            />);
         }
         return null;
     };

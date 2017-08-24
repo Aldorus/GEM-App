@@ -3,16 +3,17 @@ import React from 'react';
 import {View} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
+import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
 import ListUsersScreen from '../modules/auth/ListUsers.screen';
 import AddGemScreen from '../modules/gem/AddGem.screen';
 import ProfileScreen from '../modules/profile/Profile.screen';
 import IntroExampleScreen from '../modules/intro/IntroExample.screen';
 import HomeScreen from '../modules/home/Home.screen';
 import ListSaveScreen from '../modules/save/ListSave.screen';
-import {TransitionEngine} from '../utilities/transitions/TransitionEngine';
 import AddFriendsScreen from '../modules/friend/ListFriends.screen';
 import DetailFriendScreen from '../modules/friend/DetailFriend.screen';
 import DetailGemScreen from '../modules/gem/DetailGem.screen';
+import AddNewGemScreen from '../modules/gem/AddNewGem.screen';
 
 const RootStackNavigator = ({initialRouteName}) => {
     const stackNavigatorConfigs = {
@@ -50,6 +51,9 @@ const RootStackNavigator = ({initialRouteName}) => {
         },
         DetailFriend: {
             screen: DetailFriendScreen
+        },
+        AddNewGem: {
+            screen: AddNewGemScreen
         }
     };
 

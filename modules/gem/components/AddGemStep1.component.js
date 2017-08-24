@@ -54,6 +54,12 @@ export default class AddGemStep1 extends React.Component {
         }
     };
 
+    onNewResult = () => {
+        if (this.props.onNewResult) {
+            this.props.onNewResult();
+        }
+    };
+
     onChange = (value) => {
         if (value.length > 3) {
             Promise.all([
@@ -102,7 +108,11 @@ export default class AddGemStep1 extends React.Component {
                        onChangeText={this.onChange}/>
             <Image source={searchImage}
                    style={styles.icon}/>
-            <ExternalSearchResults results={this.state.results} onElementSelected={this.onElementSelected}/>
+            <ExternalSearchResults
+                results={this.state.results}
+                onElementSelected={this.onElementSelected}
+                onNewResult={this.onNewResult}
+            />
         </View>);
     };
 }

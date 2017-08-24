@@ -1,6 +1,7 @@
 import React from 'react';
 import {BackAndroid, Platform, View} from 'react-native';
 import {NavigationActions} from 'react-navigation';
+import {Segment} from 'expo';
 import BottomNavigationGem from './navigation/BottomNavigationGem.component';
 import TopNavigationGem from './navigation/TopNavigationGem.component';
 import TopSortAndFilter from './modules/search/components/TopSortAndFilter.component';
@@ -17,6 +18,7 @@ export default class AbstractGemScreen extends React.Component {
         if (this.navigationOptions.hasHistory && Platform.OS === 'android' && this.listener === null) {
             this.listener = BackAndroid.addEventListener('hardwareBackPress', this.backButtonPressed);
         }
+        Segment.track(`screen: ${this.navigationOptions.stateName}`);
     }
 
     onOpenContextualPanel = () => {

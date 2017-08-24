@@ -138,7 +138,7 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={() => this.goToParams('params')}>
-                    {this.renderImage('params', paramsOnImage, paramsOffImage)}
+                    {this.renderImage('profile', paramsOnImage, paramsOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}

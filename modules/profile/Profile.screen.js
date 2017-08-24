@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
 export class ProfileScreen extends AbstractGemScreen {
     navigationOptions = {
-        stateName: 'params',
+        stateName: 'profile',
         hasHistory: false,
         titleState: ' '
     };
@@ -44,11 +44,6 @@ export class ProfileScreen extends AbstractGemScreen {
 
     static navigationOptions = {
         header: null
-    };
-
-    componentDidMount = () => {
-        super.componentDidMount();
-        Segment.track('Profile page');
     };
 
     goToDisconnect = () => {

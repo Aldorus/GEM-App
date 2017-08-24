@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Segment} from 'expo';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import {StyleSheet, View} from 'react-native';
@@ -62,11 +61,6 @@ export class DetailFriendScreen extends AbstractGemScreen {
             'DetailGem',
             {gem}
         );
-    };
-
-    componentDidMount = () => {
-        super.componentDidMount();
-        Segment.screen('Detail friend page');
     };
 
     renderRowView = (rowData) => {

@@ -2,8 +2,7 @@ import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
 
 export const createGem = (gem) => {
-    // TODO replace the key
-    return gemFetch(`https://rousselguillaume.fr/?s=${gem}&apikey=c6c0355`, {
+    return gemFetch(`${Config.WS_ROOT}items`, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'

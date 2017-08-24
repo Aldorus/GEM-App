@@ -28,12 +28,18 @@ export default class ExternalSearchResults extends React.Component {
         }
     };
 
+    newResult = () => {
+        if (this.props.onNewResult) {
+            this.props.onNewResult();
+        }
+    };
+
     renderRowView = (rowData) => {
         return <ExternalSearchResultElement result={rowData} elementPressed={this.elementSelected}/>;
     };
 
     renderHeader = () => {
-        return this.props.results.length ? <NoResultElement elementPressed={this.elementSelected}/> : <View/>;
+        return this.props.results.length ? <NoResultElement elementPressed={this.newResult}/> : <View/>;
     };
 
     render() {

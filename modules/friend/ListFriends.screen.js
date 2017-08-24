@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Segment} from 'expo';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
@@ -26,7 +25,6 @@ export class AddFriendsScreen extends AbstractGemScreen {
 
     componentDidMount = () => {
         super.componentDidMount();
-        Segment.track('List Friend page');
         getAllFriends(this.props.userStore.group).then((listFriend) => {
             this.setState({
                 listFriend
