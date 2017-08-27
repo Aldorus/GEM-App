@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {AsyncStorage, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {NavigationActions} from 'react-navigation';
-import ListItemStyle from '../../constants/ListItemStyle';
+import {StyleSheet, View} from 'react-native';
+import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import HeaderProfile from '../../components/HeaderProfile';
+import FeedElementComponent from '../gem/components/FeedElement.component';
+import {onlyGem, onlySaved} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -30,7 +31,8 @@ const styles = StyleSheet.create({
 export class ProfileScreen extends AbstractGemScreen {
     navigationOptions = {
         stateName: 'Profile',
-        hasHistory: false
+        hasHistory: false,
+        logout: true
     };
 
     static propTypes = {
@@ -41,42 +43,61 @@ export class ProfileScreen extends AbstractGemScreen {
         header: null
     };
 
-    goToDisconnect = () => {
-        AsyncStorage.removeItem('current_user');
-        this.props
-            .navigation
-            .dispatch(NavigationActions.reset(
-                {
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({routeName: 'Login'})
-                    ]
-                }));
+    constructor(props) {
+        super(props);
+        this.state = {
+            tabSelected: 'gems'
+        };
+    }
+
+    tabDisplayChanged = (tab) => {
+        this.setState({
+            tabSelected: tab
+        });
     };
 
-    scrollViewOption = () => {
-        return (<ScrollView style={styles.container}>
-            <Text
-                style={ListItemStyle.item}
-                onPress={this.goToDisconnect}
-            >
-                Disconnect
-            </Text>
-        </ScrollView>);
+    clickOnGem = (gem) => {
+        this.props.navigation.navigate(
+            'DetailGem',
+            {gem}
+        );
+    };
+
+    renderRowView = (rowData) => {
+        return (<FeedElementComponent gemData={rowData}
+                                      onClick={this.clickOnGem}
+                                      userStore={this.props.userStore}
+                                      displayAvatar={false}
+                                      displayWithImage={false}/>);
+    };
+
+    renderListGems = () => {
+        console.log('Render only the gem list');
+        return (<ListView data={this.props.gemStore.filter(onlyGem)}
+                          style={{listContent: {backgroundColor: 'transparent'}}}
+                          renderRow={this.renderRowView}/>);
+    };
+
+    renderListSaved = () => {
+        console.log('Render only the save list');
+        return (<ListView data={this.props.gemStore.filter(onlySaved)}
+                          style={{listContent: {backgroundColor: 'transparent'}}}
+                          renderRow={this.renderRowView}/>);
     };
 
     render() {
         return super.render(
             <View style={styles.container}>
-                <HeaderProfile user={this.props.userStore}/>
-                {this.scrollViewOption()}
+                <HeaderProfile user={this.props.userStore} tabDisplayChanged={this.tabDisplayChanged}/>
+                {this.state.tabSelected === 'gems' ? this.renderListGems() : this.renderListSaved()}
             </View>, true);
     }
 }
 
 const mapStores = (store) => {
     return {
-        userStore: store.userReducer
+        userStore: store.userReducer,
+        gemStore: store.gemReducer
     };
 };
 

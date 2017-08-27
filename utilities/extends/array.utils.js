@@ -10,4 +10,12 @@ export const shuffleArray = (array) => {
         array[j] = temp;
     }
     return array;
-}
+};
+
+export const onlyGem = (experience) => {
+    return experience.fullfil;
+};
+
+export const onlySaved = (experience) => {
+    return !experience.fullfil;
+};

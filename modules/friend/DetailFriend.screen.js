@@ -8,6 +8,7 @@ import listGems from '../gem/gem.json';
 import Colors from '../../constants/Colors';
 import FeedElementComponent from '../gem/components/FeedElement.component';
 import HeaderProfile from '../../components/HeaderProfile';
+import {onlyGem, onlySaved} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -87,13 +88,15 @@ export class DetailFriendScreen extends AbstractGemScreen {
     };
 
     renderListGems = () => {
-        return (<ListView data={this.state.user.listGems}
+        console.log('Render only the gem list');
+        return (<ListView data={this.state.user.listGems.filter(onlyGem)}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderRow={this.renderRowView}/>);
     };
 
     renderListSaved = () => {
-        return (<ListView data={this.state.user.listGems}
+        console.log('Render only the save list');
+        return (<ListView data={this.state.user.listGems.filter(onlySaved)}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderRow={this.renderRowView}/>);
     };

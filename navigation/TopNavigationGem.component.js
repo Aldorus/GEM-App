@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableHighlight} from 'react-native';
+import {Image, StyleSheet, Text, TouchableHighlight, AsyncStorage} from 'react-native';
 import {NavigationBar} from '@shoutem/ui'
 import {NavigationActions} from 'react-navigation';
 import {LinearGradient} from 'expo';
@@ -68,6 +68,30 @@ export default class TopNavigationGem extends React.Component {
         return null;
     };
 
+    goToDisconnect = () => {
+        AsyncStorage.removeItem('current_user');
+        this.props
+            .navigation
+            .dispatch(NavigationActions.reset(
+                {
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName: 'Login'})
+                    ]
+                }));
+    };
+
+    renderRightComponent = () => {
+        if (this.props.navigationOptions.logout) {
+            console.log('Render right');
+            return (<TouchableHighlight underlayColor={Colors.tintColor}
+                                        onPress={this.goToDisconnect}>
+                <Text>D</Text>
+            </TouchableHighlight>);
+        }
+        return null;
+    };
+
     render() {
         return (
             <LinearGradient colors={this.getGradient()}
@@ -75,6 +99,7 @@ export default class TopNavigationGem extends React.Component {
                             style={styles.container}>
                 <NavigationBar styleName="clear"
                                centerComponent={this.renderCenterComponent()}
+                               rightComponent={this.renderRightComponent()}
                                leftComponent={this.renderLeftComponent()}/>
             </LinearGradient>
         );

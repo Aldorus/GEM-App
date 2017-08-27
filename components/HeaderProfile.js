@@ -54,7 +54,7 @@ export default class HeaderProfile extends React.Component {
         }
 
         if (this.props.tabDisplayChanged) {
-            this.props.tabDisplayChanged();
+            this.props.tabDisplayChanged('gems');
         }
     };
 
@@ -66,7 +66,7 @@ export default class HeaderProfile extends React.Component {
         }
 
         if (this.props.tabDisplayChanged) {
-            this.props.tabDisplayChanged();
+            this.props.tabDisplayChanged('saved');
         }
     };
 
