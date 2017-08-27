@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableHighlight} from 'react-native';
+import {Image, StyleSheet, TouchableHighlight, View} from 'react-native';
 import {LinearGradient} from 'expo';
 import {NavigationActions} from 'react-navigation';
 import Colors from '../constants/Colors';
@@ -11,10 +11,11 @@ import addGemImage from '../assets/icons/add-gem@2x.png';
 import paramsOffImage from '../assets/icons/params-off@2x.png';
 import paramsOnImage from '../assets/icons/params-on@2x.png';
 import loveImage from '../assets/icons/love@2x.png';
+import StyledText from '../components/StyledText';
 
 const styles = StyleSheet.create({
     container: {
-        height: 40,
+        height: 45,
         alignSelf: 'stretch',
         flexDirection: 'row'
     },
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     },
     smallIcon: {},
     bigIcon: {
-        bottom: 30,
+        bottom: 31,
         height: 62
     }
 });
@@ -108,8 +109,12 @@ export default class BottomNavigationGem extends React.Component {
         }
     };
 
+    // TODO
     renderImage = (state, imageOn, imageOff) => {
-        return this.props.stateName === state ? <Image source={imageOn}/> : <Image source={imageOff}/>;
+        return (<View style={{alignItems: 'center'}}>
+            {this.props.stateName === state ? <Image source={imageOn}/> : <Image source={imageOff}/>}
+            <StyledText style={{fontSize: 10}}>{state}</StyledText>
+        </View>);
     };
 
     render() {
@@ -120,13 +125,13 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={() => this.goToListGems('home')}>
-                    {this.renderImage('home', listGemOnImage, listGemOffImage)}
+                    {this.renderImage('Home', listGemOnImage, listGemOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={() => this.goToAddFriend('addFriend')}>
-                    {this.renderImage('addFriend', addFriendOnImage, addFriendOffImage)}
+                    {this.renderImage('Friend', addFriendOnImage, addFriendOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.bigIcon]}
@@ -138,13 +143,13 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={() => this.goToParams('params')}>
-                    {this.renderImage('profile', paramsOnImage, paramsOffImage)}
+                    {this.renderImage('Profile', paramsOnImage, paramsOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={() => this.goToLove('saved')}>
-                    {this.renderImage('saved', loveImage, loveImage)}
+                    {this.renderImage('Saved', loveImage, loveImage)}
                 </TouchableHighlight>
             </LinearGradient>
         );

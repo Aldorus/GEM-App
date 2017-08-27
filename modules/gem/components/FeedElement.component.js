@@ -3,19 +3,19 @@ import {StyleSheet, TouchableHighlight, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import Swipeout from 'react-native-swipeout';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
 import {feedElementSwipeButton} from './feedElementSwipeButton';
-import GradientBackground from '../../../components/GradientBackground';
+import {feedElementSwipeButtonUser} from './feedElementSwipeButtonUser';
 
 const styles = StyleSheet.create({
     container: {
         margin: 15,
-        marginTop: 8,
+        marginTop: 0,
         marginBottom: 0,
+        paddingTop: 8,
         flexDirection: 'row',
         alignSelf: 'stretch'
     },
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
         paddingRight: 15,
-        paddingBottom: 10
+        paddingBottom: 8
     },
     avatar: {
         width: 30,
@@ -73,42 +73,52 @@ export default class FeedElementComponent extends React.Component {
         return this.props.gemData.location ? ` in ${this.props.gemData.location}` : '';
     };
 
+    renderAvatar = () => {
+        if (this.props.displayAvatar) {
+            return (<ImageLoader borderRadius={15}
+                                 style={styles.avatar}
+                                 indicator={ProgressBar}
+                                 indicatorProps={{
+                                     color: Colors.colorText
+                                 }}
+                                 source={{uri: this.props.gemData.user.avatar_url}}/>
+            );
+        }
+        return null;
+    };
+
     renderContent = () => {
         return (<View style={[styles.container]}>
-            <ImageLoader borderRadius={15}
-                         style={styles.avatar}
-                         indicator={ProgressBar}
-                         indicatorProps={{
-                             color: Colors.colorText
-                         }}
-                         source={{uri: this.props.gemData.user.avatar_url}}/>
+            {this.renderAvatar()}
             <View style={styles.textWrapper}>
                 <StyledText>{this.props.gemData.category}{this.renderLocation()}</StyledText>
                 <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
                 <StyledText>
-                    {this.props.gemData.user.first_name} says {this.props.gemData.word}
+                    {this.props.gemData.user.first_name} {this.props.gemData.word}
                 </StyledText>
             </View>
         </View>);
     };
 
     render() {
+        console.log(this.props.userStore.id, this.props.gemData.user.id);
         return (
-            <GradientBackground>
-                <Swipeout right={feedElementSwipeButton}
-                          backgroundColor="white">
+            <View style={{alignSelf: 'stretch'}}>
+                <Swipeout
+                    right={this.props.userStore.id !== this.props.gemData.user.id ? feedElementSwipeButton : feedElementSwipeButtonUser}
+                    backgroundColor="white">
                     <View style={{
                         flexDirection: 'column',
-                        alignSelf: 'stretch',
-                        marginBottom: 8
+                        alignSelf: 'stretch'
                     }}>
                         <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnGem}>
                             {this.renderContent()}
                         </TouchableHighlight>
-                        {this.renderImageGem()}
                     </View>
                 </Swipeout>
-            </GradientBackground>
+                {this.renderImageGem()}
+                <StyledText>{this.props.gemData.comment}</StyledText>
+            </View>
         );
     }
 }

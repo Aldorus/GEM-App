@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
 export class ListSaveScreen extends AbstractGemScreen {
     navigationOptions = {
-        stateName: 'saved',
+        stateName: 'Saved',
         hasHistory: false
     };
 

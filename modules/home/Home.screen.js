@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 export class HomeScreen extends AbstractGemScreen {
     navigationOptions = {
-        stateName: 'home',
+        stateName: 'Home',
         hasHistory: false
     };
 
@@ -35,14 +35,18 @@ export class HomeScreen extends AbstractGemScreen {
         };
     }
 
-    componentWillMount = () => {
-        super.componentDidMount();
-        getAllGems().then((gems) => {
+    callForLoadGem = (filter) => {
+        getAllGems(filter).then((gems) => {
             this.props.dispatch({
                 type: types.LOAD_GEM_SUCCESS,
                 gems: listGems
             });
         });
+    };
+
+    componentWillMount = () => {
+        super.componentDidMount();
+        this.callForLoadGem();
     };
 
     clickOnGem = (gem) => {
@@ -67,17 +71,25 @@ export class HomeScreen extends AbstractGemScreen {
     renderRowView = (rowData) => {
         return (<FeedElementComponent
             gemData={rowData}
+            displayAvatar={true}
             onClick={this.clickOnGem}
             userStore={this.props.userStore}
         />);
     };
 
+    quickSearchChange = (value) => {
+        console.log('value', value);
+        this.callForLoadGem({
+            q: value
+        });
+    };
+
     renderHeader = () => {
-        return <QuickSearchComponent/>;
+        return <QuickSearchComponent onChange={this.quickSearchChange}/>;
     };
 
     render() {
-        console.log('Rebuild')
+        console.log('Rebuild');
         // TODO may cause some trouble for the performance
         const gemStoreCopy = copyArray(this.props.gemStore);
         return super.render(

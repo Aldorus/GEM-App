@@ -90,6 +90,20 @@ export class IntroExampleScreen extends React.Component {
         </GradientBackground>);
     };
 
+    renderSlide4 = () => {
+        return (<GradientBackground style={styles.container}>
+            <StyledText style={{
+                textAlign: 'center'
+            }}>
+                Share{'\n'}
+                your amazing Gems{'\n'}
+                with with world!{'\n\n'}
+                (Because the world deserves{'\n'}
+                5 stars experiences)
+            </StyledText>
+        </GradientBackground>);
+    };
+
     render() {
         return (
             <AppIntro onDoneBtnClick={this.doneBtnHandle}
@@ -97,6 +111,7 @@ export class IntroExampleScreen extends React.Component {
                 {this.renderSlide1()}
                 {this.renderSlide2()}
                 {this.renderSlide3()}
+                {this.renderSlide4()}
             </AppIntro>
         );
     }

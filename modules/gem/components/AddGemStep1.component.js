@@ -99,7 +99,6 @@ export default class AddGemStep1 extends React.Component {
 
     render = () => {
         return (<View style={styles.container}>
-            <Text style={styles.title}>Add a Gem</Text>
             <TextInput placeholder="Find your GEM"
                        style={styles.input}
                        autoFocus={true}

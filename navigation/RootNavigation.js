@@ -14,6 +14,7 @@ import AddFriendsScreen from '../modules/friend/ListFriends.screen';
 import DetailFriendScreen from '../modules/friend/DetailFriend.screen';
 import DetailGemScreen from '../modules/gem/DetailGem.screen';
 import AddNewGemScreen from '../modules/gem/AddNewGem.screen';
+import {ListCommentsScreen} from '../modules/comments/ListComments.screen';
 
 const RootStackNavigator = ({initialRouteName}) => {
     const stackNavigatorConfigs = {
@@ -54,6 +55,9 @@ const RootStackNavigator = ({initialRouteName}) => {
         },
         AddNewGem: {
             screen: AddNewGemScreen
+        },
+        ListComments: {
+            screen: ListCommentsScreen
         }
     };
 

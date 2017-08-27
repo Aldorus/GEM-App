@@ -5,6 +5,7 @@ import {Button} from '@shoutem/ui';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import Colors from '../../constants/Colors';
+import StyledButton from '../../components/StyledButton';
 
 const styles = StyleSheet.create({
     button: {
@@ -68,16 +69,9 @@ export default class PicturePicker extends React.Component {
                     flexDirection: 'row',
                     alignSelf: 'stretch'
                 }}>
-                    <Button onPress={this.onPressGallery}
-                            style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: Colors.white
-                            }}
-                            styleName="clear">
-                        <Text style={styles.button}>Gallery</Text>
-                    </Button>
+                    <StyledButton onPress={this.onPressGallery}>
+                        Gallery
+                    </StyledButton>
                     <Button onPress={this.onPressCamera}
                             style={{
                                 flex: 1,

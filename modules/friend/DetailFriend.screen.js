@@ -1,16 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import ImageLoader from 'react-native-image-progress';
-import ProgressBar from 'react-native-progress/Circle';
 import {StyleSheet, View} from 'react-native';
-import GradientBackground from '../../components/GradientBackground';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
-import StyledText from '../../components/StyledText';
 import listGems from '../gem/gem.json';
 import Colors from '../../constants/Colors';
 import FeedElementComponent from '../gem/components/FeedElement.component';
+import HeaderProfile from '../../components/HeaderProfile';
 
 const styles = StyleSheet.create({
     container: {
@@ -20,22 +17,33 @@ const styles = StyleSheet.create({
     },
     gradient: {
         alignSelf: 'stretch',
-        alignItems: 'center',
-        paddingBottom: 20
+        flexDirection: 'row',
+        paddingLeft: 15,
+        paddingRight: 15
     },
     avatar: {
         width: 80,
         height: 80,
-        paddingTop: 50,
-        marginBottom: 10
+        marginRight: 20,
+        marginBottom: 20,
+    },
+    button: {
+        flex: 1,
+        alignItems: 'center',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderBottomWidth: 0,
+        borderColor: Colors.white,
+        padding: 8
     }
 });
 
 export class DetailFriendScreen extends AbstractGemScreen {
     navigationOptions = {
         stateName: 'addFriend',
-        hasHistory: true,
-        titleState: ' '
+        hasHistory: true
     };
 
     static propTypes = {
@@ -50,7 +58,8 @@ export class DetailFriendScreen extends AbstractGemScreen {
         super(props);
         if (props.navigation.state && props.navigation.state.params && props.navigation.state.params.user) {
             this.state = {
-                user: props.navigation.state.params.user
+                user: props.navigation.state.params.user,
+                tabSelected: 'gems'
             };
             this.state.user.listGems = listGems;
         }
@@ -63,40 +72,45 @@ export class DetailFriendScreen extends AbstractGemScreen {
         );
     };
 
-    renderRowView = (rowData) => {
-        return <FeedElementComponent gemData={rowData}
-                                     onClick={this.clickOnGem}
-                                     displayWithImage={false}/>;
+    tabDisplayChanged = (tab) => {
+        this.setState({
+            tabSelected: tab
+        });
     };
 
-    renderListGem = () => {
-        return <ListView data={this.state.user.listGems}
-                         style={{listContent: {backgroundColor: 'transparent'}}}
-                         renderRow={this.renderRowView}/>;
+    renderRowView = (rowData) => {
+        return (<FeedElementComponent gemData={rowData}
+                                      onClick={this.clickOnGem}
+                                      userStore={this.props.userStore}
+                                      displayAvatar={true}
+                                      displayWithImage={false}/>);
+    };
+
+    renderListGems = () => {
+        return (<ListView data={this.state.user.listGems}
+                          style={{listContent: {backgroundColor: 'transparent'}}}
+                          renderRow={this.renderRowView}/>);
+    };
+
+    renderListSaved = () => {
+        return (<ListView data={this.state.user.listGems}
+                          style={{listContent: {backgroundColor: 'transparent'}}}
+                          renderRow={this.renderRowView}/>);
     };
 
     render() {
         return super.render(
             <View style={styles.container}>
-                <GradientBackground style={styles.gradient}>
-                    <ImageLoader borderRadius={40}
-                                 style={styles.avatar}
-                                 indicator={ProgressBar}
-                                 indicatorProps={{
-                                     color: Colors.colorText
-                                 }}
-                                 source={{uri: this.state.user.avatar_url}}/>
-                    <StyledText>
-                        {this.state.user.first_name} {this.state.user.last_name}
-                    </StyledText>
-                </GradientBackground>
-                {this.renderListGem()}
+                <HeaderProfile user={this.state.user} tabDisplayChanged={this.tabDisplayChanged}/>
+                {this.state.tabSelected === 'gems' ? this.renderListGems() : this.renderListSaved()}
             </View>, true);
     }
 }
 
-const mapStores = () => {
-    return {};
+const mapStores = (store) => {
+    return {
+        userStore: store.userReducer
+    };
 };
 
 export default connect(mapStores)(DetailFriendScreen);

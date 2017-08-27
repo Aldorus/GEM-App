@@ -9,7 +9,8 @@ import UserElementComponent from './UserElement.component';
 export class AddFriendsScreen extends AbstractGemScreen {
     navigationOptions = {
         hasHistory: false,
-        stateName: 'addFriend',
+        stateName: 'Friend',
+        titleState: ' '
     };
 
     static navigationOptions = {
@@ -19,15 +20,16 @@ export class AddFriendsScreen extends AbstractGemScreen {
     constructor(props) {
         super(props);
         this.state = {
-            listFriend: []
+            listFriends: []
         };
     }
 
     componentDidMount = () => {
         super.componentDidMount();
-        getAllFriends(this.props.userStore.group).then((listFriend) => {
+        getAllFriends(this.props.userStore).then((listFriends) => {
+            this.listFriends = listFriends;
             this.setState({
-                listFriend
+                listFriends
             });
         });
     };
@@ -43,14 +45,28 @@ export class AddFriendsScreen extends AbstractGemScreen {
         return <UserElementComponent user={item} onUserSelected={this.onUserSelected}/>;
     };
 
+    onChange = (name) => {
+        if (!name) {
+            this.setState({
+                listFriends: this.listFriends
+            });
+        } else {
+            this.setState({
+                listFriends: this.listFriends.filter((friend) => {
+                    return (`${friend.first_name} ${friend.last_name}`).toLowerCase().indexOf(name.toLowerCase()) >= 0;
+                })
+            });
+        }
+    };
+
     renderHeader = () => {
-        return <QuickSearchComponent label="Search Gem friends"/>;
+        return <QuickSearchComponent label="Search Gem friends" onChange={this.onChange}/>;
     };
 
     renderList = () => {
         return (
             <ListView style={{list: {backgroundColor: 'white'}, listContent: {backgroundColor: 'transparent'}}}
-                      data={this.state.listFriend}
+                      data={this.state.listFriends}
                       renderHeader={this.renderHeader}
                       renderRow={this.renderUser}/>
         );

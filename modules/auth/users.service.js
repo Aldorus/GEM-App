@@ -8,10 +8,10 @@ export const getAllUsers = () => {
     });
 };
 
-export const getAllFriends = (userGroup) => {
+export const getAllFriends = (currentUser) => {
     return gemFetch(`${Config.WS_ROOT}users`).then((parsedResponse) => {
         return parsedResponse.users.filter((user) => {
-            return user.group === userGroup;
+            return user.group === currentUser.group && user.id !== currentUser.id;
         });
     });
 };

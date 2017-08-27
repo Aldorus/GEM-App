@@ -1,16 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Segment} from 'expo';
-import ImageLoader from 'react-native-image-progress';
-import ProgressBar from 'react-native-progress/Circle';
 import {AsyncStorage, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {NavigationActions} from 'react-navigation';
-import GradientBackground from '../../components/GradientBackground';
 import ListItemStyle from '../../constants/ListItemStyle';
 import AbstractGemScreen from '../../AbstractGem.screen';
-import StyledText from '../../components/StyledText';
-import Colors from '../../constants/Colors';
+import HeaderProfile from '../../components/HeaderProfile';
 
 const styles = StyleSheet.create({
     container: {
@@ -21,21 +16,21 @@ const styles = StyleSheet.create({
     gradient: {
         alignSelf: 'stretch',
         alignItems: 'center',
-        paddingBottom: 20
+        paddingBottom: 20,
+        paddingLeft: 15,
+        paddingRight: 15
     },
     avatar: {
         width: 80,
         height: 80,
-        paddingTop: 50,
-        marginBottom: 10
+        marginRight: 20
     }
 });
 
 export class ProfileScreen extends AbstractGemScreen {
     navigationOptions = {
-        stateName: 'profile',
-        hasHistory: false,
-        titleState: ' '
+        stateName: 'Profile',
+        hasHistory: false
     };
 
     static propTypes = {
@@ -73,18 +68,7 @@ export class ProfileScreen extends AbstractGemScreen {
     render() {
         return super.render(
             <View style={styles.container}>
-                <GradientBackground style={styles.gradient}>
-                    <ImageLoader borderRadius={40}
-                                 style={styles.avatar}
-                                 indicator={ProgressBar}
-                                 indicatorProps={{
-                                     color: Colors.colorText
-                                 }}
-                                 source={{uri: this.props.userStore.avatar_url}}/>
-                    <StyledText>
-                        {this.props.userStore.first_name} {this.props.userStore.last_name}
-                    </StyledText>
-                </GradientBackground>
+                <HeaderProfile user={this.props.userStore}/>
                 {this.scrollViewOption()}
             </View>, true);
     }

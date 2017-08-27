@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     highlight: {
         alignSelf: 'stretch',
         backgroundColor: 'white',
-        marginBottom: 10
+        opacity: 0.4
     },
     container: {
-        marginBottom: 15,
-        paddingLeft: 65,
+        paddingBottom: 13,
+        paddingLeft: 35,
         paddingRight: 15,
         paddingTop: 10
     }
@@ -26,13 +26,14 @@ export default class NoResultElement extends React.Component {
         };
     }
 
+    // TODO not for the mve
     pressed = (result) => {
-        this.setState({
-            selected: true
-        });
-        if (this.props.elementPressed) {
-            this.props.elementPressed(result);
-        }
+    //     this.setState({
+    //         selected: true
+    //     });
+    //     if (this.props.elementPressed) {
+    //         this.props.elementPressed(result);
+    //     }
     };
 
     render() {
@@ -42,7 +43,7 @@ export default class NoResultElement extends React.Component {
                                 style={styles.highlight}>
                 <View style={[styles.container]}>
                     <StyledText>You don't find your GEM</StyledText>
-                    <StyledTitle>Add a new One</StyledTitle>
+                    <StyledTitle>Add a new One (Soon)</StyledTitle>
                     <StyledText>And share it whit your community</StyledText>
                 </View>
             </TouchableHighlight>

@@ -1,11 +1,10 @@
 import React from 'react';
 import {BackAndroid, Image, Platform, StyleSheet, View} from 'react-native';
-import {LinearGradient} from 'expo';
+import {LinearGradient, Segment} from 'expo';
 import {NavigationActions} from 'react-navigation';
-import {Segment} from 'expo';
 import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
-import gemImage from '../../assets/icons/gem.png';
+import gemImage from '../../assets/icons/add-gem@2x.png';
 import AddGemStep1 from './components/AddGemStep1.component';
 import AddGemStep2 from './components/AddGemStep2.component';
 
@@ -13,10 +12,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: 'stretch',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 20,
+        zIndex: 200
     },
     image: {
-        bottom: 16
+        position: 'absolute',
+        top: -30,
+        zIndex: 200
     }
 });
 
@@ -81,13 +84,15 @@ export default class AddGemScreen extends React.Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <TopNavigationGem navigationOptions={{
-                    hasHistory: true,
-                    titleState: ' ',
-                    noBackground: true
-                }}
-                                  backButtonAction={this.backButtonPressed}
-                                  navigation={this.props.navigation}/>
+                <TopNavigationGem
+                    navigationOptions={{
+                        hasHistory: true,
+                        titleState: ' ',
+                        background: '#fff'
+                    }}
+                    backButtonAction={this.backButtonPressed}
+                    navigation={this.props.navigation}
+                />
                 <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
                                 style={styles.container}
                                 end={[1, 0]}>

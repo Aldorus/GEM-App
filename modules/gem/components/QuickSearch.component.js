@@ -36,8 +36,10 @@ export default class QuickSearchComponent extends React.Component {
     }
 
     onChange = (value) => {
-        console.log('update value', value);
         this.setState({value});
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
     };
 
     render() {

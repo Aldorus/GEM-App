@@ -5,12 +5,13 @@ import {NavigationActions} from 'react-navigation';
 import {LinearGradient} from 'expo';
 import Colors from '../constants/Colors';
 import contextualMenuImage from '../assets/icons/contextual-menu.png';
-import backImage from '../assets/icons/back.png';
+import whiteBackImage from '../assets/icons/back.png';
 
 const styles = StyleSheet.create({
     container: {
         height: 70,
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        zIndex: 30
     }
 });
 
@@ -24,10 +25,17 @@ export default class TopNavigationGem extends React.Component {
     };
 
     getGradient = () => {
-        if (this.props.navigationOptions.noBackground === true) {
-            return [Colors.white, Colors.white];
+        if (this.props.navigationOptions.background) {
+            return [this.props.navigationOptions.background, this.props.navigationOptions.background];
         }
         return [Colors.gradientStart, Colors.gradientEnd];
+    };
+
+    getOrientation = () => {
+        if (this.props.navigationOptions.noBackground === true) {
+            return [1, 0];
+        }
+        return [1, 0];
     };
 
     goBack = () => {
@@ -54,7 +62,7 @@ export default class TopNavigationGem extends React.Component {
             return (<TouchableHighlight underlayColor={Colors.tintColor}
                                         onPress={this.goBack}
                                         style={{marginLeft: 10}}>
-                <Image source={backImage}/>
+                <Image source={whiteBackImage}/>
             </TouchableHighlight>);
         }
         return null;
@@ -63,7 +71,7 @@ export default class TopNavigationGem extends React.Component {
     render() {
         return (
             <LinearGradient colors={this.getGradient()}
-                            end={[1, 0]}
+                            end={this.getOrientation()}
                             style={styles.container}>
                 <NavigationBar styleName="clear"
                                centerComponent={this.renderCenterComponent()}

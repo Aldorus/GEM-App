@@ -3,9 +3,32 @@
         "category": "Restaurant",
         "title": "Atelier Septembre",
         "location": "Copenhagen",
+        "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+        "comments": [
+            {
+                "user": {
+                    "first_name": "Guillaume",
+                    "last_name": "Roussel",
+                    "avatar_url": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200"
+                },
+                "date": "Thu Aug 24 2017 23:20:35 GMT-0400 (EDT)",
+                "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+            },
+            {
+                "user": {
+                    "id":"e000edf9-774c-4044-9602-755ca2dd39cf",
+                    "first_name": "Guillaume",
+                    "last_name": "Roussel",
+                    "avatar_url": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200"
+                },
+                "date": "Thu Aug 24 2017 23:10:35 GMT-0400 (EDT)",
+                "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+            }
+        ],
         "word": "it's \"To Die For\"",
         "picture": "http://loremflickr.com/320/240/duck/all",
         "user": {
+            "id":"e000edf9-774c-4044-9602-755ca2dd39cf",
             "first_name": "Guillaume",
             "last_name": "Roussel",
             "avatar_url": "https://fr.gravatar.com/userimage/30478323/d53afb6ef01b7644a50b9dad2c973405.jpg?size=200"
@@ -16,6 +39,7 @@
         "category": "Documentary",
         "title": "Les bleus - Une autre histoire de france",
         "word": "it's a \"mind opener\"",
+        "note": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
         "picture": "http://loremflickr.com/320/240/duck/all",
         "user": {
             "first_name": "Guillaume",
