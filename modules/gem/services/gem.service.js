@@ -25,14 +25,16 @@ const createExperience = (item, gem) => {
     experienceFormData.append('experience[item_id]', item.id);
     experienceFormData.append('experience[reaction]', gem.word);
     experienceFormData.append('experience[description]', gem.description);
-    const file = {
-        uri: gem.picture,
-        name: `${uuidv4()}.png`,
-        type: 'image/png'
-    };
+    if (gem.picture) {
+        const file = {
+            uri: gem.picture,
+            name: `${uuidv4()}.png`,
+            type: 'image/png'
+        };
 
-    // var reader  = new window.FileReader();
-    experienceFormData.append('experience[picture]', file);
+        // var reader  = new window.FileReader();
+        experienceFormData.append('experience[picture]', file);
+    }
 
     return gemFetch(`${Config.WS_ROOT}experiences`, {
         headers: {

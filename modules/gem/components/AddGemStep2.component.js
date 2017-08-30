@@ -79,7 +79,9 @@ export class AddGemStep2 extends React.Component {
         };
         newGem.word = this.state.selectedWord.key;
         newGem.description = this.state.description;
-        newGem.picture = this.state.picture || this.state.image;
+        if (this.state.picture || this.state.image) {
+            newGem.picture = this.state.picture || this.state.image;
+        }
         console.log('Tying to create', newGem);
         createGem(newGem, this.props.userStore).then((newGemResponse) => {
             console.log('new gem', newGemResponse);
