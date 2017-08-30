@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 
 export default class AddNewGemScreen extends AbstractGemScreen {
     navigationOptions = {
-        stateName: 'addNewGem',
+        stateName: 'Add New Gem',
         hasHistory: true,
         titleState: ' '
     };

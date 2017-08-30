@@ -34,6 +34,7 @@
         "react-native/no-color-literals": 2
     },
     "globals": {
+        "File": false,
         "describe": false,
         "it": false,
         "expect": false,

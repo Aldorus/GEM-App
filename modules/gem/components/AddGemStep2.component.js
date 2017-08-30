@@ -7,6 +7,7 @@ import ExternalSearchResultElement from '../../search/components/ExternalSearchR
 import * as types from '../../../constants/ActionTypes';
 import listWords from './listWords.json';
 import PicturePicker from '../../picture/PicturePicker.component';
+import {createGem} from '../services/gem.service';
 
 const styles = StyleSheet.create({
     scroll: {
@@ -74,17 +75,18 @@ export class AddGemStep2 extends React.Component {
     createTheGem = () => {
         const newGem = this.props.entity;
         newGem.user = this.props.userStore;
-        newGem.word = this.state.selectedWord.word;
-        newGem.comment = this.state.comment;
-        newGem.picture = this.state.picture;
-        // createGem(newGem).then((newGemResponse) => {
-        console.log('gem created', newGem);
-        this.props.dispatch({
-            type: types.ADD_GEM,
-            gem: newGem
+        newGem.word = this.state.selectedWord.key;
+        newGem.description = this.state.description;
+        newGem.picture = this.state.picture || this.state.image;
+        console.log('Tying to create', newGem);
+        createGem(newGem).then((newGemResponse) => {
+            console.log('new gem', newGemResponse);
+            this.props.dispatch({
+                type: types.ADD_GEM,
+                gem: newGemResponse
+            });
+            this.props.navigation.navigate('Main');
         });
-        this.props.navigation.navigate('Main');
-        // });
     };
 
     selectStyles = {
@@ -121,8 +123,8 @@ export class AddGemStep2 extends React.Component {
                 <TextInput placeholder="Add your comment"
                            style={[styles.input]}
                            multiline={true}
-                           onChangeText={(comment) => this.setState({comment})}
-                           value={this.state.comment}
+                           onChangeText={(description) => this.setState({description})}
+                           value={this.state.description}
                            placeholderTextColor="black"
                            underlineColorAndroid="transparent"/>
                 <Button onPress={this.createTheGem}

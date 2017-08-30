@@ -16,6 +16,7 @@ export const parseGoogleEntitySearchData = (data) => {
     if (data.itemListElement) {
         return data.itemListElement.map((itemElement) => {
             return {
+                key: `knowledge:${itemElement.result['@id']}`,
                 category: extractMainCategory(itemElement),
                 title: itemElement.result.name,
                 shortLabel: itemElement.result.description,

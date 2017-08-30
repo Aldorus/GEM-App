@@ -1,42 +1,52 @@
 [
     {
         "label": "To Die For",
-        "word": "it's \"To Die For\""
+        "word": "it's \"To Die For\"",
+        "key":"wtf"
     },
     {
         "label": "WTF",
-        "word": "it's \"WTF\""
+        "word": "it's \"WTF\"",
+        "key":"wtf"
     },
     {
         "label": "Seriously WTF",
-        "word": "it's \"Seriously WFT\""
+        "word": "it's \"Seriously WFT\"",
+        "key":"wtf"
     },
     {
         "label": "Awesome",
-        "word": "it's \"Awesome\""
+        "word": "it's \"Awesome\"",
+        "key":"omg"
     },
     {
         "label": "The Best Thing Ever",
-        "word": "it's \"The Best Thing Ever\""
+        "word": "it's \"The Best Thing Ever\"",
+        "key":"wtf"
     },
     {
         "label": "Must Try",
-        "word": "it's a \"Must Try\""
+        "word": "it's a \"Must Try\"",
+        "key":"wtf"
     },
     {
         "label": "Holy shit...",
-        "word": "\"Holy shit...\""
+        "word": "\"Holy shit...\"",
+        "key":"wtf"
     },
     {
         "label": "Dude, really",
-        "word": "\"Dude, really\""
+        "word": "\"Dude, really\"",
+        "key":"wtf"
     },
     {
         "label": "Whaaaaaaaaaa",
-        "word": "\"Whaaaaaaaaaa\""
+        "word": "\"Whaaaaaaaaaa\"",
+        "key":"wtf"
     },
     {
         "label": "Best of Yhe Year",
-        "word": "it's The Best of The Year"
+        "word": "it's The Best of The Year",
+        "key":"best"
     }
 ]

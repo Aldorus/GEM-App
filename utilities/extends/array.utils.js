@@ -13,9 +13,25 @@ export const shuffleArray = (array) => {
 };
 
 export const onlyGem = (experience) => {
-    return experience.fullfil;
+    return experience.fullfil === undefined || experience.fullfil === true;
 };
 
 export const onlySaved = (experience) => {
-    return !experience.fullfil;
+    return !experience.fullfil === false;
+};
+
+export const onlyGemForThisGroup = (experience, group) => {
+    return onlyGem(experience, group) && experience.user.group === group;
+};
+
+export const onlySaveForThisGroup = (experience, group) => {
+    return onlySaved(experience, group) && experience.user.group === group;
+};
+
+export const onlyGemForThisUser = (experience, userId) => {
+    return onlyGem(experience) && experience.user.id === userId;
+};
+
+export const onlySaveForThisUser = (experience, userId) => {
+    return onlySaved(experience) && experience.user.id === userId;
 };

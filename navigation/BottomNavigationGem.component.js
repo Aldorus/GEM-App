@@ -112,8 +112,8 @@ export default class BottomNavigationGem extends React.Component {
     // TODO
     renderImage = (state, imageOn, imageOff) => {
         return (<View style={{alignItems: 'center'}}>
-            {this.props.stateName === state ? <Image source={imageOn}/> : <Image source={imageOff}/>}
-            <StyledText style={{fontSize: 10}}>{state}</StyledText>
+            {state.indexOf(this.props.stateName) >= 0 ? <Image source={imageOn}/> : <Image source={imageOff}/>}
+            <StyledText style={{fontSize: 10}}>{state[0]}</StyledText>
         </View>);
     };
 
@@ -125,13 +125,13 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={() => this.goToListGems('home')}>
-                    {this.renderImage('Home', listGemOnImage, listGemOffImage)}
+                    {this.renderImage(['Home'], listGemOnImage, listGemOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.secondaryTintColor}
                                     onPress={() => this.goToAddFriend('addFriend')}>
-                    {this.renderImage('Friend', addFriendOnImage, addFriendOffImage)}
+                    {this.renderImage(['Friend', 'Detail Friend'], addFriendOnImage, addFriendOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.bigIcon]}
@@ -143,13 +143,13 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={() => this.goToParams('params')}>
-                    {this.renderImage('Profile', paramsOnImage, paramsOffImage)}
+                    {this.renderImage(['Profile'], paramsOnImage, paramsOffImage)}
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={() => this.goToLove('saved')}>
-                    {this.renderImage('Saved', loveImage, loveImage)}
+                    {this.renderImage(['Saved'], loveImage, loveImage)}
                 </TouchableHighlight>
             </LinearGradient>
         );

@@ -25,7 +25,7 @@ export default class DetailGemScreen extends AbstractGemScreen {
 
     navigationOptions = {
         hasHistory: true,
-        stateName: 'detailGem',
+        stateName: 'Detail Gem',
         titleState: ' '
         // noBackground: true
     };

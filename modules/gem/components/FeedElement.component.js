@@ -8,7 +8,9 @@ import Colors from '../../../constants/Colors';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
 import {feedElementSwipeButton} from './feedElementSwipeButton';
+import listWords from './listWords.json';
 import {feedElementSwipeButtonUser} from './feedElementSwipeButtonUser';
+import BoldText from '../../../components/BoldText';
 
 const styles = StyleSheet.create({
     container: {
@@ -87,21 +89,27 @@ export default class FeedElementComponent extends React.Component {
         return null;
     };
 
+    getReaction = (wordKey) => {
+        return listWords.find((word) => {
+            return word.key === wordKey;
+        }).word;
+    };
+
     renderContent = () => {
+        console.log('Gem data', this.props.gemData);
         return (<View style={[styles.container]}>
             {this.renderAvatar()}
             <View style={styles.textWrapper}>
-                <StyledText>{this.props.gemData.category}{this.renderLocation()}</StyledText>
-                <StyledTitle numberOfLines={1}>{this.props.gemData.title}</StyledTitle>
+                <StyledText>{this.props.gemData.item.category}{this.renderLocation()}</StyledText>
+                <StyledTitle numberOfLines={1}>{this.props.gemData.item.name}</StyledTitle>
                 <StyledText>
-                    {this.props.gemData.user.first_name} {this.props.gemData.word}
+                    <BoldText>{this.props.gemData.user.first_name}</BoldText> {this.getReaction(this.props.gemData.reaction)}
                 </StyledText>
             </View>
         </View>);
     };
 
     render() {
-        console.log(this.props.userStore.id, this.props.gemData.user.id);
         return (
             <View style={{alignSelf: 'stretch'}}>
                 <Swipeout

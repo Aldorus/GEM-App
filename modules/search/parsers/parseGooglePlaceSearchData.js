@@ -15,6 +15,7 @@ export const parseGooglePlaceSearchData = (data) => {
     if (data.results) {
         return data.results.slice(0, 5).map((result) => {
             return {
+                key: `place:${result.id}`,
                 category: extractMainCategory(result),
                 title: result.name,
                 image: getImage(result),

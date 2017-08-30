@@ -9,6 +9,7 @@ import {copyArray} from '../../utilities/extends/object.utils';
 import {getAllGems} from '../gem/services/gem.service';
 import * as types from '../../constants/ActionTypes';
 import listGems from '../gem/gem.json';
+import {onlyGemForThisGroup} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -39,7 +40,7 @@ export class HomeScreen extends AbstractGemScreen {
         getAllGems(filter).then((gems) => {
             this.props.dispatch({
                 type: types.LOAD_GEM_SUCCESS,
-                gems: listGems
+                gems: gems || []
             });
         });
     };
@@ -91,7 +92,7 @@ export class HomeScreen extends AbstractGemScreen {
     render() {
         console.log('Rebuild');
         // TODO may cause some trouble for the performance
-        const gemStoreCopy = copyArray(this.props.gemStore);
+        const gemStoreCopy = copyArray(this.props.gemStore.filter((gem) => onlyGemForThisGroup(gem, this.props.userStore.group)));
         return super.render(
             <View style={styles.container}>
                 <ListView data={gemStoreCopy}

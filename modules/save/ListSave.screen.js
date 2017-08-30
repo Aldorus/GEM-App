@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import FeedElementComponent from '../gem/components/FeedElement.component';
-import {onlySaved} from '../../utilities/extends/array.utils';
+import {onlySaveForThisGroup} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -42,9 +42,10 @@ export class ListSaveScreen extends AbstractGemScreen {
     render() {
         return super.render(
             <View style={styles.container}>
-                <ListView data={this.props.gemStore.filter(onlySaved)}
-                          style={{listContent: {backgroundColor: 'transparent'}}}
-                          renderRow={this.renderRowView}/>
+                <ListView
+                    data={this.props.gemStore.filter((gem) => onlySaveForThisGroup(gem, this.props.userStore.group))}
+                    style={{listContent: {backgroundColor: 'transparent'}}}
+                    renderRow={this.renderRowView}/>
             </View>
         );
     }
