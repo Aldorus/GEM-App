@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import AbstractGemScreen from '../../AbstractGem.screen';
 
 const styles = StyleSheet.create({
@@ -27,7 +27,7 @@ export class ListCommentsScreen extends AbstractGemScreen {
     render() {
         return super.render(
             <View style={styles.container}>
-
+                <Text>Under Construct</Text>
             </View>, true);
     }
 }

@@ -1,6 +1,7 @@
 import uuidv4 from 'uuid/v4';
 import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
+import {copyObject} from '../../../utilities/extends/object.utils';
 
 const createItem = (gem) => {
     const itemFormData = new FormData();
@@ -26,9 +27,11 @@ const createExperience = (item, gem) => {
     experienceFormData.append('experience[description]', gem.description);
     const file = {
         uri: gem.picture,
-        name: `${uuidv4()}.jpg`,
-        type: 'image/jpg'
+        name: `${uuidv4()}.png`,
+        type: 'image/png'
     };
+
+    // var reader  = new window.FileReader();
     experienceFormData.append('experience[picture]', file);
 
     return gemFetch(`${Config.WS_ROOT}experiences`, {
@@ -42,32 +45,20 @@ const createExperience = (item, gem) => {
     });
 };
 
-export const createGem = (gem) => {
+export const createGem = (gem, user) => {
     return createItem(gem).then((responseCreateItem) => {
-        return createExperience(responseCreateItem, gem);
+        return createExperience(responseCreateItem, gem).then((responseCreateExp) => {
+            const response = copyObject(responseCreateExp);
+            response.item = responseCreateItem;
+            response.user = user;
+            return response;
+        });
     });
 };
 
-export const getAllGems = ((filter) => {
+export const getAllGems = (() => {
     console.log('getAllGems');
     return gemFetch(`${Config.WS_ROOT}experiences`).then((parsedResponse) => {
-        console.log('response', parsedResponse);
         return parsedResponse.experiences;
-    });
-});
-
-export const getYourSaves = ((filter) => {
-    console.log('getYourSaves', filter);
-    return gemFetch(`${Config.WS_ROOT}experiences`).then((parsedResponse) => {
-        console.log('response', parsedResponse);
-        return parsedResponse.items;
-    });
-});
-
-export const getYourGems = ((filter) => {
-    console.log('getYourGems');
-    return gemFetch(`${Config.WS_ROOT}experiences`).then((parsedResponse) => {
-        console.log('response', parsedResponse);
-        return parsedResponse.items;
     });
 });

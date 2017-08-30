@@ -1,12 +1,18 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableHighlight, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
+import {connect} from 'react-redux';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import StyledText from '../../components/StyledText';
 import Colors from '../../constants/Colors';
+import FeedElementComponent from './components/FeedElement.component';
 
 const styles = StyleSheet.create({
+    scroll: {
+        alignSelf: 'stretch',
+        paddingBottom: 30
+    },
     container: {
         flex: 1,
         backgroundColor: 'white'
@@ -18,7 +24,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class DetailGemScreen extends AbstractGemScreen {
+export class DetailGemScreen extends AbstractGemScreen {
     static navigationOptions = {
         header: null
     };
@@ -51,28 +57,58 @@ export default class DetailGemScreen extends AbstractGemScreen {
         return null;
     };
 
+    goOnComments = () => {
+        this.props.navigation.navigate('ListComments');
+    };
+
+    renderComment = () => {
+
+    };
+
     renderComments = () => {
-        if (this.state.gem.comments) {
-            return <StyledText>Recommended by {this.state.gem.recommended_by}</StyledText>;
+        // TODO
+        // this.state.gem.comments = listComments.comments;
+        if (!this.state.gem.comments) {
+            return <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
+                <View>
+                    <StyledText>Add comments</StyledText>
+                </View>
+            </TouchableHighlight>;
         }
-        return null;
+        return this.state.gem.comments.map(this.renderComment);
     };
 
     render() {
         return super.render(
-            <View style={styles.container}>
-                <ImageLoader indicator={ProgressBar}
-                             style={styles.image}
-                             indicatorProps={{
-                                 color: Colors.colorText
-                             }}
-                             source={{uri: this.state.gem.picture}}/>
-                <View style={{margin: 10}}>
-                    {this.renderDescription()}
-                    {this.renderRecommendedBy()}
-                    {this.renderComments()}
+            <ScrollView style={styles.scroll}>
+                <View style={styles.container}>
+                    <ImageLoader indicator={ProgressBar}
+                                 style={styles.image}
+                                 indicatorProps={{
+                                     color: Colors.colorText
+                                 }}
+                                 source={{uri: this.state.gem.picture}}/>
+                    <View style={{margin: 10}}>
+                        <FeedElementComponent
+                            gemData={this.state.gem}
+                            hideSentence={true}
+                            userStore={this.props.userStore}
+                            displayWithImage={false}
+                        />
+                        {this.renderDescription()}
+                        {this.renderRecommendedBy()}
+                        {this.renderComments()}
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
+
+const mapStores = (store) => {
+    return {
+        userStore: store.userReducer
+    };
+};
+
+export default connect(mapStores)(DetailGemScreen);

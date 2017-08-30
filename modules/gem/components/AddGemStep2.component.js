@@ -74,19 +74,21 @@ export class AddGemStep2 extends React.Component {
 
     createTheGem = () => {
         const newGem = this.props.entity;
-        newGem.user = this.props.userStore;
+        newGem.user = {
+            id: this.props.userStore.id
+        };
         newGem.word = this.state.selectedWord.key;
         newGem.description = this.state.description;
         newGem.picture = this.state.picture || this.state.image;
         console.log('Tying to create', newGem);
-        createGem(newGem).then((newGemResponse) => {
+        createGem(newGem, this.props.userStore).then((newGemResponse) => {
             console.log('new gem', newGemResponse);
             this.props.dispatch({
                 type: types.ADD_GEM,
                 gem: newGemResponse
             });
-            this.props.navigation.navigate('Main');
         });
+        this.props.navigation.navigate('Main');
     };
 
     selectStyles = {

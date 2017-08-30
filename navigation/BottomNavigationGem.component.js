@@ -15,7 +15,7 @@ import StyledText from '../components/StyledText';
 
 const styles = StyleSheet.create({
     container: {
-        height: 45,
+        height: 50,
         alignSelf: 'stretch',
         flexDirection: 'row'
     },
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     },
     smallIcon: {},
     bigIcon: {
-        bottom: 31,
-        height: 62
+        bottom: 20,
+        height: 40
     }
 });
 

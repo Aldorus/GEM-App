@@ -36,11 +36,20 @@ export class HomeScreen extends AbstractGemScreen {
         };
     }
 
+    sortGems = (gems) => {
+        if (gems) {
+            return gems.sort((a, b) => {
+                return new Date(b.experienced_at) - new Date(a.experienced_at);
+            });
+        }
+        return [];
+    };
+
     callForLoadGem = (filter) => {
         getAllGems(filter).then((gems) => {
             this.props.dispatch({
                 type: types.LOAD_GEM_SUCCESS,
-                gems: gems || []
+                gems: this.sortGems(gems)
             });
         });
     };
@@ -80,9 +89,17 @@ export class HomeScreen extends AbstractGemScreen {
 
     quickSearchChange = (value) => {
         console.log('value', value);
-        this.callForLoadGem({
-            q: value
-        });
+        if (!value) {
+            this.setState({
+                listGems: null
+            });
+        } else {
+            this.setState({
+                listGems: this.props.gemStore.filter((gem) => {
+                    return gem.item.name.indexOf(value) >= 0 || `${gem.user.first_name} ${gem.user.last_name}`.indexOf(value) >= 0;
+                })
+            });
+        }
     };
 
     renderHeader = () => {
@@ -95,7 +112,7 @@ export class HomeScreen extends AbstractGemScreen {
         const gemStoreCopy = copyArray(this.props.gemStore.filter((gem) => onlyGemForThisGroup(gem, this.props.userStore.group)));
         return super.render(
             <View style={styles.container}>
-                <ListView data={gemStoreCopy}
+                <ListView data={this.state.listGems || gemStoreCopy}
                           autoHideHeader={true}
                           loading={this.state.loading}
                           onRefresh={this.refreshList}

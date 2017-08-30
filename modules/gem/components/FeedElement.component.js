@@ -95,16 +95,22 @@ export default class FeedElementComponent extends React.Component {
         }).word;
     };
 
+    renderSentence = () => {
+        if (!this.props.hideSentence) {
+            return (<StyledText>
+                <BoldText>{this.props.gemData.user.first_name}</BoldText> {this.getReaction(this.props.gemData.reaction)}
+            </StyledText>);
+        }
+        return null;
+    };
+
     renderContent = () => {
-        console.log('Gem data', this.props.gemData);
         return (<View style={[styles.container]}>
             {this.renderAvatar()}
             <View style={styles.textWrapper}>
                 <StyledText>{this.props.gemData.item.category}{this.renderLocation()}</StyledText>
                 <StyledTitle numberOfLines={1}>{this.props.gemData.item.name}</StyledTitle>
-                <StyledText>
-                    <BoldText>{this.props.gemData.user.first_name}</BoldText> {this.getReaction(this.props.gemData.reaction)}
-                </StyledText>
+                {this.renderSentence()}
             </View>
         </View>);
     };

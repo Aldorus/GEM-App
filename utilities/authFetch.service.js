@@ -5,7 +5,6 @@ export const gemFetch = (url, options = {}) => {
     return AsyncStorage.getItem('current_user').then((user) => {
         return JSON.parse(user);
     }).then((user) => {
-        console.log('Get user', user);
         const optionsCopy = copyObject(options);
         if (!options.headers) {
             optionsCopy.headers = {};

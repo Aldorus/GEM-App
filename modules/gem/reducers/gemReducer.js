@@ -1,5 +1,4 @@
 import * as types from '../../../constants/ActionTypes';
-import listGems from '../gem.json';
 
 // let defaultValue = listGems;
 const defaultValue = [];

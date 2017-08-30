@@ -85,8 +85,11 @@ export default class TopNavigationGem extends React.Component {
         if (this.props.navigationOptions.logout) {
             console.log('Render right');
             return (<TouchableHighlight underlayColor={Colors.tintColor}
+                                        style={{
+                                            padding:15
+                                        }}
                                         onPress={this.goToDisconnect}>
-                <Text>D</Text>
+                <Text>Logout</Text>
             </TouchableHighlight>);
         }
         return null;
