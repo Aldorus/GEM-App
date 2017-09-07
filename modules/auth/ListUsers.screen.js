@@ -35,9 +35,6 @@ export class ListUsersScreen extends AbstractGemScreen {
                 listUsers
             });
         });
-        // this.setState({
-        //     listUsers: users
-        // });
     };
 
     goToMainScreen = () => {

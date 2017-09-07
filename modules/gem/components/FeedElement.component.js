@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     textWrapper: {
         flexDirection: 'column',
         flex: 1,
-        paddingRight: 15,
-        paddingBottom: 8
+        paddingRight: 15
     },
     avatar: {
         width: 30,
@@ -36,7 +35,9 @@ const styles = StyleSheet.create({
     },
     image: {
         alignSelf: 'stretch',
-        height: 200
+        height: 200,
+        marginTop: 8,
+        paddingBottom: 8
     }
 });
 
@@ -56,17 +57,17 @@ export default class FeedElementComponent extends React.Component {
     };
 
     componentNeedToBeDisplayWithImage = () => {
-        return this.props.displayWithImage;
+        return this.props.displayWithImage === true;
     };
 
     renderImageGem = () => {
-        if ((this.userHasPreferenceDisplayWithImage() || this.componentNeedToBeDisplayWithImage()) && this.props.gemData.picture) {
+        if (this.props.displayWithImage !== false && (this.userHasPreferenceDisplayWithImage() || this.componentNeedToBeDisplayWithImage()) && this.props.gemData.picture_url) {
             return (<ImageLoader indicator={ProgressBar}
                                  style={styles.image}
                                  indicatorProps={{
                                      color: Colors.colorText
                                  }}
-                                 source={{uri: this.props.gemData.picture}}/>);
+                                 source={{uri: this.props.gemData.picture_url}}/>);
         }
         return null;
     };
@@ -90,9 +91,11 @@ export default class FeedElementComponent extends React.Component {
     };
 
     getReaction = (wordKey) => {
-        return listWords.find((word) => {
-            return word.key === wordKey;
-        }).word;
+        if (wordKey) {
+            return listWords.find((word) => {
+                return word.key === wordKey;
+            }).word;
+        }
     };
 
     renderSentence = () => {
@@ -125,7 +128,7 @@ export default class FeedElementComponent extends React.Component {
                         flexDirection: 'column',
                         alignSelf: 'stretch'
                     }}>
-                        <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnGem}>
+                        <TouchableHighlight underlayColor={this.props.underlayColor || Colors.tintColor} onPress={this.goOnGem}>
                             {this.renderContent()}
                         </TouchableHighlight>
                     </View>

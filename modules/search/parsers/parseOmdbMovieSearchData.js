@@ -6,6 +6,7 @@ export const parseOmdbMovieSearchData = (data) => {
             return {
                 key: `movie:${result.imdbID}`,
                 category: capitalizeFirstLetter(result.Type),
+                unformatedCategory: result.Type,
                 title: result.Title,
                 shortLabel: result.Year,
                 image: result.Poster

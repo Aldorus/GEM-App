@@ -56,7 +56,6 @@ export class AppGem extends React.Component {
     loadAssetsAsync() {
         cacheAssetsAsync({
             images: [
-                require('./assets/images/expo-wordmark.png'),
                 require('./assets/icons/add-friend-off@2x.png'),
                 require('./assets/icons/add-friend-on@2x.png'),
                 require('./assets/icons/add-gem@2x.png'),
@@ -68,7 +67,8 @@ export class AppGem extends React.Component {
                 require('./assets/icons/list-gem-off@2x.png'),
                 require('./assets/icons/list-gem-on@2x.png'),
                 require('./assets/icons/loading-icon.png'),
-                require('./assets/icons/love@2x.png'),
+                require('./assets/icons/love-on@2x.png'),
+                require('./assets/icons/love-off@2x.png'),
                 require('./assets/icons/params-off@2x.png'),
                 require('./assets/icons/params-on@2x.png'),
                 require('./assets/icons/params-off-notif@2x.png'),

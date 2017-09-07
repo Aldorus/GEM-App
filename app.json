@@ -5,7 +5,7 @@
         "slug": "gem",
         "privacy": "public",
         "sdkVersion": "18.0.0",
-        "version": "1.0.1",
+        "version": "1.0.4",
         "orientation": "portrait",
         "primaryColor": "#cccccc",
         "icon": "./assets/icons/app-icon.png",
@@ -29,15 +29,15 @@
         },
         "android": {
             "package": "com.guillaume.gem",
-            "versionCode": 2
+            "versionCode": 5
         },
         "hooks": {
             "postPublish": [
                 {
                     "file": "sentry-expo/upload-sourcemaps",
                     "config": {
-                        "organization": "Aldorus",
-                        "project": "GEM",
+                        "organization": "aldorus",
+                        "project": "gem",
                         "authToken": "7824a9dffc58408e9af386cda7df43ae140c53e587184283a69c3d2928a6d9d2"
                     }
                 }

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         padding: 20,
-        paddingTop: 30,
+        paddingTop: 28,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -122,17 +122,6 @@ export class TopSortAndFilter extends React.Component {
                 </TouchableHighlight>
                 <StyledText style={styles.padding}>Sort & Filter</StyledText>
 
-                {/*TODO*/}
-                {/*<DropDownMenu*/}
-                {/*styleName="clear"*/}
-                {/*options={listDisplay}*/}
-                {/*selectedOption={this.state.selectDisplay}*/}
-                {/*onOptionSelected={this.onDisplayStyleChange}*/}
-                {/*titleProperty="label"*/}
-                {/*valueProperty="label"*/}
-                {/*style={this.selectStyles}*/}
-                {/*/>*/}
-
                 <BoldText style={styles.padding}>Show</BoldText>
                 <View style={{alignSelf: 'stretch'}}>
                     <DropDownMenu
@@ -147,7 +136,7 @@ export class TopSortAndFilter extends React.Component {
                 </View>
 
 
-                <BoldText style={styles.padding}>Sort by</BoldText>
+                <BoldText style={styles.padding}>Sort by (Soon)</BoldText>
                 <View style={{alignSelf: 'stretch'}}>
                     <DropDownMenu
                         styleName="clear"
@@ -156,7 +145,7 @@ export class TopSortAndFilter extends React.Component {
                         onOptionSelected={(sorting) => this.setState({selectSorting: sorting})}
                         titleProperty="label"
                         valueProperty="label"
-                        style={this.selectStyles}
+                        style={[this.selectStyles, {opacity: 0.2}]}
                     />
                 </View>
 

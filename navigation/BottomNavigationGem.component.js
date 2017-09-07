@@ -10,7 +10,8 @@ import addFriendOnImage from '../assets/icons/add-friend-on@2x.png';
 import addGemImage from '../assets/icons/add-gem@2x.png';
 import paramsOffImage from '../assets/icons/params-off@2x.png';
 import paramsOnImage from '../assets/icons/params-on@2x.png';
-import loveImage from '../assets/icons/love@2x.png';
+import loveOnImage from '../assets/icons/love-on@2x.png';
+import loveOffImage from '../assets/icons/love-off@2x.png';
 import StyledText from '../components/StyledText';
 
 const styles = StyleSheet.create({
@@ -23,13 +24,15 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 1
     },
     smallIcon: {},
     bigIcon: {
-        bottom: 20,
-        height: 40
+        bottom: 30,
+        height: 60
     }
+
 });
 
 export default class BottomNavigationGem extends React.Component {
@@ -113,7 +116,7 @@ export default class BottomNavigationGem extends React.Component {
     renderImage = (state, imageOn, imageOff) => {
         return (<View style={{alignItems: 'center'}}>
             {state.indexOf(this.props.stateName) >= 0 ? <Image source={imageOn}/> : <Image source={imageOff}/>}
-            <StyledText style={{fontSize: 10}}>{state[0]}</StyledText>
+            <StyledText style={{fontSize: 9}}>{state[0]}</StyledText>
         </View>);
     };
 
@@ -149,7 +152,7 @@ export default class BottomNavigationGem extends React.Component {
                 <TouchableHighlight style={[styles.icon, styles.smallIcon]}
                                     underlayColor={Colors.tintColor}
                                     onPress={() => this.goToLove('saved')}>
-                    {this.renderImage(['Saved'], loveImage, loveImage)}
+                    {this.renderImage(['Saved'], loveOnImage, loveOffImage)}
                 </TouchableHighlight>
             </LinearGradient>
         );

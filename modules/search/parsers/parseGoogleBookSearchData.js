@@ -5,6 +5,7 @@ export const parseGoogleBookSearchData = (data) => {
             return {
                 key: `book:${item.id}`,
                 category: 'Book',
+                unformatedCategory: 'book',
                 title: item.volumeInfo.title,
                 shortLabel: item.volumeInfo.authors ? item.volumeInfo.authors.join(' - ') : '',
                 image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : ''

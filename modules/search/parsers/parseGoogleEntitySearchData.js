@@ -18,6 +18,7 @@ export const parseGoogleEntitySearchData = (data) => {
             return {
                 key: `knowledge:${itemElement.result['@id']}`,
                 category: extractMainCategory(itemElement),
+                unformatedCategory: itemElement.result['@type'][0],
                 title: itemElement.result.name,
                 shortLabel: itemElement.result.description,
                 image: itemElement.result.image ? itemElement.result.image.contentUrl : ''

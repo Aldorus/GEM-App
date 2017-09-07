@@ -1,17 +1,23 @@
 import React from 'react';
 import {ScrollView, StyleSheet, TouchableHighlight, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
+import {ListView} from '@shoutem/ui';
 import ProgressBar from 'react-native-progress/Circle';
 import {connect} from 'react-redux';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import StyledText from '../../components/StyledText';
 import Colors from '../../constants/Colors';
 import FeedElementComponent from './components/FeedElement.component';
+import CommentElement from '../comments/CommentElement.component';
+import {copyObject} from '../../utilities/extends/object.utils';
+import {getAllUsers} from '../auth/users.service';
+import {getAllCom} from '../comments/comment.service';
 
 const styles = StyleSheet.create({
     scroll: {
         alignSelf: 'stretch',
-        paddingBottom: 30
+        paddingBottom: 30,
+        backgroundColor: 'white'
     },
     container: {
         flex: 1,
@@ -39,9 +45,19 @@ export class DetailGemScreen extends AbstractGemScreen {
     constructor(props) {
         super(props);
         this.state = {
-            gem: props.navigation.state.params.gem
+            gem: props.navigation.state.params.gem,
+            comments: []
         };
     }
+
+    componentDidMount = () => {
+        getAllUsers().then((users) => {
+            this.setState({users});
+            getAllCom(this.state.gem).then((comments) => {
+                this.setState({comments: comments.slice(-3)});
+            });
+        });
+    };
 
     renderDescription = () => {
         if (this.state.gem.note) {
@@ -58,22 +74,32 @@ export class DetailGemScreen extends AbstractGemScreen {
     };
 
     goOnComments = () => {
-        this.props.navigation.navigate('ListComments');
+        this.props.navigation.navigate('ListComments', {
+            gem: this.state.gem
+        });
     };
 
-    renderComment = () => {
-
+    renderRowView = (rowData) => {
+        const rowDataWithUser = copyObject(rowData);
+        rowDataWithUser.user = this.state.users.find((user) => {
+            return rowDataWithUser.user_id === user.id;
+        });
+        console.log('row data', rowDataWithUser);
+        return <CommentElement comment={rowDataWithUser}/>;
     };
 
     renderComments = () => {
-        // TODO
-        // this.state.gem.comments = listComments.comments;
         if (!this.state.gem.comments) {
-            return <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
-                <View>
-                    <StyledText>Add comments</StyledText>
-                </View>
-            </TouchableHighlight>;
+            return <View>
+                <ListView data={this.state.comments}
+                          style={{listContent: {backgroundColor: 'transparent'}}}
+                          renderRow={this.renderRowView}/>
+                <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
+                    <View>
+                        <StyledText style={{paddingLeft: 15, paddingTop: 10, paddingBottom: 10}}>Add comments</StyledText>
+                    </View>
+                </TouchableHighlight>
+            </View>;
         }
         return this.state.gem.comments.map(this.renderComment);
     };
@@ -87,10 +113,11 @@ export class DetailGemScreen extends AbstractGemScreen {
                                  indicatorProps={{
                                      color: Colors.colorText
                                  }}
-                                 source={{uri: this.state.gem.picture}}/>
+                                 source={{uri: this.state.gem.picture_url}}/>
                     <View style={{margin: 10}}>
                         <FeedElementComponent
                             gemData={this.state.gem}
+                            underlayColor="transparent"
                             hideSentence={true}
                             userStore={this.props.userStore}
                             displayWithImage={false}

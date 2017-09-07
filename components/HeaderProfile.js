@@ -4,7 +4,7 @@ import ProgressBar from 'react-native-progress/Circle';
 import {Image, StyleSheet, TouchableHighlight, View} from 'react-native';
 import GradientBackground from '../components/GradientBackground';
 import listGemOffImage from '../assets/icons/list-gem-off@2x.png';
-import loveImage from '../assets/icons/love@2x.png';
+import loveImage from '../assets/icons/love-off@2x.png';
 import StyledText from '../components/StyledText';
 import Colors from '../constants/Colors';
 

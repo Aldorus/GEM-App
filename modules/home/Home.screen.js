@@ -6,10 +6,9 @@ import AbstractGemScreen from '../../AbstractGem.screen';
 import FeedElementComponent from '../gem/components/FeedElement.component';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
 import {copyArray} from '../../utilities/extends/object.utils';
-import {getAllGems} from '../gem/services/gem.service';
+import {getAllGems, getAllSaved} from '../gem/services/gem.service';
 import * as types from '../../constants/ActionTypes';
-import listGems from '../gem/gem.json';
-import {onlyGemForThisGroup} from '../../utilities/extends/array.utils';
+import {onlyGemForThisGroup, sortGems} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -36,20 +35,22 @@ export class HomeScreen extends AbstractGemScreen {
         };
     }
 
-    sortGems = (gems) => {
-        if (gems) {
-            return gems.sort((a, b) => {
-                return new Date(b.experienced_at) - new Date(a.experienced_at);
-            });
-        }
-        return [];
-    };
-
-    callForLoadGem = (filter) => {
-        getAllGems(filter).then((gems) => {
+    callForLoadGem = () => {
+        getAllGems().then((gems) => {
             this.props.dispatch({
                 type: types.LOAD_GEM_SUCCESS,
-                gems: this.sortGems(gems)
+                gems: sortGems(gems)
+            });
+
+            this.setState({
+                loading: false
+            });
+
+            getAllSaved().then((saved) => {
+                this.props.dispatch({
+                    type: types.LOAD_SAVED_GEM_SUCCESS,
+                    saved: sortGems(saved)
+                });
             });
         });
     };
@@ -67,15 +68,10 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     refreshList = () => {
-        return getAllGems().then((gems) => {
-            this.setState({
-                loading: false
-            });
-            this.props.dispatch({
-                type: types.LOAD_GEM_SUCCESS,
-                gems: listGems
-            });
+        this.setState({
+            loading: true
         });
+        this.callForLoadGem();
     };
 
     renderRowView = (rowData) => {
@@ -88,7 +84,6 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     quickSearchChange = (value) => {
-        console.log('value', value);
         if (!value) {
             this.setState({
                 listGems: null
@@ -96,7 +91,8 @@ export class HomeScreen extends AbstractGemScreen {
         } else {
             this.setState({
                 listGems: this.props.gemStore.filter((gem) => {
-                    return gem.item.name.indexOf(value) >= 0 || `${gem.user.first_name} ${gem.user.last_name}`.indexOf(value) >= 0;
+                    return gem.item.name.toLowerCase().indexOf(value.toLowerCase()) >= 0 ||
+                        `${gem.user.first_name} ${gem.user.last_name}`.toLowerCase().indexOf(value.toLowerCase()) >= 0;
                 })
             });
         }
@@ -107,7 +103,6 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     render() {
-        console.log('Rebuild');
         // TODO may cause some trouble for the performance
         const gemStoreCopy = copyArray(this.props.gemStore.filter((gem) => onlyGemForThisGroup(gem, this.props.userStore.group)));
         return super.render(
@@ -127,6 +122,7 @@ export class HomeScreen extends AbstractGemScreen {
 const mapStores = (store) => {
     return {
         gemStore: store.gemReducer,
+        savedStore: store.savedReducer,
         userStore: store.userReducer
     };
 };

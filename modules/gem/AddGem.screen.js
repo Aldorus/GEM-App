@@ -1,12 +1,15 @@
 import React from 'react';
 import {BackAndroid, Image, Platform, StyleSheet, View} from 'react-native';
 import {LinearGradient, Segment} from 'expo';
+import {connect} from 'react-redux';
 import {NavigationActions} from 'react-navigation';
 import Colors from '../../constants/Colors';
 import TopNavigationGem from '../../navigation/TopNavigationGem.component';
 import gemImage from '../../assets/icons/add-gem@2x.png';
 import AddGemStep1 from './components/AddGemStep1.component';
+import * as types from '../../constants/ActionTypes';
 import AddGemStep2 from './components/AddGemStep2.component';
+import {createGem} from './services/gem.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class AddGemScreen extends React.Component {
+export class AddGemScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
@@ -42,11 +45,24 @@ export default class AddGemScreen extends React.Component {
         Segment.track('screen: addGem');
     }
 
-    onElementSelected = (result) => {
+    onElementSelected = (result, type) => {
         // TODO save result
-        this.setState({
-            entitySelected: result
+        console.log('type: ', type);
+        if (type === 'gem') {
+            return this.setState({
+                entitySelected: result,
+                type
+            });
+        }
+        console.log('Result to save', result);
+        createGem(result, this.props.userStore).then((newGemResponse) => {
+            console.log('new gem', newGemResponse);
+            this.props.dispatch({
+                type: types.ADD_SAVED_GEM,
+                saved: newGemResponse
+            });
         });
+        this.props.navigation.navigate('Main');
     };
 
     onNewResult = () => {
@@ -76,7 +92,9 @@ export default class AddGemScreen extends React.Component {
 
     renderStep2 = () => {
         if (this.state.entitySelected) {
-            return <AddGemStep2 entity={this.state.entitySelected} navigation={this.props.navigation}/>;
+            return <AddGemStep2 entity={this.state.entitySelected}
+                                type={this.state.type}
+                                navigation={this.props.navigation}/>;
         }
         return null;
     };
@@ -105,3 +123,11 @@ export default class AddGemScreen extends React.Component {
         );
     }
 }
+
+const mapStores = (store) => {
+    return {
+        userStore: store.userReducer
+    };
+};
+
+export default connect(mapStores)(AddGemScreen);

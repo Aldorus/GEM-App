@@ -5,7 +5,7 @@ import StyledTitle from '../../../components/StyledTitle';
 import Colors from '../../../constants/Colors';
 import GradientBackground from '../../../components/GradientBackground';
 import listGemOffImage from '../../../assets/icons/list-gem-off@2x.png';
-import loveImage from '../../../assets/icons/love@2x.png';
+import loveImage from '../../../assets/icons/love-off@2x.png';
 
 const styles = StyleSheet.create({
     highlight: {
@@ -45,6 +45,7 @@ export default class ExternalSearchResultElement extends React.Component {
     };
 
     selected = (type) => {
+        console.log('ExternalElement type', type);
         if (this.props.elementPressed) {
             this.props.elementPressed(this.props.result, type);
         }

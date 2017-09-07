@@ -19,12 +19,12 @@ export default class ExternalSearchResults extends React.Component {
         };
     }
 
-    elementSelected = (rowData) => {
+    elementSelected = (rowData, type) => {
         this.setState({
             selected: rowData
         });
         if (this.props.onElementSelected) {
-            this.props.onElementSelected(rowData);
+            this.props.onElementSelected(rowData, type);
         }
     };
 

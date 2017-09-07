@@ -59,9 +59,9 @@ export default class TopNavigationGem extends React.Component {
 
     renderLeftComponent = () => {
         if (this.props.navigationOptions.hasHistory) {
-            return (<TouchableHighlight underlayColor={Colors.tintColor}
+            return (<TouchableHighlight underlayColor={Colors.secondaryTintColor}
                                         onPress={this.goBack}
-                                        style={{marginLeft: 10}}>
+                                        style={{padding:15}}>
                 <Image source={whiteBackImage}/>
             </TouchableHighlight>);
         }
@@ -85,9 +85,7 @@ export default class TopNavigationGem extends React.Component {
         if (this.props.navigationOptions.logout) {
             console.log('Render right');
             return (<TouchableHighlight underlayColor={Colors.tintColor}
-                                        style={{
-                                            padding:15
-                                        }}
+                                        style={{padding:15}}
                                         onPress={this.goToDisconnect}>
                 <Text>Logout</Text>
             </TouchableHighlight>);

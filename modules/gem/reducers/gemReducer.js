@@ -1,6 +1,5 @@
 import * as types from '../../../constants/ActionTypes';
 
-// let defaultValue = listGems;
 const defaultValue = [];
 
 export const gemReducer = (state = defaultValue, action) => {

@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     icon: {
         bottom: 32,
         left: 25,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        zIndex: 10
     }
 });
 
@@ -45,12 +46,12 @@ export default class AddGemStep1 extends React.Component {
         };
     }
 
-    onElementSelected = (result) => {
+    onElementSelected = (result, type) => {
         this.setState({
             entitySelected: result
         });
         if (this.props.onElementSelected) {
-            this.props.onElementSelected(result);
+            this.props.onElementSelected(result, type);
         }
     };
 

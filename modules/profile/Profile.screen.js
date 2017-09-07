@@ -80,7 +80,7 @@ export class ProfileScreen extends AbstractGemScreen {
 
     renderListSaved = () => {
         console.log('Render only the save list');
-        return (<ListView data={this.props.gemStore.filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))}
+        return (<ListView data={this.props.savedStore.filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderRow={this.renderRowView}/>);
     };
@@ -97,7 +97,8 @@ export class ProfileScreen extends AbstractGemScreen {
 const mapStores = (store) => {
     return {
         userStore: store.userReducer,
-        gemStore: store.gemReducer
+        gemStore: store.gemReducer,
+        savedStore: store.savedReducer
     };
 };
 

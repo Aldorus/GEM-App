@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, TouchableHighlight, StyleSheet} from 'react-native';
 import Colors from '../../../constants/Colors';
 import listGemImage from '../../../assets/icons/list-gem-off@2x.png';
-import loveImage from '../../../assets/icons/love@2x.png';
+import loveImage from '../../../assets/icons/love-off@2x.png';
 import shareImageIOS from '../../../assets/icons/share-ios@2x.png';
 import GradientBackground from '../../../components/GradientBackground';
 
