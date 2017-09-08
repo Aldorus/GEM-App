@@ -92,7 +92,7 @@ export class ListCommentsScreen extends AbstractGemScreen {
             return rowDataWithUser.user_id === user.id;
         });
         console.log('row data', rowDataWithUser);
-        return <CommentElement comment={rowDataWithUser}/>;
+        return <CommentElement comment={rowDataWithUser} displayAvatar={true}/>;
     };
 
     render() {

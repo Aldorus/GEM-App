@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import FeedElementComponent from '../gem/components/FeedElement.component';
-import {onlySaveForThisGroup, sortGems} from '../../utilities/extends/array.utils';
+import {onlySaveForThisUser, sortGems} from '../../utilities/extends/array.utils';
 import * as types from '../../constants/ActionTypes';
 import {getAllSaved} from '../gem/services/gem.service';
 
@@ -34,9 +34,7 @@ export class ListSaveScreen extends AbstractGemScreen {
     }
 
     callForLoadGem = () => {
-
         getAllSaved().then((saved) => {
-            console.log(saved);
             this.props.dispatch({
                 type: types.LOAD_SAVED_GEM_SUCCESS,
                 saved: sortGems(saved)
@@ -44,7 +42,6 @@ export class ListSaveScreen extends AbstractGemScreen {
             this.setState({
                 loading: false
             });
-
         });
     };
 
@@ -78,7 +75,7 @@ export class ListSaveScreen extends AbstractGemScreen {
                 <ListView
                     loading={this.state.loading}
                     onRefresh={this.refreshList}
-                    data={this.props.savedStore.filter((gem) => onlySaveForThisGroup(gem, this.props.userStore.group))}
+                    data={this.props.savedStore.filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))}
                     style={{listContent: {backgroundColor: 'transparent'}}}
                     renderRow={this.renderRowView}/>
             </View>

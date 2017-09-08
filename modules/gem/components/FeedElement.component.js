@@ -2,14 +2,11 @@ import React from 'react';
 import {StyleSheet, TouchableHighlight, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
-import Swipeout from 'react-native-swipeout';
 import PropTypes from 'prop-types';
 import Colors from '../../../constants/Colors';
 import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
-import {feedElementSwipeButton} from './feedElementSwipeButton';
 import listWords from './listWords.json';
-import {feedElementSwipeButtonUser} from './feedElementSwipeButtonUser';
 import BoldText from '../../../components/BoldText';
 
 const styles = StyleSheet.create({
@@ -20,6 +17,12 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         flexDirection: 'row',
         alignSelf: 'stretch'
+    },
+    swipeButton: {
+        flex: 1,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textWrapper: {
         flexDirection: 'column',
@@ -121,18 +124,15 @@ export default class FeedElementComponent extends React.Component {
     render() {
         return (
             <View style={{alignSelf: 'stretch'}}>
-                <Swipeout
-                    right={this.props.userStore.id !== this.props.gemData.user.id ? feedElementSwipeButton : feedElementSwipeButtonUser}
-                    backgroundColor="white">
-                    <View style={{
-                        flexDirection: 'column',
-                        alignSelf: 'stretch'
-                    }}>
-                        <TouchableHighlight underlayColor={this.props.underlayColor || Colors.tintColor} onPress={this.goOnGem}>
-                            {this.renderContent()}
-                        </TouchableHighlight>
-                    </View>
-                </Swipeout>
+                <View style={{
+                    flexDirection: 'column',
+                    alignSelf: 'stretch'
+                }}>
+                    <TouchableHighlight underlayColor={this.props.underlayColor || Colors.tintColor}
+                                        onPress={this.goOnGem}>
+                        {this.renderContent()}
+                    </TouchableHighlight>
+                </View>
                 {this.renderImageGem()}
                 <StyledText>{this.props.gemData.comment}</StyledText>
             </View>

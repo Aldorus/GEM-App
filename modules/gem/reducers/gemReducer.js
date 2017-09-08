@@ -12,6 +12,11 @@ export const gemReducer = (state = defaultValue, action) => {
             stateCopy.unshift(action.gem);
             state = stateCopy;
             break;
+        case types.DELETE_GEM:
+            state = state.slice(0).filter((gem) => {
+                return gem.id !== action.gem.id;
+            });
+            break;
         default:
             return state;
     }

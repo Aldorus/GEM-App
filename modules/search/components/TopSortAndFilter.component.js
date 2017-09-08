@@ -105,7 +105,6 @@ export class TopSortAndFilter extends React.Component {
     };
 
     onDisplayStyleChange = (display) => {
-        console.log('Display', display);
         this.props.dispatch({
             type: display.action
         });

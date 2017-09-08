@@ -23,7 +23,7 @@ const createItem = (gem) => {
     });
 };
 
-const createExperience = (item, gem) => {
+export const createExperience = (item, gem) => {
     const experienceFormData = new FormData();
     experienceFormData.append('experience[item_id]', item.id);
     if (gem.word) {
@@ -83,3 +83,11 @@ export const getAllSaved = (() => {
         return parsedResponse.experiences;
     });
 });
+
+export const deleteGem = (gem) => {
+    return gemFetch(`${Config.WS_ROOT}experiences/${gem.id}`, {
+        method: 'DELETE'
+    }).then(() => {
+        return true;
+    });
+};

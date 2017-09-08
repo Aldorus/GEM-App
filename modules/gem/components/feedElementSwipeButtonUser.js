@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, TouchableHighlight, StyleSheet} from 'react-native';
 import Colors from '../../../constants/Colors';
-import listGemImage from '../../../assets/icons/list-gem-off@2x.png';
+import listGemImage from '../../../assets/icons/trash@2x.png';
 import GradientBackground from '../../../components/GradientBackground';
 
 const styles = StyleSheet.create({

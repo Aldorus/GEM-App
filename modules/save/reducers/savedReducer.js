@@ -12,6 +12,11 @@ export const savedReducer = (state = defaultValue, action) => {
             stateCopy.unshift(action.saved);
             state = stateCopy;
             break;
+        case types.DELETE_SAVED_GEM:
+            state = state.slice(0).filter((saved) => {
+                return saved.id !== action.saved.id;
+            });
+            break;
         default:
             return state;
     }

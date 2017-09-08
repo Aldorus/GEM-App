@@ -14,7 +14,11 @@ export const gemFetch = (url, options = {}) => {
         }
         return fetch(url, optionsCopy).then((response) => {
             if (response.ok) {
-                return response.json();
+                return response.json().then((parsed) => {
+                    return parsed;
+                }).catch(() => {
+                    return {result: true};
+                });
             }
             throw new Error(JSON.stringify({response}));
         });

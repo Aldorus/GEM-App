@@ -46,15 +46,12 @@ export class AddGemScreen extends React.Component {
     }
 
     onElementSelected = (result, type) => {
-        // TODO save result
-        console.log('type: ', type);
         if (type === 'gem') {
             return this.setState({
                 entitySelected: result,
                 type
             });
         }
-        console.log('Result to save', result);
         createGem(result, this.props.userStore).then((newGemResponse) => {
             console.log('new gem', newGemResponse);
             this.props.dispatch({

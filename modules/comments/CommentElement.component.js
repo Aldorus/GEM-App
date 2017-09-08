@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import Colors from '../../constants/Colors';
@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
 export default class CommentElement extends React.Component {
     render = () => {
         return <View style={styles.container}>
-            <ImageLoader borderRadius={15}
-                         style={styles.avatar}
-                         indicator={ProgressBar}
-                         indicatorProps={{
-                             color: Colors.colorText
-                         }}
-                         source={{uri: this.props.comment.user.avatar_url}}/>
+            {this.props.displayAvatar ? <ImageLoader borderRadius={15}
+                                                     style={styles.avatar}
+                                                     indicator={ProgressBar}
+                                                     indicatorProps={{
+                                                         color: Colors.colorText
+                                                     }}
+                                                     source={{uri: this.props.comment.user.avatar_url}}/> : null}
             <StyledText>
                 <BoldText>{this.props.comment.user.first_name}</BoldText> {this.props.comment.message}
             </StyledText>
