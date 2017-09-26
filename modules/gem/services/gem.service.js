@@ -1,4 +1,5 @@
 import uuidv4 from 'uuid/v4';
+import axios from 'axios';
 import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
 import {copyObject} from '../../../utilities/extends/object.utils';
@@ -23,7 +24,7 @@ const createItem = (gem) => {
     });
 };
 
-export const createExperience = (item, gem) => {
+const createExperience = (item, gem) => {
     const experienceFormData = new FormData();
     experienceFormData.append('experience[item_id]', item.id);
     if (gem.word) {
@@ -49,7 +50,7 @@ export const createExperience = (item, gem) => {
 
     return gemFetch(`${Config.WS_ROOT}experiences`, {
         headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'multipart/form-data'
         },
         method: 'POST',
         body: experienceFormData
@@ -60,7 +61,9 @@ export const createExperience = (item, gem) => {
 
 export const createGem = (gem, user) => {
     return createItem(gem).then((responseCreateItem) => {
+        console.log('create Item', responseCreateItem);
         return createExperience(responseCreateItem, gem).then((responseCreateExp) => {
+            console.log('create Experience', responseCreateExp);
             const response = copyObject(responseCreateExp);
             response.item = responseCreateItem;
             response.user = user;

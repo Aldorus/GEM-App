@@ -10,7 +10,8 @@
         "build-android": "exp build:android",
         "build-ios": "exp build:ios",
         "build-status": "node node_modules/.bin/exp build:status",
-        "lint": "node node_modules/.bin/eslint ."
+        "lint": "node node_modules/.bin/eslint .",
+        "postinstall": "rndebugger-open"
     },
     "jest": {
         "preset": "jest-expo"
@@ -18,6 +19,7 @@
     "dependencies": {
         "@expo/samples": "~1.0.4",
         "@shoutem/ui": "github:imWildCat/shoutem-react-native-ui#develop",
+        "axios": "^0.16.2",
         "exp": "^44.0.0",
         "expo": "^18.0.4",
         "lodash": "^4.17.4",

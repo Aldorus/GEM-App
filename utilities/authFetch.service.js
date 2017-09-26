@@ -12,15 +12,21 @@ export const gemFetch = (url, options = {}) => {
         if (user && user.accessToken) {
             optionsCopy.headers.Authorization = user.accessToken;
         }
-        return fetch(url, optionsCopy).then((response) => {
+        return fetch(url, optionsCopy).then((response, more) => {
+            console.log('response', response, more);
             if (response.ok) {
                 return response.json().then((parsed) => {
                     return parsed;
-                }).catch(() => {
+                }).catch((error) => {
+                    console.log('error in catch', error);
                     return {result: true};
                 });
             }
+
             throw new Error(JSON.stringify({response}));
+        }).catch((error, mote) => {
+            console.log('error', error, mote);
+            // return {result: true};
         });
     });
 };

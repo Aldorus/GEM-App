@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Image, StyleSheet, TextInput, View} from 'react-native';
 import ExternalSearchEntity from '../../search/services/ExternalSearchEntity.service';
 import ExternalSearchPlace from '../../search/services/ExternalSearchPlace.service';
 import ExternalSearchMovie from '../../search/services/ExternalSearchMovie.service';
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         bottom: 32,
         left: 25,
         alignSelf: 'flex-start',
-        zIndex: 10
+        zIndex: 100,
+        position: 'relative'
     }
 });
 
