@@ -8,7 +8,7 @@ export const parseGoogleBookSearchData = (data) => {
                 unformatedCategory: 'book',
                 title: item.volumeInfo.title,
                 shortLabel: item.volumeInfo.authors ? item.volumeInfo.authors.join(' - ') : '',
-                image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : ''
+                image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail.replace('zoom=1', 'zoom=3') : ''
             };
         });
     }

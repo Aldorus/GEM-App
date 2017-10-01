@@ -1,12 +1,17 @@
 import uuidv4 from 'uuid/v4';
-import axios from 'axios';
 import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
 import {copyObject} from '../../../utilities/extends/object.utils';
 
+export const getAllItems = (() => {
+    console.log('getAllItems');
+    return gemFetch(`${Config.WS_ROOT}items`).then((parsedResponse) => {
+        return parsedResponse.items;
+    });
+});
+
 const createItem = (gem) => {
     const itemFormData = new FormData();
-    itemFormData.append('item[date]', new Date());
     itemFormData.append('item[name]', gem.title);
     itemFormData.append('item[name_identifier]', uuidv4());
     itemFormData.append('item[category]', gem.unformatedCategory);
@@ -24,6 +29,19 @@ const createItem = (gem) => {
     });
 };
 
+const callTheApi = (experienceFormData) => {
+    console.log('experience', experienceFormData);
+    return gemFetch(`${Config.WS_ROOT}experiences`, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        method: 'POST',
+        body: experienceFormData
+    }).then((experienceResponse) => {
+        return experienceResponse.experience;
+    });
+};
+
 const createExperience = (item, gem) => {
     const experienceFormData = new FormData();
     experienceFormData.append('experience[item_id]', item.id);
@@ -36,34 +54,26 @@ const createExperience = (item, gem) => {
     }
 
     if (gem.picture) {
-        console.log('add picture');
-        const file = {
-            uri: gem.picture,
-            name: `${uuidv4()}.jpg`,
-            type: 'image/jpg'
-        };
-
-        // var reader  = new window.FileReader();
-        experienceFormData.append('experience[picture]', file);
+        if (gem.picture.indexOf('http') === 0) {
+            console.log('add external picture');
+            experienceFormData.append('experience[remote_picture_url]', gem.picture);
+        } else {
+            console.log('add internal picture');
+            const file = {
+                uri: gem.picture,
+                name: `${uuidv4()}.jpg`,
+                type: 'image/jpg'
+            };
+            experienceFormData.append('experience[picture]', file);
+        }
     }
     console.log('experience', experienceFormData);
-
-    return gemFetch(`${Config.WS_ROOT}experiences`, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        method: 'POST',
-        body: experienceFormData
-    }).then((experienceResponse) => {
-        return experienceResponse.experience;
-    });
+    return callTheApi(experienceFormData);
 };
 
 export const createGem = (gem, user) => {
     return createItem(gem).then((responseCreateItem) => {
-        console.log('create Item', responseCreateItem);
         return createExperience(responseCreateItem, gem).then((responseCreateExp) => {
-            console.log('create Experience', responseCreateExp);
             const response = copyObject(responseCreateExp);
             response.item = responseCreateItem;
             response.user = user;
@@ -78,7 +88,6 @@ export const getAllGems = (() => {
         return parsedResponse.experiences;
     });
 });
-
 
 export const getAllSaved = (() => {
     console.log('getAllSaved');

@@ -13,7 +13,7 @@ export const gemFetch = (url, options = {}) => {
             optionsCopy.headers.Authorization = user.accessToken;
         }
         return fetch(url, optionsCopy).then((response, more) => {
-            console.log('response', response, more);
+            // console.log('response', response, more);
             if (response.ok) {
                 return response.json().then((parsed) => {
                     return parsed;
@@ -24,9 +24,6 @@ export const gemFetch = (url, options = {}) => {
             }
 
             throw new Error(JSON.stringify({response}));
-        }).catch((error, mote) => {
-            console.log('error', error, mote);
-            // return {result: true};
         });
     });
 };
