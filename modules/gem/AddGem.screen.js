@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         paddingTop: 20,
-        zIndex: 200
+        zIndex: 0
     },
     image: {
         position: 'absolute',
-        top: -30,
-        zIndex: 200
+        top: -40,
+        zIndex: 2000
     }
 });
 

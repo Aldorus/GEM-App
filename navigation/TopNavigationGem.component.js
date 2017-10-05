@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableHighlight, AsyncStorage} from 'react-native';
+import {AsyncStorage, Image, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {NavigationBar} from '@shoutem/ui'
 import {NavigationActions} from 'react-navigation';
 import {LinearGradient} from 'expo';
@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
     container: {
         height: 70,
         alignSelf: 'stretch',
-        zIndex: 30
+        position: 'relative',
+        zIndex: -10
+
     }
 });
 
@@ -61,7 +63,7 @@ export default class TopNavigationGem extends React.Component {
         if (this.props.navigationOptions.hasHistory) {
             return (<TouchableHighlight underlayColor={Colors.secondaryTintColor}
                                         onPress={this.goBack}
-                                        style={{padding:15}}>
+                                        style={{padding: 15}}>
                 <Image source={whiteBackImage}/>
             </TouchableHighlight>);
         }
@@ -85,7 +87,7 @@ export default class TopNavigationGem extends React.Component {
         if (this.props.navigationOptions.logout) {
             console.log('Render right');
             return (<TouchableHighlight underlayColor={Colors.tintColor}
-                                        style={{padding:15}}
+                                        style={{padding: 15}}
                                         onPress={this.goToDisconnect}>
                 <Text>Logout</Text>
             </TouchableHighlight>);
