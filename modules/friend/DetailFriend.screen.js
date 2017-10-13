@@ -7,7 +7,7 @@ import AbstractGemScreen from '../../AbstractGem.screen';
 import Colors from '../../constants/Colors';
 import FeedElementComponent from '../gem/components/FeedElement.component';
 import HeaderProfile from '../../components/HeaderProfile';
-import {onlyGemForThisUser, onlySaveForThisUser} from '../../utilities/extends/array.utils';
+import {onlyGemForThisCategory, onlyGemForThisUser, onlySaveForThisUser} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -88,7 +88,9 @@ export class DetailFriendScreen extends AbstractGemScreen {
     renderListGems = () => {
         console.log('Render only the gem list');
         return (
-            <ListView data={this.props.gemStore.filter((gem) => onlyGemForThisUser(gem, this.state.user.id))}
+            <ListView data={this.props.gemStore
+                        .filter((gem) => onlyGemForThisUser(gem, this.state.user.id))
+                        .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                       style={{listContent: {backgroundColor: 'transparent'}}}
                       renderRow={this.renderRowView}/>);
     };
@@ -96,7 +98,9 @@ export class DetailFriendScreen extends AbstractGemScreen {
     renderListSaved = () => {
         console.log('Render only the save list');
         return (
-            <ListView data={this.props.savedStore.filter((gem) => onlySaveForThisUser(gem, this.state.user.id))}
+            <ListView data={this.props.savedStore
+                        .filter((gem) => onlySaveForThisUser(gem, this.state.user.id))
+                        .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                       style={{listContent: {backgroundColor: 'transparent'}}}
                       renderRow={this.renderRowView}/>);
     };

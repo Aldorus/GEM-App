@@ -1,4 +1,3 @@
-
 /**
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
@@ -24,6 +23,13 @@ export const sortGems = (gems) => {
 
 export const onlyGemForThisGroup = (experience, group) => {
     return experience.user.group === group;
+};
+
+export const onlyGemForThisCategory = (experience, category) => {
+    if (category && category !== 'All') {
+        return experience.item.category.toLowerCase() === category.toLowerCase();
+    }
+    return true;
 };
 
 export const onlySaveForThisGroup = (experience, group) => {

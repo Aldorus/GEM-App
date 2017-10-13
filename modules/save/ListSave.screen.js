@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import FeedElementComponent from '../gem/components/FeedElement.component';
-import {onlySaveForThisUser, sortGems} from '../../utilities/extends/array.utils';
+import {onlyGemForThisCategory, onlySaveForThisUser, sortGems} from '../../utilities/extends/array.utils';
 import * as types from '../../constants/ActionTypes';
 import {getAllSaved} from '../gem/services/gem.service';
 
@@ -75,7 +75,9 @@ export class ListSaveScreen extends AbstractGemScreen {
                 <ListView
                     loading={this.state.loading}
                     onRefresh={this.refreshList}
-                    data={this.props.savedStore.filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))}
+                    data={this.props.savedStore
+                        .filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))
+                        .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                     style={{listContent: {backgroundColor: 'transparent'}}}
                     renderRow={this.renderRowView}/>
             </View>

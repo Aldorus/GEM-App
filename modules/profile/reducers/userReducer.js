@@ -18,6 +18,11 @@ export const userReducer = (state = defaultValue, action) => {
             stateCopy.displayListWithImage = false;
             state = stateCopy;
             break;
+        case types.CATEGORY_FILTER:
+            var stateCopy = copyObject(state);
+            stateCopy.categoryFilter = action.category.label;
+            state = stateCopy;
+            break;
         default:
             return state;
     }

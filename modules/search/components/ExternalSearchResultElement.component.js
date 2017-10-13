@@ -39,9 +39,11 @@ export default class ExternalSearchResultElement extends React.Component {
     }
 
     pressed = () => {
-        this.setState({
-            selected: true
-        });
+        if (!this.props.noClick) {
+            this.setState({
+                selected: true
+            });
+        }
     };
 
     selected = (type) => {

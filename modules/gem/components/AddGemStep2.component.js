@@ -1,4 +1,5 @@
 import React from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Button, DropDownMenu} from '@shoutem/ui';
@@ -8,6 +9,7 @@ import * as types from '../../../constants/ActionTypes';
 import listWords from './listWords.json';
 import PicturePicker from '../../picture/PicturePicker.component';
 import {createGem} from '../services/gem.service';
+
 
 const styles = StyleSheet.create({
     scroll: {
@@ -105,9 +107,9 @@ export class AddGemStep2 extends React.Component {
     };
 
     render = () => {
-        return (<ScrollView style={styles.scroll}>
+        return (<KeyboardAwareScrollView style={styles.scroll}>
             <View style={styles.container}>
-                <ExternalSearchResultElement result={this.props.entity}/>
+                <ExternalSearchResultElement result={this.props.entity} noClick={true}/>
                 <View style={styles.wordContainer}>
                     <Text style={styles.was}>Was...</Text>
                     <DropDownMenu
@@ -136,7 +138,7 @@ export class AddGemStep2 extends React.Component {
                     <Text style={styles.button}>Gem It ></Text>
                 </Button>
             </View>
-        </ScrollView>);
+        </KeyboardAwareScrollView>);
     };
 }
 

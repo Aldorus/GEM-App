@@ -39,12 +39,14 @@ export default class AppContainer extends React.Component {
 
         const { hostname } = url.parse(NativeModules.SourceCode.scriptURL);
         console.log('hostname', hostname);
-        Reactotron
-            .configure({
-                host: hostname
-            }) // controls connection & communication settings
-            .useReactNative() // add all built-in react native plugins
-            .connect(); // let's connect!
+        if (process.env.NODE_ENV !== 'production') {
+            Reactotron
+                .configure({
+                    host: hostname
+                }) // controls connection & communication settings
+                .useReactNative() // add all built-in react native plugins
+                .connect(); // let's connect!
+        }
     }
 
     render() {

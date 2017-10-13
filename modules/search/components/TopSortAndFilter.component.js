@@ -40,19 +40,22 @@ const listCategories = [
         label: 'Movie'
     },
     {
-        label: 'Restaurants'
+        label: 'Restaurant'
     },
     {
-        label: 'Books'
+        label: 'Book'
     },
     {
-        label: 'Places'
+        label: 'Place'
     },
     {
         label: 'Show'
     },
     {
         label: 'Event'
+    },
+    {
+        label: 'Other'
     }
 ];
 const listSorting = [
@@ -81,11 +84,20 @@ export class TopSortAndFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectCategory: listCategories[0],
-            selectSorting: listSorting[0],
+            selectCategory: this.getSelectedFilter(),
+            selectSorting: this.props.userStore.sortingFilter || listSorting[0],
             selectDisplay: this.props.userStore.displayListWithImage ? listDisplay[1] : listDisplay[0]
         };
     }
+
+    getSelectedFilter = () => {
+        if (this.props.userStore.categoryFilter) {
+            return listCategories.find((category) => {
+                return category.label.toLowerCase() === this.props.userStore.categoryFilter.toLowerCase();
+            });
+        }
+        return listCategories[0];
+    };
 
     selectStyles = {
         selectedOption: {
@@ -96,6 +108,17 @@ export class TopSortAndFilter extends React.Component {
         modal: {
             backgroundColor: 'white'
         }
+    };
+
+    setFilterCategory = (category) => {
+        this.setState({
+            selectCategory: category
+        });
+        this.props.dispatch({
+            type: types.CATEGORY_FILTER,
+            category
+        });
+        this.onClose();
     };
 
     onClose = () => {
@@ -127,7 +150,7 @@ export class TopSortAndFilter extends React.Component {
                         styleName="clear"
                         options={listCategories}
                         selectedOption={this.state.selectCategory ? this.state.selectCategory : listCategories[0]}
-                        onOptionSelected={(category) => this.setState({selectCategory: category})}
+                        onOptionSelected={(category) => this.setFilterCategory(category)}
                         titleProperty="label"
                         valueProperty="label"
                         style={this.selectStyles}

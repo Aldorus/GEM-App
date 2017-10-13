@@ -8,7 +8,7 @@ import QuickSearchComponent from '../gem/components/QuickSearch.component';
 import {copyArray} from '../../utilities/extends/object.utils';
 import {getAllGems, getAllSaved} from '../gem/services/gem.service';
 import * as types from '../../constants/ActionTypes';
-import {onlyGemForThisGroup, sortGems} from '../../utilities/extends/array.utils';
+import {onlyGemForThisCategory, onlyGemForThisGroup, sortGems} from '../../utilities/extends/array.utils';
 
 const styles = StyleSheet.create({
     container: {
@@ -104,7 +104,9 @@ export class HomeScreen extends AbstractGemScreen {
 
     render() {
         // TODO may cause some trouble for the performance
-        const gemStoreCopy = copyArray(this.props.gemStore.filter((gem) => onlyGemForThisGroup(gem, this.props.userStore.group)));
+        const gemStoreCopy = copyArray(this.props.gemStore
+            .filter((gem) => onlyGemForThisGroup(gem, this.props.userStore.group))
+            .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter)));
         return super.render(
             <View style={styles.container}>
                 <ListView data={this.state.listGems || gemStoreCopy}
