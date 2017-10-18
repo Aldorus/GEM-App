@@ -37,22 +37,46 @@ const listCategories = [
         label: 'All'
     },
     {
-        label: 'Movie'
+        label: 'Apps'
     },
     {
-        label: 'Restaurant'
+        label: 'Articles'
     },
     {
-        label: 'Book'
+        label: 'Bars & Nightclubs'
     },
     {
-        label: 'Place'
+        label: 'Books'
     },
     {
-        label: 'Show'
+        label: 'Coffee shops'
     },
     {
-        label: 'Event'
+        label: 'Hotels'
+    },
+    {
+        label: 'Museums'
+    },
+    {
+        label: 'Music'
+    },
+    {
+        label: 'Products'
+    },
+    {
+        label: 'Places'
+    },
+    {
+        label: 'Restaurants'
+    },
+    {
+        label: 'Shows'
+    },
+    {
+        label: 'Boutiques'
+    },
+    {
+        label: 'Videos'
     },
     {
         label: 'Other'
@@ -63,10 +87,10 @@ const listSorting = [
         label: 'Most recent'
     },
     {
-        label: 'Most gemmed'
+        label: 'Most popular'
     },
     {
-        label: 'More friends interested'
+        label: 'Most saved'
     }
 ];
 const listDisplay = [
@@ -144,7 +168,7 @@ export class TopSortAndFilter extends React.Component {
                 </TouchableHighlight>
                 <StyledText style={styles.padding}>Sort & Filter</StyledText>
 
-                <BoldText style={styles.padding}>Show</BoldText>
+                <BoldText style={styles.padding}>Show Me</BoldText>
                 <View style={{alignSelf: 'stretch'}}>
                     <DropDownMenu
                         styleName="clear"
@@ -158,18 +182,18 @@ export class TopSortAndFilter extends React.Component {
                 </View>
 
 
-                <BoldText style={styles.padding}>Sort by (Soon)</BoldText>
-                <View style={{alignSelf: 'stretch'}}>
-                    <DropDownMenu
-                        styleName="clear"
-                        options={listSorting}
-                        selectedOption={this.state.selectSorting ? this.state.selectSorting : listSorting[0]}
-                        onOptionSelected={(sorting) => this.setState({selectSorting: sorting})}
-                        titleProperty="label"
-                        valueProperty="label"
-                        style={[this.selectStyles, {opacity: 0.2}]}
-                    />
-                </View>
+                {/*<BoldText style={styles.padding}>Sort by (Soon)</BoldText>*/}
+                {/*<View style={{alignSelf: 'stretch'}}>*/}
+                    {/*<DropDownMenu*/}
+                        {/*styleName="clear"*/}
+                        {/*options={listSorting}*/}
+                        {/*selectedOption={this.state.selectSorting ? this.state.selectSorting : listSorting[0]}*/}
+                        {/*onOptionSelected={(sorting) => this.setState({selectSorting: sorting})}*/}
+                        {/*titleProperty="label"*/}
+                        {/*valueProperty="label"*/}
+                        {/*style={[this.selectStyles, {opacity: 0.2}]}*/}
+                    {/*/>*/}
+                {/*</View>*/}
 
                 <BoldText style={styles.padding}>View as</BoldText>
                 <View style={{

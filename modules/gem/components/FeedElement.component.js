@@ -55,6 +55,14 @@ export default class FeedElementComponent extends React.Component {
         }
     };
 
+    getReaction = (wordKey) => {
+        if (wordKey) {
+            return (listWords.find((word) => {
+                return word.key === wordKey;
+            }) || listWords[0]).word;
+        }
+    };
+
     userHasPreferenceDisplayWithImage = () => {
         return this.props.userStore && this.props.userStore.displayListWithImage;
     };
@@ -91,14 +99,6 @@ export default class FeedElementComponent extends React.Component {
             );
         }
         return null;
-    };
-
-    getReaction = (wordKey) => {
-        if (wordKey) {
-            return listWords.find((word) => {
-                return word.key === wordKey;
-            }).word;
-        }
     };
 
     renderSentence = () => {

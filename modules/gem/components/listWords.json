@@ -1,52 +1,67 @@
 [
     {
-        "label": "To Die For",
-        "word": "it's \"To Die For\"",
-        "key":"wtf"
+        "label": "Epic!",
+        "word": "it's epic!",
+        "key": "epic"
     },
     {
-        "label": "WTF",
-        "word": "it's \"WTF\"",
-        "key":"wtf"
+        "label": "I'm in Loooove!",
+        "word": "i'm in loooove!",
+        "key": "love"
     },
     {
-        "label": "Seriously WTF",
-        "word": "it's \"Seriously WFT\"",
-        "key":"wtf"
+        "label": "A Must!",
+        "word": "it's a must!",
+        "key": "must"
     },
     {
-        "label": "Awesome",
-        "word": "it's \"Awesome\"",
-        "key":"omg"
+        "label": "Brilliant!",
+        "word": "it's brilliant!",
+        "key": "brilliant"
     },
     {
-        "label": "The Best Thing Ever",
-        "word": "it's \"The Best Thing Ever\"",
-        "key":"wtf"
+        "label": "So, so, so Good!",
+        "word": "it's so, so, so good!",
+        "key": "good"
     },
     {
-        "label": "Must Try",
-        "word": "it's a \"Must Try\"",
-        "key":"wtf"
+        "label": "The Best Ever",
+        "word": "it's the best ever",
+        "key": "best"
     },
     {
-        "label": "Holy shit...",
-        "word": "\"Holy shit...\"",
-        "key":"wtf"
+        "label": "Effing Fantastic",
+        "word": "it's effing fantastic",
+        "key": "fantastic"
     },
     {
-        "label": "Dude, really",
-        "word": "\"Dude, really\"",
-        "key":"wtf"
+        "label": "Amazing Discovery",
+        "word": "it's an amazing discovery",
+        "key": "discovery"
     },
     {
-        "label": "Whaaaaaaaaaa",
-        "word": "\"Whaaaaaaaaaa\"",
-        "key":"wtf"
+        "label": "I'm on cloud 9!",
+        "word": "i'm on cloud 9!",
+        "key": "cloud"
     },
     {
-        "label": "Best of Yhe Year",
-        "word": "it's The Best of The Year",
-        "key":"best"
+        "label": "I Highly Recommend It",
+        "word": "highly recommend it",
+        "key": "recommend"
+    },
+    {
+        "label": "Fascinating",
+        "word": "it's fascinating",
+        "key": "fascinating"
+    },
+    {
+        "label": "A 10!",
+        "word": "it's a 10!",
+        "key": "ten"
+    },
+    {
+        "label": "Amazing",
+        "word": "it's amazing",
+        "key": "amazing"
     }
 ]

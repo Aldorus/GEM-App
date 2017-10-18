@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
 });
 
 export default class AddGemStep1 extends React.Component {
+    currentCall = 0;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -64,35 +66,40 @@ export default class AddGemStep1 extends React.Component {
 
     onChange = (value) => {
         if (value.length > 3) {
+            this.currentCall++;
             Promise.all([
-                this.searchEntity(value),
-                this.searchPlaces(value),
-                this.searchMovies(value),
-                this.searchBooks(value)
-            ]).then(this.mergeResults);
+                this.searchEntity(value, this.currentCall),
+                this.searchPlaces(value, this.currentCall),
+                this.searchMovies(value, this.currentCall),
+                this.searchBooks(value, this.currentCall)
+            ]).then((partialResults) => {
+                if (partialResults[0].index === this.currentCall) {
+                    this.mergeResults(partialResults);
+                }
+            });
         }
         this.setState({value});
     };
 
-    searchEntity = (value) => {
-        return ExternalSearchEntity(value);
+    searchEntity = (value, index) => {
+        return ExternalSearchEntity(value, index);
     };
 
-    searchPlaces = (value) => {
-        return ExternalSearchPlace(value);
+    searchPlaces = (value, index) => {
+        return ExternalSearchPlace(value, index);
     };
 
-    searchMovies = (value) => {
-        return ExternalSearchMovie(value);
+    searchMovies = (value, index) => {
+        return ExternalSearchMovie(value, index);
     };
 
-    searchBooks = (value) => {
-        return ExternalSearchBook(value);
+    searchBooks = (value, index) => {
+        return ExternalSearchBook(value, index);
     };
 
     mergeResults = (partialResults) => {
         const results = partialResults.reduce((accu, partial) => {
-            return accu.concat(partial);
+            return accu.concat(partial.response);
         }, []);
         this.setState({
             results
@@ -101,7 +108,7 @@ export default class AddGemStep1 extends React.Component {
 
     render = () => {
         return (<View style={styles.container}>
-            <TextInput placeholder="Find your GEM"
+            <TextInput placeholder="Add an experience"
                        style={styles.input}
                        autoFocus={true}
                        placeholderTextColor="black"

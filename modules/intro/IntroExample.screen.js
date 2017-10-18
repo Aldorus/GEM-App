@@ -49,12 +49,12 @@ export class IntroExampleScreen extends React.Component {
             <StyledText style={{
                 textAlign: 'center'
             }}>
-                Gem{'\n'}
-                is a new way{'\n'}
-                to share and save{'\n'}
-                5 stars experiences{'\n\n'}
-                (Because life's too short{'\n'}
-                to bother with less)
+                GEM{'\n\n'}
+                The only app that{'\n'}
+                lets you discover, save{'\n'}
+                and share the{'\n'}
+                memorable five-star experiences{'\n'}
+                you fill your life with.
             </StyledText>
         </GradientBackground>);
     };
@@ -64,13 +64,12 @@ export class IntroExampleScreen extends React.Component {
             <StyledText style={{
                 textAlign: 'center'
             }}>
-                Discover{'\n'}
-                5 stars your friends{'\n'}
-                wish you would{'\n'}
-                experiment{'\n\n'}
-                (You know, to have exciting{'\n'}
-                to talk about, next time{'\n'}
-                you meet)
+                DISCOVER{'\n\n'}
+                Find out about{'\n'}
+                the must dos around you{'\n'}
+                from the people that matter.{'\n\n'}
+                Discover the finer things in life.{'\n'}
+                Enjoy yourself.
             </StyledText>
         </GradientBackground>);
     };
@@ -80,12 +79,11 @@ export class IntroExampleScreen extends React.Component {
             <StyledText style={{
                 textAlign: 'center'
             }}>
-                Save{'\n'}
-                future Gems{'\n'}
-                to keep track of all{'\n'}
-                the amazing things{'\n'}
-                your life awaits.{'\n\n'}
-                (Then Gem it!)
+                SAVE{'\n\n'}
+                Fill your must-do list{'\n'}
+                with experiences to try:{'\n'}
+                restaurants, books, shows…{'\n\n'}
+                The world is your oyster.
             </StyledText>
         </GradientBackground>);
     };
@@ -95,11 +93,11 @@ export class IntroExampleScreen extends React.Component {
             <StyledText style={{
                 textAlign: 'center'
             }}>
-                Share{'\n'}
-                your amazing Gems{'\n'}
-                with with world!{'\n\n'}
-                (Because the world deserves{'\n'}
-                5 stars experiences)
+                SHARE{'\n\n'}
+                Share the hidden gems{'\n'}
+                that you unveiled with other users.{'\n\n'}
+                After all, happiness is real only{'\n'}
+                when shared with others.
             </StyledText>
         </GradientBackground>);
     };

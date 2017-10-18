@@ -1,6 +1,6 @@
 import React from 'react';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {connect} from 'react-redux';
 import {Button, DropDownMenu} from '@shoutem/ui';
 import {shuffleArray} from '../../../utilities/extends/array.utils';
@@ -111,7 +111,7 @@ export class AddGemStep2 extends React.Component {
             <View style={styles.container}>
                 <ExternalSearchResultElement result={this.props.entity} noClick={true}/>
                 <View style={styles.wordContainer}>
-                    <Text style={styles.was}>Was...</Text>
+                    <Text style={styles.was}>It Was...</Text>
                     <DropDownMenu
                         styleName="clear"
                         options={shuffleListWords}
@@ -126,7 +126,7 @@ export class AddGemStep2 extends React.Component {
                 </View>
                 <PicturePicker image={this.state.picture}
                                onSelectImage={this.onSelectImage}/>
-                <TextInput placeholder="Add your comment"
+                <TextInput placeholder="Add a note if you’d like"
                            style={[styles.input]}
                            multiline={true}
                            onChangeText={(description) => this.setState({description})}
