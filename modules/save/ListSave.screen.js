@@ -49,7 +49,7 @@ export class ListSaveScreen extends AbstractGemScreen {
         return <FeedElementComponent
             onClick={this.clickOnGem}
             gemData={rowData}
-            displayAvatar={true}
+            displayReferer={true}
             hideSentence={false}
             userStore={this.props.userStore}
         />;

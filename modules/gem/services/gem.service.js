@@ -1,4 +1,3 @@
-import uuidv4 from 'uuid/v4';
 import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
 import {copyObject} from '../../../utilities/extends/object.utils';
@@ -13,14 +12,11 @@ export const getAllItems = (() => {
 const createItem = (gem) => {
     const itemFormData = new FormData();
     itemFormData.append('item[name]', gem.title);
-    itemFormData.append('item[name_identifier]', uuidv4());
+    itemFormData.append('item[name_identifier]', gem.shortLabel);
     itemFormData.append('item[category]', gem.unformatedCategory);
-
-    console.log('item', itemFormData);
-
     return gemFetch(`${Config.WS_ROOT}items`, {
         headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'multipart/form-data'
         },
         method: 'POST',
         body: itemFormData
@@ -42,7 +38,7 @@ const callTheApi = (experienceFormData) => {
     });
 };
 
-const createExperience = (item, gem) => {
+export const createExperience = (item, gem, referrer) => {
     const experienceFormData = new FormData();
     experienceFormData.append('experience[item_id]', item.id);
     if (gem.word) {
@@ -53,12 +49,15 @@ const createExperience = (item, gem) => {
         experienceFormData.append('experience[description]', gem.description);
     }
 
+    if (referrer) {
+        experienceFormData.append('experience[referrer_id]', referrer.id);
+    }
+
     if (gem.picture) {
         if (gem.picture.indexOf('http') === 0) {
             console.log('add external picture');
             experienceFormData.append('experience[remote_picture_url]', gem.picture);
         } else {
-            console.log('add internal picture');
             const file = {
                 uri: gem.picture,
                 name: `${uuidv4()}.jpg`,
@@ -67,18 +66,23 @@ const createExperience = (item, gem) => {
             experienceFormData.append('experience[picture]', file);
         }
     }
-    console.log('experience', experienceFormData);
     return callTheApi(experienceFormData);
 };
 
-export const createGem = (gem, user) => {
+export const createGem = (gem, user, referrer) => {
     return createItem(gem).then((responseCreateItem) => {
-        return createExperience(responseCreateItem, gem).then((responseCreateExp) => {
+        return createExperience(responseCreateItem, gem, referrer).then((responseCreateExp) => {
             const response = copyObject(responseCreateExp);
             response.item = responseCreateItem;
             response.user = user;
             return response;
         });
+    });
+};
+
+export const duplicateGem = () => {
+    return gemFetch(`${Config.WS_ROOT}experience`).then((parsedResponse) => {
+        return parsedResponse.experience;
     });
 };
 

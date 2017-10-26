@@ -1,67 +1,154 @@
 [
     {
         "label": "Epic!",
-        "word": "it's epic!",
         "key": "epic"
     },
     {
         "label": "I'm in Loooove!",
-        "word": "i'm in loooove!",
-        "key": "love"
+        "key": "looove"
     },
     {
         "label": "A Must!",
-        "word": "it's a must!",
         "key": "must"
     },
     {
         "label": "Brilliant!",
-        "word": "it's brilliant!",
         "key": "brilliant"
     },
     {
-        "label": "So, so, so Good!",
-        "word": "it's so, so, so good!",
-        "key": "good"
-    },
-    {
-        "label": "The Best Ever",
-        "word": "it's the best ever",
+        "label": "The Best ever",
         "key": "best"
     },
     {
         "label": "Effing Fantastic",
-        "word": "it's effing fantastic",
         "key": "fantastic"
     },
     {
         "label": "Amazing Discovery",
-        "word": "it's an amazing discovery",
         "key": "discovery"
     },
     {
         "label": "I'm on cloud 9!",
-        "word": "i'm on cloud 9!",
         "key": "cloud"
     },
     {
         "label": "I Highly Recommend It",
-        "word": "highly recommend it",
         "key": "recommend"
     },
     {
         "label": "Fascinating",
-        "word": "it's fascinating",
         "key": "fascinating"
     },
     {
+        "label": "Insanely Great",
+        "key": "insanely"
+    },
+    {
+        "label": "So Hot!",
+        "key": "hot"
+    },
+    {
+        "label": "I LOVE It!",
+        "key": "love_it"
+    },
+    {
+        "label": "Feeling Blessed Right Now",
+        "key": "blessed"
+    },
+    {
         "label": "A 10!",
-        "word": "it's a 10!",
         "key": "ten"
     },
     {
-        "label": "Amazing",
-        "word": "it's amazing",
-        "key": "amazing"
+        "label": "I'm blown away!",
+        "key": "blown"
+    },
+    {
+        "label": "Awesome!",
+        "key": "awesome"
+    },
+    {
+        "label": "Simply Love It",
+        "key": "simply"
+    },
+    {
+        "label": "Yessss!",
+        "key": "yessss"
+    },
+    {
+        "label": "Too Good!",
+        "key": "too_good"
+    },
+    {
+        "label": "Crazy Delicious!",
+        "key": "delicious"
+    },
+    {
+        "label": "I'm Obsessed with It",
+        "key": "obsessed"
+    },
+    {
+        "label": "It's my new Addiction!",
+        "key": "addiction"
+    },
+    {
+        "label": "It's Wonderfully Perfect!",
+        "key": "wonderfully_perfect"
+    },
+    {
+        "label": "It's Just that Good",
+        "key": "that_good"
+    },
+    {
+        "label": "I'm Dying!",
+        "key": "dying"
+    },
+    {
+        "label": "A diamond in the Rough",
+        "key": "diamond"
+    },
+    {
+        "label": "A Cut About the Rest",
+        "key": "cut_above"
+    },
+    {
+        "label": "A little Hidden Gem!",
+        "key": "hidden_gem"
+    },
+    {
+        "label": "Precious",
+        "key": "precious"
+    },
+    {
+        "label": "There's no Word to Describe It",
+        "key": "no_word"
+    },
+    {
+        "label": "Powerful",
+        "key": "powerful"
+    },
+    {
+        "label": "Insane",
+        "key": "insane"
+    },
+    {
+        "label": "Wow! Just Wow!",
+        "key": "wow"
+    },
+    {
+        "label": "Somebody Pinch Me",
+        "key": "pinch_me"
+    },
+    {
+        "label": "Pure Perfection",
+        "key": "pure_perfection"
+    },
+    {
+        "label": "This is It!",
+        "key": "this_is_it"
+    },
+    {
+        "label": "Fabulous",
+        "key": "fabulous"
     }
 ]

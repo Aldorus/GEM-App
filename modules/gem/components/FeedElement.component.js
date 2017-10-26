@@ -8,13 +8,14 @@ import StyledText from '../../../components/StyledText';
 import StyledTitle from '../../../components/StyledTitle';
 import listWords from './listWords.json';
 import BoldText from '../../../components/BoldText';
+import {capitalizeFirstLetter} from '../../../utilities/extends/string.utils';
 
 const styles = StyleSheet.create({
     container: {
         margin: 15,
         marginTop: 0,
         marginBottom: 0,
-        paddingTop: 8,
+        paddingTop: 5,
         flexDirection: 'row',
         alignSelf: 'stretch'
     },
@@ -59,7 +60,7 @@ export default class FeedElementComponent extends React.Component {
         if (wordKey) {
             return (listWords.find((word) => {
                 return word.key === wordKey;
-            }) || listWords[0]).word;
+            }) || listWords[0]).label;
         }
     };
 
@@ -97,14 +98,34 @@ export default class FeedElementComponent extends React.Component {
                                  }}
                                  source={{uri: this.props.gemData.user.avatar_url}}/>
             );
+        } else if (this.props.displayReferer && this.props.gemData.referrer) {
+            return (<ImageLoader borderRadius={15}
+                                 style={styles.avatar}
+                                 indicator={ProgressBar}
+                                 indicatorProps={{
+                                     color: Colors.colorText
+                                 }}
+                                 source={{uri: this.props.gemData.referrer.avatar_url}}/>
+            );
         }
         return null;
     };
 
     renderSentence = () => {
         if (!this.props.hideSentence) {
-            return (<StyledText>
-                <BoldText>{this.props.gemData.user.first_name}</BoldText> {this.getReaction(this.props.gemData.reaction)}
+            return (<StyledText style={{position:'relative', bottom: 1}}>
+                {this.props.displayReferer && this.props.gemData.referrer ? <BoldText>{this.props.gemData.referrer.first_name} </BoldText> : null}
+                {!this.props.displayReferer ? <BoldText>{this.props.gemData.user.first_name} </BoldText> : null}
+                "{this.getReaction(this.props.gemData.reaction)}"
+            </StyledText>);
+        }
+        return null;
+    };
+
+    renderShortLabel = () => {
+        if (this.props.displayShortLabel) {
+            return (<StyledText style={{position:'relative', bottom: 1}}>
+                {this.props.gemData.item.name_identifier}
             </StyledText>);
         }
         return null;
@@ -114,9 +135,10 @@ export default class FeedElementComponent extends React.Component {
         return (<View style={[styles.container]}>
             {this.renderAvatar()}
             <View style={styles.textWrapper}>
-                <StyledText>{this.props.gemData.item.category}{this.renderLocation()}</StyledText>
-                <StyledTitle numberOfLines={1}>{this.props.gemData.item.name}</StyledTitle>
+                <StyledText style={{position:'relative', top: 2}}>{capitalizeFirstLetter(this.props.gemData.item.category)}{this.renderLocation()}</StyledText>
+                <StyledTitle numberOfLines={this.props.fullTitle ? null : 1}>{this.props.gemData.item.name}</StyledTitle>
                 {this.renderSentence()}
+                {this.renderShortLabel()}
             </View>
         </View>);
     };

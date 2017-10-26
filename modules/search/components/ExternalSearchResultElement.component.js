@@ -19,20 +19,22 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
-        marginTop: 5,
+        marginTop: 12,
+        marginBottom: 8,
         borderRadius: 20
     },
     innerButton: {
         borderRadius: 20,
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'center'
+        padding: 7,
+        paddingLeft: 10,
+        flexDirection: 'row'
     }
 });
 
 export default class ExternalSearchResultElement extends React.Component {
     constructor(props) {
         super(props);
+        ExternalSearchResultElement
         this.state = {
             selected: false
         };
@@ -59,15 +61,15 @@ export default class ExternalSearchResultElement extends React.Component {
 
     renderButtons = () => {
         if (this.state.selected) {
-            return (<View style={{flexDirection: 'row', alignSelf: 'stretch'}}>
+            return (<View style={{flexDirection: 'row', alignSelf: 'stretch', paddingRight: 25}}>
                 <TouchableHighlight
                     style={[styles.button, {marginRight: 5}]}
                     underlayColor={Colors.tintColor}
                     onPress={() => this.selected('gem')}>
                     <View>
                         <GradientBackground style={styles.innerButton}>
-                            <Image source={listGemOffImage}/>
-                            <StyledText style={{marginLeft: 10}}>Gem it</StyledText>
+                            <Image style={{marginTop: 1}} source={listGemOffImage}/>
+                            <StyledText style={{marginLeft: 15, marginTop: 2}}>Gem it</StyledText>
                         </GradientBackground>
                     </View>
                 </TouchableHighlight>
@@ -77,8 +79,8 @@ export default class ExternalSearchResultElement extends React.Component {
                     onPress={() => this.selected('save')}>
                     <View>
                         <GradientBackground style={styles.innerButton}>
-                            <Image source={loveImage}/>
-                            <StyledText style={{marginLeft: 10}}>Save it</StyledText>
+                            <Image style={{marginTop: 1}} source={loveImage}/>
+                            <StyledText style={{marginLeft: 15, marginTop: 2}}>Save it</StyledText>
                         </GradientBackground>
                     </View>
                 </TouchableHighlight>

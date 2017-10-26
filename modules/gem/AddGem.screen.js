@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
         alignItems: 'center',
-        paddingTop: 20,
+        paddingTop: 0,
         zIndex: 0
     },
     image: {

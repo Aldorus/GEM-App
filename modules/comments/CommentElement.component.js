@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         flexDirection: 'row',
         margin: 15,
+        marginTop: 0,
+        marginBottom: 7,
         alignItems: 'center'
     },
     avatar: {
@@ -18,7 +20,8 @@ const styles = StyleSheet.create({
         height: 30,
         padding: 10,
         marginRight: 8,
-        top: 5
+        top: 5,
+        alignSelf: 'flex-start'
     }
 });
 

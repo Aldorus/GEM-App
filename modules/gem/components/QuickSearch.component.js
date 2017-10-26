@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
         paddingLeft: 50,
         height: 40,
         alignSelf: 'stretch',
-        fontFamily: 'celia'
+        fontFamily: 'celia-light',
+        fontSize: 18
     },
     icon: {
         position: 'absolute',
@@ -47,7 +48,7 @@ export default class QuickSearchComponent extends React.Component {
             <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]}
                             end={[1, 0]}
                             style={styles.container}>
-                <TextInput placeholder={this.props.label || 'Browse through gems'}
+                <TextInput placeholder={this.props.label || 'Browse through Gems'}
                            style={styles.input}
                            placeholderTextColor="black"
                            underlineColorAndroid="transparent"

@@ -15,7 +15,7 @@ import {getAllUsers} from '../auth/users.service';
 import {getAllCom} from '../comments/comment.service';
 import BoldText from '../../components/BoldText';
 import * as types from '../../constants/ActionTypes';
-import {createGem, deleteGem} from './services/gem.service';
+import {createExperience, deleteGem} from './services/gem.service';
 
 const styles = StyleSheet.create({
     scroll: {
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
         zIndex: 0
     },
     actionButton: {
-        alignSelf: 'stretch',
         alignItems: 'center',
+        width: 150,
         marginLeft: 20,
         marginRight: 20,
         borderRadius: 20,
@@ -111,11 +111,19 @@ export class DetailGemScreen extends AbstractGemScreen {
     };
 
     onSaveIt = () => {
-        const gemToSave = {};
-        gemToSave.picture = this.state.gem.picture_url;
-        gemToSave.title = this.state.gem.item.name;
-        gemToSave.unformatedCategory = this.state.gem.item.category;
-        createGem(gemToSave, this.props.userStore).then((newGemResponse) => {
+        const itemToSave = {
+            id: this.state.gem.item.id
+        };
+        const gemToSave = {
+            picture: this.state.gem.picture_url,
+            title: this.state.gem.item.name
+        };
+        createExperience(itemToSave, gemToSave, this.state.gem.user).then((newGemResponse) => {
+            newGemResponse.user = this.props.userStore;
+            newGemResponse.item = {
+                category: this.state.gem.item.category,
+                name: this.state.gem.item.name
+            };
             this.props.dispatch({
                 type: types.ADD_SAVED_GEM,
                 saved: newGemResponse
@@ -136,20 +144,26 @@ export class DetailGemScreen extends AbstractGemScreen {
         if (!this.state.gem.comments) {
             return <View>
                 {this.state.gem.description ?
-                    <StyledText style={{paddingLeft: 15, paddingTop: 10, paddingBottom: 10}}>
+                    <StyledText style={{paddingLeft: 15, paddingTop: 0, paddingBottom: 0, marginBottom: -12}}>
                         <BoldText>{this.state.gem.user.first_name}</BoldText> {this.state.gem.description}
                     </StyledText> : null
                 }
-                <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
-                    <View>
-                        <StyledText
-                            style={{paddingLeft: 15, paddingTop: 10, paddingBottom: 10, color: Colors.thirdColor}}>Add/See
-                            comments</StyledText>
-                    </View>
-                </TouchableHighlight>
                 <ListView data={this.state.comments}
                           style={{listContent: {backgroundColor: 'transparent'}}}
                           renderRow={this.renderRowView}/>
+                <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
+                    <View>
+                        <StyledText
+                            style={{
+                                paddingLeft: 15,
+                                paddingTop: 0,
+                                paddingBottom: 10,
+                                color: '#9FA3FD',
+                                fontFamily: 'celia-bold'
+                            }}>
+                            View and add comment</StyledText>
+                    </View>
+                </TouchableHighlight>
             </View>;
         }
         return this.state.gem.comments.map(this.renderComment);
@@ -165,11 +179,13 @@ export class DetailGemScreen extends AbstractGemScreen {
                                      color: Colors.colorText
                                  }}
                                  source={{uri: this.state.gem.picture_url}}/>
-                    <View style={{margin: 10}}>
+                    <View style={{margin: 10, marginTop: 5}}>
                         <FeedElementComponent
                             gemData={this.state.gem}
                             underlayColor="transparent"
                             hideSentence={true}
+                            fullTitle={true}
+                            displayShortLabel={true}
                             userStore={this.props.userStore}
                             displayWithImage={false}
                         />
@@ -178,16 +194,19 @@ export class DetailGemScreen extends AbstractGemScreen {
                         {this.renderComments()}
                     </View>
                     {this.props.userStore.id === this.state.gem.user.id ?
-                        <TouchableHighlight underlayColor={Colors.tintColor}
-                                            style={styles.actionButton}
-                                            onPress={this.onDelete}><View>
-                            <StyledText>Delete</StyledText></View>
-                        </TouchableHighlight> :
-                        <TouchableHighlight style={styles.actionButton}
-                                            underlayColor={Colors.tintColor}
-                                            onPress={this.onSaveIt}><View>
-                            <StyledText>Save It</StyledText></View>
-                        </TouchableHighlight>}
+                        <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
+                            <TouchableHighlight underlayColor={Colors.tintColor}
+                                                style={styles.actionButton}
+                                                onPress={this.onDelete}><View>
+                                <StyledText>Ditch It</StyledText></View>
+                            </TouchableHighlight></View> :
+                        <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
+                            <TouchableHighlight style={styles.actionButton}
+                                                underlayColor={Colors.tintColor}
+                                                onPress={this.onSaveIt}><View>
+                                <StyledText>Save It</StyledText></View>
+                            </TouchableHighlight>
+                        </View>}
                 </View>
             </ScrollView>
         );

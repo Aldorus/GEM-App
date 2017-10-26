@@ -19,11 +19,12 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 50,
         height: 40,
-        marginTop: 30,
+        marginTop: 45,
         marginLeft: 15,
         marginRight: 15,
         alignSelf: 'stretch',
-        fontFamily: 'celia'
+        fontFamily: 'celia-light',
+        fontSize: 18
     },
     title: {
         fontSize: 20,

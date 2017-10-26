@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
@@ -11,6 +12,10 @@ import {copyArray, copyObject} from '../../utilities/extends/object.utils';
 import {getAllUsers} from '../auth/users.service';
 
 const styles = StyleSheet.create({
+    scroll: {
+        flex: 1,
+        alignSelf: 'stretch',
+    },
     container: {
         flex: 1,
         alignSelf: 'stretch',
@@ -91,29 +96,31 @@ export class ListCommentsScreen extends AbstractGemScreen {
         rowDataWithUser.user = this.state.users.find((user) => {
             return rowDataWithUser.user_id === user.id;
         });
-        console.log('row data', rowDataWithUser);
         return <CommentElement comment={rowDataWithUser} displayAvatar={true}/>;
     };
 
     render() {
         return super.render(
-            <View style={styles.container}>
-                <ListView data={this.state.comments}
-                          style={{listContent: {backgroundColor: 'transparent'}}}
-                          renderRow={this.renderRowView}/>
-                <GradientBackground style={styles.wrapperInput}>
-                    <TextInput placeholder={'Add a comment'}
-                               style={styles.input}
-                               onChangeText={(comment) => this.setState({comment})}
-                               value={this.state.comment}
-                               placeholderTextColor="black"
-                               underlineColorAndroid="transparent"/>
-                    <TouchableHighlight underlayColor={Colors.tintColor}
-                                        onPress={this.sendComment}>
-                        <Text>POST</Text>
-                    </TouchableHighlight>
-                </GradientBackground>
-            </View>, true);
+            <KeyboardAwareScrollView style={styles.scroll}>
+                <View style={styles.container}>
+                    <ListView data={this.state.comments}
+                              style={{listContent: {backgroundColor: 'transparent'}}}
+                              renderRow={this.renderRowView}/>
+                    <GradientBackground style={styles.wrapperInput}>
+                        <TextInput placeholder={'Add a comment'}
+                                   style={styles.input}
+                                   onChangeText={(comment) => this.setState({comment})}
+                                   value={this.state.comment}
+                                   multiline={true}
+                                   placeholderTextColor="black"
+                                   underlineColorAndroid="transparent"/>
+                        <TouchableHighlight underlayColor={Colors.tintColor}
+                                            onPress={this.sendComment}>
+                            <Text>Send</Text>
+                        </TouchableHighlight>
+                    </GradientBackground>
+                </View>
+            </KeyboardAwareScrollView>, true);
     }
 }
 

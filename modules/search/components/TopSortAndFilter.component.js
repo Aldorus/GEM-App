@@ -7,6 +7,7 @@ import {DropDownMenu} from '@shoutem/ui';
 import Colors from '../../../constants/Colors';
 import * as types from '../../../constants/ActionTypes';
 import close from '../../../assets/icons/close.png';
+import listCategories from './categories.json';
 import GradientBackground from '../../../components/GradientBackground';
 import StyledButton from '../../../components/StyledButton';
 
@@ -32,56 +33,6 @@ const styles = StyleSheet.create({
     }
 });
 
-const listCategories = [
-    {
-        label: 'All'
-    },
-    {
-        label: 'Apps'
-    },
-    {
-        label: 'Articles'
-    },
-    {
-        label: 'Bars & Nightclubs'
-    },
-    {
-        label: 'Books'
-    },
-    {
-        label: 'Coffee shops'
-    },
-    {
-        label: 'Hotels'
-    },
-    {
-        label: 'Museums'
-    },
-    {
-        label: 'Music'
-    },
-    {
-        label: 'Products'
-    },
-    {
-        label: 'Places'
-    },
-    {
-        label: 'Restaurants'
-    },
-    {
-        label: 'Shows'
-    },
-    {
-        label: 'Boutiques'
-    },
-    {
-        label: 'Videos'
-    },
-    {
-        label: 'Other'
-    }
-];
 const listSorting = [
     {
         label: 'Most recent'
@@ -131,7 +82,8 @@ export class TopSortAndFilter extends React.Component {
         },
         modal: {
             backgroundColor: 'white'
-        }
+        },
+        visibleOptions: 12
     };
 
     setFilterCategory = (category) => {
