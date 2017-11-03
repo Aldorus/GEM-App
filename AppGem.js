@@ -76,7 +76,11 @@ export class AppGem extends React.Component {
                 require('./assets/icons/camera-icon@2x.png'),
                 require('./assets/icons/gallery-icon@2x.png'),
                 require('./assets/icons/share-ios@2x.png'),
-                require('./assets/icons/trash@2x.png')
+                require('./assets/icons/trash@2x.png'),
+                require('./assets/icons/onboard-1@2x.png'),
+                require('./assets/icons/onboard-2@2x.png'),
+                require('./assets/icons/onboard-3@2x.png'),
+                require('./assets/icons/onboard-4@2x.png')
             ],
             fonts: [
                 {'celia': require('./assets/fonts/Celias_Regular.ttf')},
