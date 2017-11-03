@@ -27,7 +27,11 @@ export const onlyGemForThisGroup = (experience, group) => {
 
 export const onlyGemForThisCategory = (experience, category) => {
     if (category && category !== 'All') {
-        return experience.item.category.toLowerCase() === category.toLowerCase();
+        if(experience.item.category.toLowerCase() === category.toLowerCase() ||
+            experience.item.category.toLowerCase() === category.toLowerCase().substring(0, category.length - 1)) {
+            return true;
+        }
+        return false;
     }
     return true;
 };

@@ -3,7 +3,6 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import {connect} from 'react-redux';
 import {DropDownMenu} from '@shoutem/ui';
-import {shuffleArray} from '../../../utilities/extends/array.utils';
 import ExternalSearchResultElement from '../../search/components/ExternalSearchResultElement.component';
 import * as types from '../../../constants/ActionTypes';
 import listWords from './listWords.json';
@@ -12,7 +11,6 @@ import {createGem} from '../services/gem.service';
 import Colors from '../../../constants/Colors';
 import GradientBackground from '../../../components/GradientBackground';
 import StyledText from '../../../components/StyledText';
-
 
 const styles = StyleSheet.create({
     scroll: {
@@ -70,18 +68,17 @@ const styles = StyleSheet.create({
     innerButton: {
         borderRadius: 20,
         padding: 7,
-        paddingLeft: 20,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 });
-const shuffleListWords = shuffleArray(listWords);
 
 export class AddGemStep2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             picture: props.entity.image,
-            selectedWord: shuffleListWords[0]
+            selectedWord: listWords[Math.floor(Math.random() * listWords.length)]
         };
     }
 
@@ -124,8 +121,7 @@ export class AddGemStep2 extends React.Component {
         },
         modalItem: {
             padding: 0,
-            margin: 0,
-            fontFamily: 'celia-bold'
+            margin: 0
         },
         visibleOptions: 12
     };
@@ -140,8 +136,8 @@ export class AddGemStep2 extends React.Component {
                         <View style={{flex: 1, marginLeft: 5}}>
                             <DropDownMenu
                                 styleName="clear"
-                                options={shuffleListWords}
-                                selectedOption={this.state.selectedWord ? this.state.selectedWord : shuffleListWords[0]}
+                                options={listWords.sort((a, b) => a.label.localeCompare(b.label))}
+                                selectedOption={this.state.selectedWord}
                                 onOptionSelected={(word) => {
                                     return this.setState({selectedWord: word});
                                 }}
@@ -171,7 +167,7 @@ export class AddGemStep2 extends React.Component {
                         onPress={this.createTheGem}>
                         <View>
                             <GradientBackground style={styles.innerButton}>
-                                <StyledText style={{marginLeft: 15, marginTop: 2}}>Gem It</StyledText>
+                                <StyledText style={{marginTop: 2}}>Gem It</StyledText>
                             </GradientBackground>
                         </View>
                     </TouchableHighlight>

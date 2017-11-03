@@ -54,12 +54,13 @@ export class AddGemScreen extends React.Component {
         }
         createGem(result, this.props.userStore).then((newGemResponse) => {
             console.log('new gem', newGemResponse);
+            delete newGemResponse.reaction;
             this.props.dispatch({
                 type: types.ADD_SAVED_GEM,
                 saved: newGemResponse
             });
         });
-        this.props.navigation.navigate('Main');
+        this.props.navigation.navigate('ListSave');
     };
 
     onNewResult = () => {

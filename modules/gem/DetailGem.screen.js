@@ -15,7 +15,7 @@ import {getAllUsers} from '../auth/users.service';
 import {getAllCom} from '../comments/comment.service';
 import BoldText from '../../components/BoldText';
 import * as types from '../../constants/ActionTypes';
-import {createExperience, deleteGem} from './services/gem.service';
+import {createExperience, deleteGem, fulfillGem} from './services/gem.service';
 
 const styles = StyleSheet.create({
     scroll: {
@@ -120,6 +120,7 @@ export class DetailGemScreen extends AbstractGemScreen {
         };
         createExperience(itemToSave, gemToSave, this.state.gem.user).then((newGemResponse) => {
             newGemResponse.user = this.props.userStore;
+            newGemResponse.referrer = this.state.gem.user;
             newGemResponse.item = {
                 category: this.state.gem.item.category,
                 name: this.state.gem.item.name
@@ -130,6 +131,22 @@ export class DetailGemScreen extends AbstractGemScreen {
             });
         });
         this.props.navigation.navigate('ListSave');
+    };
+
+    onGemIt = () => {
+        fulfillGem(this.state.gem).then((newGemResponse) => {
+            console.log('on Gem it', newGemResponse);
+            newGemResponse.user = this.props.userStore;
+            this.props.dispatch({
+                type: types.DELETE_SAVED_GEM,
+                saved: newGemResponse
+            });
+            this.props.dispatch({
+                type: types.ADD_GEM,
+                gem: newGemResponse
+            });
+            this.props.navigation.navigate('Main');
+        });
     };
 
     renderRowView = (rowData) => {
@@ -144,7 +161,7 @@ export class DetailGemScreen extends AbstractGemScreen {
         if (!this.state.gem.comments) {
             return <View>
                 {this.state.gem.description ?
-                    <StyledText style={{paddingLeft: 15, paddingTop: 0, paddingBottom: 0, marginBottom: -12}}>
+                    <StyledText style={{paddingLeft: 15, paddingTop: 0, paddingBottom: 0, marginBottom: 0}}>
                         <BoldText>{this.state.gem.user.first_name}</BoldText> {this.state.gem.description}
                     </StyledText> : null
                 }
@@ -167,6 +184,39 @@ export class DetailGemScreen extends AbstractGemScreen {
             </View>;
         }
         return this.state.gem.comments.map(this.renderComment);
+    };
+
+    renderGemItAction = () => {
+        console.log(this.state.gem);
+        if (!this.state.gem.experienced_at) {
+            return <TouchableHighlight underlayColor={Colors.tintColor}
+                                       style={styles.actionButton}
+                                       onPress={this.onGemIt}>
+                <View>
+                    <StyledText>Gem It</StyledText>
+                </View>
+            </TouchableHighlight>
+        }
+    };
+
+    renderPersonalActionButton = () => {
+        if (this.props.userStore.id === this.state.gem.user.id) {
+            return <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
+                {this.renderGemItAction()}
+                <TouchableHighlight underlayColor={Colors.tintColor}
+                                    style={styles.actionButton}
+                                    onPress={this.onDelete}><View>
+                    <StyledText>Ditch It</StyledText></View>
+                </TouchableHighlight>
+            </View>;
+        }
+        return <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
+            <TouchableHighlight style={styles.actionButton}
+                                underlayColor={Colors.tintColor}
+                                onPress={this.onSaveIt}><View>
+                <StyledText>Save It</StyledText></View>
+            </TouchableHighlight>
+        </View>;
     };
 
     render() {
@@ -193,20 +243,7 @@ export class DetailGemScreen extends AbstractGemScreen {
                         {this.renderRecommendedBy()}
                         {this.renderComments()}
                     </View>
-                    {this.props.userStore.id === this.state.gem.user.id ?
-                        <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
-                            <TouchableHighlight underlayColor={Colors.tintColor}
-                                                style={styles.actionButton}
-                                                onPress={this.onDelete}><View>
-                                <StyledText>Ditch It</StyledText></View>
-                            </TouchableHighlight></View> :
-                        <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
-                            <TouchableHighlight style={styles.actionButton}
-                                                underlayColor={Colors.tintColor}
-                                                onPress={this.onSaveIt}><View>
-                                <StyledText>Save It</StyledText></View>
-                            </TouchableHighlight>
-                        </View>}
+                    {this.renderPersonalActionButton()}
                 </View>
             </ScrollView>
         );

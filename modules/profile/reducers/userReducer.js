@@ -6,6 +6,7 @@ const defaultValue = {};
 export const userReducer = (state = defaultValue, action) => {
     switch (action.type) {
         case types.LOAD_USER:
+            // action.user.group === 'group_b' ? action.user.displayListWithImage = true : '';
             state = action.user;
             break;
         case types.DISPLAY_LIST_WITH_IMAGE:

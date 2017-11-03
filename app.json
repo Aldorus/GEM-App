@@ -1,11 +1,11 @@
 {
     "expo": {
-        "name": "gem",
+        "name": "Gem",
         "description": "No description",
         "slug": "gem",
         "privacy": "public",
         "sdkVersion": "18.0.0",
-        "version": "1.0.7",
+        "version": "1.0.12",
         "orientation": "portrait",
         "primaryColor": "#cccccc",
         "icon": "./assets/icons/app-icon.png",
@@ -29,7 +29,7 @@
         },
         "android": {
             "package": "com.guillaume.gem",
-            "versionCode": 9
+            "versionCode": 14
         },
         "hooks": {
             "postPublish": [

@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
 import {copyObject} from '../../../utilities/extends/object.utils';
@@ -80,9 +81,11 @@ export const createGem = (gem, user, referrer) => {
     });
 };
 
-export const duplicateGem = () => {
-    return gemFetch(`${Config.WS_ROOT}experience`).then((parsedResponse) => {
-        return parsedResponse.experience;
+export const fulfillGem = (experience) => {
+    return gemFetch(`${Config.WS_ROOT}experiences/${experience.id}/fulfill`, {
+        method: 'POST'
+    }).then(() => {
+        return experience;
     });
 };
 

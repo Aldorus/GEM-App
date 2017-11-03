@@ -92,6 +92,7 @@ export class HomeScreen extends AbstractGemScreen {
             this.setState({
                 listGems: this.props.gemStore.filter((gem) => {
                     return gem.item.name.toLowerCase().indexOf(value.toLowerCase()) >= 0 ||
+                        gem.item.category.toLowerCase().indexOf(value.toLowerCase()) >= 0 ||
                         `${gem.user.first_name} ${gem.user.last_name}`.toLowerCase().indexOf(value.toLowerCase()) >= 0;
                 })
             });

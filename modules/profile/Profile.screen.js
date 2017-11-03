@@ -67,8 +67,7 @@ export class ProfileScreen extends AbstractGemScreen {
         return (<FeedElementComponent gemData={rowData}
                                       onClick={this.clickOnGem}
                                       userStore={this.props.userStore}
-                                      displayAvatar={false}
-                                      displayWithImage={false}/>);
+                                      displayAvatar={false}/>);
     };
 
     renderListGems = () => {

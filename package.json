@@ -18,7 +18,7 @@
     "dependencies": {
         "@expo/samples": "1.0.4",
         "@shoutem/ui": "github:imWildCat/shoutem-react-native-ui#develop",
-        "exp": "44.0.0",
+        "exp": "45.0.2",
         "expo": "18.0.4",
         "lodash": "4.17.4",
         "moment": "2.18.1",

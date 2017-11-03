@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, TouchableHighlight, View} from 'react-native';
 import {ImagePicker} from 'expo';
-import {Button} from '@shoutem/ui';
 import ImageLoader from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Circle';
 import Colors from '../../constants/Colors';
-import StyledButton from '../../components/StyledButton';
+import camera from '../../assets/icons/camera-icon@2x.png';
+import gallery from '../../assets/icons/gallery-icon@2x.png';
 
 const styles = StyleSheet.create({
     button: {
@@ -27,17 +27,11 @@ export default class PicturePicker extends React.Component {
     }
 
     onPressCamera = () => {
-        ImagePicker.launchCameraAsync({
-            allowsEditing: true,
-            aspect: [4, 3],
-        }).then(this.newImage);
+        ImagePicker.launchCameraAsync().then(this.newImage);
     };
 
     onPressGallery = () => {
-        ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            aspect: [4, 3],
-        }).then(this.newImage);
+        ImagePicker.launchImageLibraryAsync().then(this.newImage);
     };
 
     newImage = (result) => {
@@ -54,7 +48,8 @@ export default class PicturePicker extends React.Component {
     render = () => {
         return (
             <View style={{
-                alignSelf: 'stretch'
+                alignSelf: 'stretch',
+                position: 'relative'
             }}>
                 <ImageLoader indicator={ProgressBar}
                              style={{
@@ -67,23 +62,20 @@ export default class PicturePicker extends React.Component {
                              source={{uri: this.state.image}}/>
                 <View style={{
                     flexDirection: 'row',
-                    alignSelf: 'stretch'
+                    alignSelf: 'stretch',
+                    position: 'absolute',
+                    bottom: 5,
+                    right: 15
                 }}>
-                    <StyledButton onPress={this.onPressGallery}>
-                        Gallery
-                    </StyledButton>
-                    <Button onPress={this.onPressCamera}
-                            style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: Colors.secondaryTintColor
-                            }}
-                            styleName="clear">
-                        <Text style={styles.button}>Camera</Text>
-                    </Button>
+                    <TouchableHighlight onPress={this.onPressGallery}
+                                        styleName="clear">
+                        <Image source={gallery}/>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={this.onPressCamera}
+                                        styleName="clear">
+                        <Image source={camera}/>
+                    </TouchableHighlight>
                 </View>
-
             </View>
         );
     }

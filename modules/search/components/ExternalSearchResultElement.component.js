@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
 export default class ExternalSearchResultElement extends React.Component {
     constructor(props) {
         super(props);
-        ExternalSearchResultElement
         this.state = {
             selected: false
         };

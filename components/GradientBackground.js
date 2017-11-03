@@ -11,9 +11,12 @@ const styles = StyleSheet.create({
 
 export default class GradientBackground extends React.Component {
     getColor = () => {
-        return this.props.alternative ?
-            [Colors.gradientAlternativeStart, Colors.gradientAlternativeEnd] :
-            [Colors.gradientStart, Colors.gradientEnd];
+        if (this.props.alternative) {
+            return [Colors.gradientAlternativeStart, Colors.gradientAlternativeEnd];
+        } else if (this.props.opacity) {
+            return [Colors.opacityGradientStart, Colors.opacityGradientEnd];
+        }
+        return [Colors.gradientStart, Colors.gradientEnd];
     };
 
     render = () => {
