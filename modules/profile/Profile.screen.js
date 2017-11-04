@@ -3,10 +3,16 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
+import * as types from '../../constants/ActionTypes';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import HeaderProfile from '../../components/HeaderProfile';
+
 import FeedElementComponent from '../gem/components/FeedElement.component';
-import {onlyGemForThisCategory, onlyGemForThisUser, onlySaveForThisUser} from '../../utilities/extends/array.utils';
+import {
+    onlyGemForThisCategory, onlyGemForThisUser, onlySaveForThisUser,
+    sortGems
+} from '../../utilities/extends/array.utils';
+import {getAllGems, getAllSaved} from '../gem/services/gem.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -46,7 +52,8 @@ export class ProfileScreen extends AbstractGemScreen {
     constructor(props) {
         super(props);
         this.state = {
-            tabSelected: 'gems'
+            tabSelected: 'gems',
+            loading: false
         };
     }
 
@@ -63,6 +70,34 @@ export class ProfileScreen extends AbstractGemScreen {
         );
     };
 
+    refreshList = () => {
+        this.setState({
+            loading: true
+        });
+        this.callForLoadGem();
+    };
+
+    callForLoadGem = () => {
+        getAllSaved().then((saved) => {
+            this.props.dispatch({
+                type: types.LOAD_SAVED_GEM_SUCCESS,
+                saved: sortGems(saved)
+            });
+        });
+
+        getAllGems().then((gems) => {
+            this.props.dispatch({
+                type: types.LOAD_GEM_SUCCESS,
+                gems: sortGems(gems)
+            });
+
+            // TODO bad place
+            this.setState({
+                loading: false
+            });
+        });
+    };
+
     renderRowView = (rowData) => {
         return (<FeedElementComponent gemData={rowData}
                                       onClick={this.clickOnGem}
@@ -76,6 +111,8 @@ export class ProfileScreen extends AbstractGemScreen {
                             .filter((gem) => onlyGemForThisUser(gem, this.props.userStore.id))
                             .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                           style={{listContent: {backgroundColor: 'transparent'}}}
+                          loading={this.state.loading}
+                          onRefresh={this.refreshList}
                           renderRow={this.renderRowView}/>);
     };
 
@@ -85,6 +122,8 @@ export class ProfileScreen extends AbstractGemScreen {
                             .filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))
                             .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                           style={{listContent: {backgroundColor: 'transparent'}}}
+                          loading={this.state.loading}
+                          onRefresh={this.refreshList}
                           renderRow={this.renderRowView}/>);
     };
 

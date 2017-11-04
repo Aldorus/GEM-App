@@ -5,9 +5,16 @@ import {StyleSheet, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import Colors from '../../constants/Colors';
+import * as types from '../../constants/ActionTypes';
 import FeedElementComponent from '../gem/components/FeedElement.component';
 import HeaderProfile from '../../components/HeaderProfile';
-import {onlyGemForThisCategory, onlyGemForThisUser, onlySaveForThisUser} from '../../utilities/extends/array.utils';
+import {
+    onlyGemForThisCategory,
+    onlyGemForThisUser,
+    onlySaveForThisUser,
+    sortGems
+} from '../../utilities/extends/array.utils';
+import {getAllGems, getAllSaved} from '../gem/services/gem.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -59,7 +66,8 @@ export class DetailFriendScreen extends AbstractGemScreen {
         if (props.navigation.state && props.navigation.state.params && props.navigation.state.params.user) {
             this.state = {
                 user: props.navigation.state.params.user,
-                tabSelected: 'gems'
+                tabSelected: 'gems',
+                loading: false
             };
         }
     }
@@ -85,13 +93,43 @@ export class DetailFriendScreen extends AbstractGemScreen {
                                       displayWithImage={false}/>);
     };
 
+    refreshList = () => {
+        this.setState({
+            loading: true
+        });
+        this.callForLoadGem();
+    };
+
+    callForLoadGem = () => {
+        getAllSaved().then((saved) => {
+            this.props.dispatch({
+                type: types.LOAD_SAVED_GEM_SUCCESS,
+                saved: sortGems(saved)
+            });
+        });
+
+        getAllGems().then((gems) => {
+            this.props.dispatch({
+                type: types.LOAD_GEM_SUCCESS,
+                gems: sortGems(gems)
+            });
+
+            // TODO bad place
+            this.setState({
+                loading: false
+            });
+        });
+    };
+
     renderListGems = () => {
         console.log('Render only the gem list');
         return (
             <ListView data={this.props.gemStore
-                        .filter((gem) => onlyGemForThisUser(gem, this.state.user.id))
-                        .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
+                .filter((gem) => onlyGemForThisUser(gem, this.state.user.id))
+                .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                       style={{listContent: {backgroundColor: 'transparent'}}}
+                      loading={this.state.loading}
+                      onRefresh={this.refreshList}
                       renderRow={this.renderRowView}/>);
     };
 
@@ -99,9 +137,11 @@ export class DetailFriendScreen extends AbstractGemScreen {
         console.log('Render only the save list');
         return (
             <ListView data={this.props.savedStore
-                        .filter((gem) => onlySaveForThisUser(gem, this.state.user.id))
-                        .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
+                .filter((gem) => onlySaveForThisUser(gem, this.state.user.id))
+                .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
                       style={{listContent: {backgroundColor: 'transparent'}}}
+                      loading={this.state.loading}
+                      onRefresh={this.refreshList}
                       renderRow={this.renderRowView}/>);
     };
 

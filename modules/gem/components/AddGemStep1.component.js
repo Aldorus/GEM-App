@@ -6,6 +6,7 @@ import ExternalSearchMovie from '../../search/services/ExternalSearchMovie.servi
 import ExternalSearchBook from '../../search/services/ExternalSearchBook.service';
 import searchImage from '../../../assets/icons/search@2x.png';
 import ExternalSearchResults from '../../search/components/ExternalSearchResults.conponent';
+import ExternalSearchAlbum from '../../search/services/ExternalSearchAlbum.service';
 
 const styles = StyleSheet.create({
     container: {
@@ -71,6 +72,7 @@ export default class AddGemStep1 extends React.Component {
             Promise.all([
                 this.searchEntity(value, this.currentCall),
                 this.searchPlaces(value, this.currentCall),
+                // this.searchAlbum(value, this.currentCall),
                 this.searchMovies(value, this.currentCall),
                 this.searchBooks(value, this.currentCall)
             ]).then((partialResults) => {
@@ -80,6 +82,10 @@ export default class AddGemStep1 extends React.Component {
             });
         }
         this.setState({value});
+    };
+
+    searchAlbum = (value, index) => {
+        return ExternalSearchAlbum(value, index);
     };
 
     searchEntity = (value, index) => {
