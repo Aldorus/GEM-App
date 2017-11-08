@@ -1,3 +1,5 @@
+import {Dimensions} from 'react-native';
+
 export const FromLeft = (index, position) => {
     const inputRange = [index - 1, index, index + 1];
     const opacity = position.interpolate({
@@ -7,7 +9,7 @@ export const FromLeft = (index, position) => {
 
     const translateX = position.interpolate({
         inputRange: inputRange,
-        outputRange: [100, 0, 0]
+        outputRange: [Dimensions.get('window').width, 0, 0]
     });
 
     return {

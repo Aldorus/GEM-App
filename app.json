@@ -5,7 +5,7 @@
         "slug": "gem",
         "privacy": "public",
         "sdkVersion": "18.0.0",
-        "version": "1.0.12",
+        "version": "1.0.13",
         "orientation": "portrait",
         "primaryColor": "#cccccc",
         "icon": "./assets/icons/app-icon.png",
@@ -29,7 +29,7 @@
         },
         "android": {
             "package": "com.guillaume.gem",
-            "versionCode": 14
+            "versionCode": 15
         },
         "hooks": {
             "postPublish": [

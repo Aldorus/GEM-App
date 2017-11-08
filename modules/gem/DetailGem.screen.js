@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     image: {
         alignSelf: 'stretch',
-        height: 200,
+        height: 250,
         zIndex: 0
     },
     actionButton: {
@@ -43,6 +43,15 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 8,
         marginBottom: 20
+    },
+    actionDitchButton: {
+        marginLeft: 20,
+        marginTop: 15,
+        marginRight: 20,
+        paddingTop: 8,
+        paddingBottom: 8,
+        marginBottom: 20,
+        textDecorationLine: 'underline'
     }
 });
 
@@ -173,8 +182,8 @@ export class DetailGemScreen extends AbstractGemScreen {
                         <StyledText
                             style={{
                                 paddingLeft: 15,
-                                paddingTop: 0,
-                                paddingBottom: 10,
+                                paddingTop: 5,
+                                paddingBottom: 20,
                                 color: '#9FA3FD',
                                 fontFamily: 'celia-bold'
                             }}>
@@ -187,7 +196,6 @@ export class DetailGemScreen extends AbstractGemScreen {
     };
 
     renderGemItAction = () => {
-        console.log(this.state.gem);
         if (!this.state.gem.experienced_at) {
             return <TouchableHighlight underlayColor={Colors.tintColor}
                                        style={styles.actionButton}
@@ -195,7 +203,7 @@ export class DetailGemScreen extends AbstractGemScreen {
                 <View>
                     <StyledText>Gem It</StyledText>
                 </View>
-            </TouchableHighlight>
+            </TouchableHighlight>;
         }
     };
 
@@ -204,9 +212,11 @@ export class DetailGemScreen extends AbstractGemScreen {
             return <View style={{alignItems: 'center', alignSelf: 'stretch', paddingBottom: 30}}>
                 {this.renderGemItAction()}
                 <TouchableHighlight underlayColor={Colors.tintColor}
-                                    style={styles.actionButton}
-                                    onPress={this.onDelete}><View>
-                    <StyledText>Ditch It</StyledText></View>
+                                    style={styles.actionDitchButton}
+                                    onPress={this.onDelete}>
+                    <View>
+                        <StyledText style={{textDecorationLine: 'underline'}}>Ditch It</StyledText>
+                    </View>
                 </TouchableHighlight>
             </View>;
         }

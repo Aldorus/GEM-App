@@ -1,3 +1,4 @@
+import {Dimensions} from 'react-native';
 
 export const FromBottom = (index, position) => {
     const inputRange = [index - 1, index, index + 1];
@@ -8,7 +9,7 @@ export const FromBottom = (index, position) => {
 
     const translateY = position.interpolate({
         inputRange: inputRange,
-        outputRange: [100, 0, 0]
+        outputRange: [Dimensions.get('window').height, 0, 0]
     });
 
     return {

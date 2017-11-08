@@ -2,6 +2,7 @@ import {FromLeft} from './FromLeft.transition';
 import {FromBottom} from './FromBottom.transition';
 import {FromTop} from './FromTop.transition';
 import {OpacityTransition} from './Opacity.transition';
+import {FromRight} from './FromRight.transition';
 
 export const TransitionEngine = () => {
     return {
@@ -15,6 +16,7 @@ export const TransitionEngine = () => {
 
             return {
                 fromLeft: FromLeft(index, position),
+                fromRight: FromRight(index, position),
                 fromBottom: FromBottom(index, position),
                 fromTop: FromTop(index, position),
                 opactity: OpacityTransition(index, position),

@@ -98,7 +98,7 @@ export default class FeedElementComponent extends React.Component {
                                  }}
                                  source={{uri: this.props.gemData.user.avatar_url}}/>
             );
-        } else if (this.props.displayReferer && this.props.gemData.referrer) {
+        } else if (this.props.displayReferer && this.props.gemData.referrer && this.props.gemData.referrer.avatar_url) {
             return (<ImageLoader borderRadius={15}
                                  style={styles.avatar}
                                  indicator={ProgressBar}
@@ -114,7 +114,7 @@ export default class FeedElementComponent extends React.Component {
                                  indicatorProps={{
                                      color: Colors.colorText
                                  }}
-                                 source={{uri: this.props.gemData.user.avatar_url}}/>
+                                 source={{uri: this.props.userStore.avatar_url}}/>
             );
         }
         return null;
