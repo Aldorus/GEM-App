@@ -149,10 +149,7 @@ export class TopSortAndFilter extends React.Component {
 
                 <BoldText style={styles.padding}>View as</BoldText>
                 <View style={{
-                    flexDirection: 'row',
-                    alignSelf: 'stretch',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                    flexDirection: 'row'
                 }}>
                     {/*TODO Problem with text center*/}
                     <StyledButton onPress={() => this.onDisplayStyleChange(listDisplay[0])}
