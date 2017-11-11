@@ -1,3 +1,4 @@
+import {AsyncStorage} from 'react-native';
 import * as types from '../../../constants/ActionTypes';
 import {copyObject} from '../../../utilities/extends/object.utils';
 
@@ -12,11 +13,13 @@ export const userReducer = (state = defaultValue, action) => {
         case types.DISPLAY_LIST_WITH_IMAGE:
             var stateCopy = copyObject(state);
             stateCopy.displayListWithImage = true;
+            AsyncStorage.setItem('current_user', JSON.stringify(stateCopy));
             state = stateCopy;
             break;
         case types.DISPLAY_LIST_WITHOUT_IMAGE:
             var stateCopy = copyObject(state);
             stateCopy.displayListWithImage = false;
+            AsyncStorage.setItem('current_user', JSON.stringify(stateCopy));
             state = stateCopy;
             break;
         case types.CATEGORY_FILTER:

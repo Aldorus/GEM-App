@@ -1,4 +1,5 @@
 import uuidv4 from 'uuid/v4';
+import {Segment} from 'expo';
 import {gemFetch} from '../../../utilities/authFetch.service';
 import {Config} from '../../../constants/Config';
 import {copyObject} from '../../../utilities/extends/object.utils';
@@ -71,6 +72,11 @@ export const createExperience = (item, gem, referrer) => {
 };
 
 export const createGem = (gem, user, referrer) => {
+    if (gem.word) {
+        Segment.trackWithProperties('event:CreateGem', gem);
+    } else {
+        Segment.trackWithProperties('event:CreateSave', gem);
+    }
     return createItem(gem).then((responseCreateItem) => {
         return createExperience(responseCreateItem, gem, referrer).then((responseCreateExp) => {
             const response = copyObject(responseCreateExp);
@@ -82,6 +88,7 @@ export const createGem = (gem, user, referrer) => {
 };
 
 export const fulfillGem = (experience) => {
+    Segment.trackWithProperties('event:Transform', experience);
     return gemFetch(`${Config.WS_ROOT}experiences/${experience.id}/fulfill`, {
         method: 'POST'
     }).then(() => {
@@ -104,6 +111,7 @@ export const getAllSaved = (() => {
 });
 
 export const deleteGem = (gem) => {
+    Segment.trackWithProperties('event:Delete', gem);
     return gemFetch(`${Config.WS_ROOT}experiences/${gem.id}`, {
         method: 'DELETE'
     }).then(() => {

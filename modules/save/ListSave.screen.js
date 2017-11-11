@@ -7,6 +7,7 @@ import FeedElementComponent from '../gem/components/FeedElement.component';
 import {onlyGemForThisCategory, onlySaveForThisUser, sortGems} from '../../utilities/extends/array.utils';
 import * as types from '../../constants/ActionTypes';
 import {getAllSaved} from '../gem/services/gem.service';
+import EmptyMessage from '../../components/EmptyMessage';
 
 const styles = StyleSheet.create({
     container: {
@@ -70,16 +71,21 @@ export class ListSaveScreen extends AbstractGemScreen {
     };
 
     render() {
+        const listGem = this.props.savedStore
+            .filter(gem => onlySaveForThisUser(gem, this.props.userStore.id))
+            .filter(gem => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter));
+
         return super.render(
             <View style={styles.container}>
-                <ListView
-                    loading={this.state.loading}
-                    onRefresh={this.refreshList}
-                    data={this.props.savedStore
-                        .filter((gem) => onlySaveForThisUser(gem, this.props.userStore.id))
-                        .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
-                    style={{listContent: {backgroundColor: 'transparent'}}}
-                    renderRow={this.renderRowView}/>
+                {listGem.length ?
+                    <ListView
+                        loading={this.state.loading}
+                        onRefresh={this.refreshList}
+                        data={listGem}
+                        style={{listContent: {backgroundColor: 'transparent'}}}
+                        renderRow={this.renderRowView}/> :
+                    <EmptyMessage
+                        message="Your must-do will appear here! Give it a try with this big button"/>}
             </View>
         );
     }

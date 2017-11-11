@@ -83,7 +83,7 @@ export class ListUsersScreen extends AbstractGemScreen {
     renderList = () => {
         return (
             <FlatList style={{flex: 1}}
-                      data={this.state.listUsers}
+                      data={this.state.listUsers ? this.state.listUsers.sort((a, b) => a.email.localeCompare(b.email)) : []}
                       keyExtractor={this.keyExtractor}
                       renderItem={this.renderUser}/>
         );

@@ -15,6 +15,7 @@ import {
     sortGems
 } from '../../utilities/extends/array.utils';
 import {getAllGems, getAllSaved} from '../gem/services/gem.service';
+import EmptyMessage from '../../components/EmptyMessage';
 
 const styles = StyleSheet.create({
     container: {
@@ -122,27 +123,32 @@ export class DetailFriendScreen extends AbstractGemScreen {
     };
 
     renderListGems = () => {
-        console.log('Render only the gem list');
-        return (
-            <ListView data={this.props.gemStore
-                .filter((gem) => onlyGemForThisUser(gem, this.state.user.id))
-                .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
+        const listGem = this.props.gemStore
+            .filter((gem) => onlyGemForThisUser(gem, this.state.user.id))
+            .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter));
+        return listGem.length ?
+            <ListView data={listGem}
                       style={{listContent: {backgroundColor: 'transparent'}}}
                       loading={this.state.loading}
                       onRefresh={this.refreshList}
-                      renderRow={this.renderRowView}/>);
+                      renderRow={this.renderRowView}/> :
+            <EmptyMessage
+                message="Your friend Gems list will appear here! Go find what your friend want to share with you."/>;
     };
 
     renderListSaved = () => {
-        console.log('Render only the save list');
-        return (
-            <ListView data={this.props.savedStore
-                .filter((gem) => onlySaveForThisUser(gem, this.state.user.id))
-                .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter))}
+        const listSaved = this.props.savedStore
+            .filter((gem) => onlySaveForThisUser(gem, this.state.user.id))
+            .filter((gem) => onlyGemForThisCategory(gem, this.props.userStore.categoryFilter));
+
+        return listSaved.length ?
+            <ListView data={listSaved}
                       style={{listContent: {backgroundColor: 'transparent'}}}
                       loading={this.state.loading}
                       onRefresh={this.refreshList}
-                      renderRow={this.renderRowView}/>);
+                      renderRow={this.renderRowView}/> :
+            <EmptyMessage
+                message="Your friend must-do will appear here! Go find what your friend want to try."/>;
     };
 
     render() {

@@ -73,7 +73,7 @@ export class IntroExampleScreen extends React.Component {
                     <BoldText style={{
                         lineHeight: 25,
                         fontSize: 18
-                    }}>five-star experiences</BoldText>
+                    }}>five-star experiences.</BoldText>
                 </StyledText>
             </View>
         </GradientBackground>);
@@ -99,7 +99,6 @@ export class IntroExampleScreen extends React.Component {
                         lineHeight: 25,
                         fontSize: 18
                     }}>Discover</BoldText>{'\n'}
-                    Find out about{'\n'}
                     the must dos around you{'\n'}
                     <BoldText style={{
                         lineHeight: 25,

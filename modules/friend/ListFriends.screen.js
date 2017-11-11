@@ -73,7 +73,6 @@ export class AddFriendsScreen extends AbstractGemScreen {
     };
 
     render = () => {
-        console.log('User', this.props.userStore);
         return super.render(this.renderList());
     }
 }

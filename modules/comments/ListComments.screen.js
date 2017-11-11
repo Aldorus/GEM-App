@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import {ListView} from '@shoutem/ui';
 import AbstractGemScreen from '../../AbstractGem.screen';
 import {createComments, getAllCom} from './comment.service';
@@ -14,12 +14,11 @@ import {getAllUsers} from '../auth/users.service';
 const styles = StyleSheet.create({
     scroll: {
         flex: 1,
-        alignSelf: 'stretch',
+        alignSelf: 'stretch'
     },
     container: {
         flex: 1,
-        alignSelf: 'stretch',
-        backgroundColor: '#fff'
+        alignSelf: 'stretch'
     },
     wrapperInput: {
         flexDirection: 'row',
@@ -31,18 +30,18 @@ const styles = StyleSheet.create({
     },
     input: {
         borderRadius: 20,
-        padding: 10,
         flex: 1,
         paddingLeft: 20,
         height: 40,
+        paddingTop: 10,
         marginRight: 15,
         alignSelf: 'stretch',
         fontFamily: 'celia',
+        alignItems: 'center',
         backgroundColor: 'white'
     }
 });
 
-// TODO
 export class ListCommentsScreen extends AbstractGemScreen {
     navigationOptions = {
         stateName: 'List Comments',
@@ -59,16 +58,31 @@ export class ListCommentsScreen extends AbstractGemScreen {
         super(props);
         this.state = {
             gem: props.navigation.state.params.gem,
-            comments: []
+            comments: [],
+            loading: false
         };
     }
+
+    callForLoadComments = () => {
+        getAllCom(this.state.gem).then((comments) => {
+            this.setState({
+                comments,
+                loading: false
+            });
+        });
+    };
+
+    refreshList = () => {
+        this.setState({
+            loading: true
+        });
+        this.callForLoadComments();
+    };
 
     componentDidMount = () => {
         getAllUsers().then((users) => {
             this.setState({users});
-            getAllCom(this.state.gem).then((comments) => {
-                this.setState({comments});
-            });
+            this.callForLoadComments();
         });
     };
 
@@ -81,7 +95,6 @@ export class ListCommentsScreen extends AbstractGemScreen {
             createComments(this.state.gem, message).then((comment) => {
                 const copyComment = copyObject(comment);
                 copyComment.user = this.props.userStore;
-                console.log('Copy', copyComment);
                 const copyComments = copyArray(this.state.comments);
                 copyComments.push(copyComment);
                 this.setState({
@@ -104,7 +117,14 @@ export class ListCommentsScreen extends AbstractGemScreen {
             <KeyboardAwareScrollView style={styles.scroll}>
                 <View style={styles.container}>
                     <ListView data={this.state.comments}
-                              style={{listContent: {backgroundColor: 'transparent'}}}
+                              loading={this.state.loading}
+                              onRefresh={this.refreshList}
+                              style={{
+                                  listContent: {
+                                      height: Dimensions.get('window').height - 126,
+                                      backgroundColor: 'white'
+                                  }
+                              }}
                               renderRow={this.renderRowView}/>
                     <GradientBackground style={styles.wrapperInput}>
                         <TextInput placeholder={'Add a comment'}

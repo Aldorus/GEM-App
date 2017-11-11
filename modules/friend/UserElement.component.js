@@ -43,13 +43,14 @@ export default class UserElementComponent extends React.Component {
                                 underlayColor={Colors.tintColor}
                                 style={[styles.container, this.props.style]}>
                 <View style={styles.wrapper}>
-                    <ImageLoader borderRadius={15}
-                                 style={styles.avatar}
-                                 indicator={ProgressBar}
-                                 indicatorProps={{
-                                     color: Colors.colorText
-                                 }}
-                                 source={{uri: this.props.user.avatar_url}}/>
+                    {this.props.user && this.props.user.avatar_url ?
+                        <ImageLoader borderRadius={15}
+                                     style={styles.avatar}
+                                     indicator={ProgressBar}
+                                     indicatorProps={{
+                                         color: Colors.colorText
+                                     }}
+                                     source={{uri: this.props.user.avatar_url}}/> : null}
                     <BoldText style={styles.name}>{this.props.user.first_name} {this.props.user.last_name}</BoldText>
                 </View>
             </TouchableHighlight>

@@ -18,7 +18,6 @@ export class AppGem extends React.Component {
 
     getCurrentUser = () => {
         AsyncStorage.getItem('current_user').then((user) => {
-            console.log('user loaded', user);
             this.user = JSON.parse(user);
             this.props.dispatch({
                 type: types.LOAD_USER,
