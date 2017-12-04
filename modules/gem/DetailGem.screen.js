@@ -15,6 +15,7 @@ import {getAllUsers} from '../auth/users.service';
 import {getAllCom} from '../comments/comment.service';
 import BoldText from '../../components/BoldText';
 import * as types from '../../constants/ActionTypes';
+import {LOAD_COMMENT_SUCCESS} from '../../constants/ActionTypes';
 import {createExperience, deleteGem, fulfillGem} from './services/gem.service';
 
 const styles = StyleSheet.create({
@@ -79,7 +80,11 @@ export class DetailGemScreen extends AbstractGemScreen {
         getAllUsers().then((users) => {
             this.setState({users});
             getAllCom(this.state.gem).then((comments) => {
-                this.setState({comments: comments.slice(0, 3)});
+                console.log(comments);
+                this.props.dispatch({
+                    type: LOAD_COMMENT_SUCCESS,
+                    comments: comments
+                });
             });
         });
     };
@@ -159,40 +164,40 @@ export class DetailGemScreen extends AbstractGemScreen {
     };
 
     renderRowView = (rowData) => {
-        const rowDataWithUser = copyObject(rowData);
-        rowDataWithUser.user = this.state.users.find((user) => {
-            return rowDataWithUser.user_id === user.id;
-        });
-        return <CommentElement comment={rowDataWithUser} displayAvatar={false}/>;
+        if (this.state.users) {
+            const rowDataWithUser = copyObject(rowData);
+            rowDataWithUser.user = this.state.users.find((user) => {
+                return rowDataWithUser.user_id === user.id;
+            });
+            return <CommentElement comment={rowDataWithUser} displayAvatar={false}/>;
+        }
+        return null;
     };
 
     renderComments = () => {
-        if (!this.state.gem.comments) {
-            return <View>
-                {this.state.gem.description ?
-                    <StyledText style={{paddingLeft: 15, paddingTop: 0, paddingBottom: 0, marginBottom: 0}}>
-                        <BoldText>{this.state.gem.user.first_name}</BoldText> {this.state.gem.description}
-                    </StyledText> : null
-                }
-                <ListView data={this.state.comments}
-                          style={{listContent: {backgroundColor: 'transparent'}}}
-                          renderRow={this.renderRowView}/>
-                <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
-                    <View>
-                        <StyledText
-                            style={{
-                                paddingLeft: 15,
-                                paddingTop: 5,
-                                paddingBottom: 20,
-                                color: '#9FA3FD',
-                                fontFamily: 'celia-bold'
-                            }}>
-                            View and add comment</StyledText>
-                    </View>
-                </TouchableHighlight>
-            </View>;
-        }
-        return this.state.gem.comments.map(this.renderComment);
+        return <View>
+            {this.state.gem.description ?
+                <StyledText style={{paddingLeft: 15, paddingTop: 0, paddingBottom: 0, marginBottom: 0}}>
+                    <BoldText>{this.state.gem.user.first_name}</BoldText> {this.state.gem.description}
+                </StyledText> : null
+            }
+            <ListView data={this.props.commentStore.slice(0, 3)}
+                      style={{listContent: {backgroundColor: 'transparent'}}}
+                      renderRow={this.renderRowView}/>
+            <TouchableHighlight underlayColor={Colors.tintColor} onPress={this.goOnComments}>
+                <View>
+                    <StyledText
+                        style={{
+                            paddingLeft: 15,
+                            paddingTop: 5,
+                            paddingBottom: 20,
+                            color: '#9FA3FD',
+                            fontFamily: 'celia-bold'
+                        }}>
+                        View and add comment</StyledText>
+                </View>
+            </TouchableHighlight>
+        </View>;
     };
 
     renderGemItAction = () => {
@@ -262,7 +267,8 @@ export class DetailGemScreen extends AbstractGemScreen {
 
 const mapStores = (store) => {
     return {
-        userStore: store.userReducer
+        userStore: store.userReducer,
+        commentStore: store.commentReducer
     };
 };
 

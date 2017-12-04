@@ -5,6 +5,7 @@ import AbstractGemScreen from '../../AbstractGem.screen';
 import QuickSearchComponent from '../gem/components/QuickSearch.component';
 import {getAllFriends} from '../auth/users.service';
 import UserElementComponent from './UserElement.component';
+import * as types from '../../constants/ActionTypes';
 
 export class AddFriendsScreen extends AbstractGemScreen {
     navigationOptions = {
@@ -25,6 +26,9 @@ export class AddFriendsScreen extends AbstractGemScreen {
     }
 
     componentDidMount = () => {
+        this.props.dispatch({
+            type: types.RESET_CATEGORY_FILTER
+        });
         super.componentDidMount();
         getAllFriends(this.props.userStore).then((listFriends) => {
             this.listFriends = listFriends;

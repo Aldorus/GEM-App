@@ -60,6 +60,12 @@ export class ProfileScreen extends AbstractGemScreen {
         };
     }
 
+    componentWillMount = () => {
+        this.props.dispatch({
+            type: types.RESET_CATEGORY_FILTER
+        });
+    };
+
     tabDisplayChanged = (tab) => {
         this.setState({
             tabSelected: tab

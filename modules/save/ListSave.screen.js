@@ -34,6 +34,12 @@ export class ListSaveScreen extends AbstractGemScreen {
         };
     }
 
+    componentWillMount = () => {
+        this.props.dispatch({
+            type: types.RESET_CATEGORY_FILTER
+        });
+    };
+
     callForLoadGem = () => {
         getAllSaved().then((saved) => {
             this.props.dispatch({

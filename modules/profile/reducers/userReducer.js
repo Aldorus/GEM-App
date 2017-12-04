@@ -27,6 +27,11 @@ export const userReducer = (state = defaultValue, action) => {
             stateCopy.categoryFilter = action.category.label;
             state = stateCopy;
             break;
+        case types.RESET_CATEGORY_FILTER:
+            var stateCopy = copyObject(state);
+            stateCopy.categoryFilter = 'All';
+            state = stateCopy;
+            break;
         default:
             return state;
     }

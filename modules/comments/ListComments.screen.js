@@ -8,8 +8,9 @@ import {createComments, getAllCom} from './comment.service';
 import CommentElement from './CommentElement.component';
 import GradientBackground from '../../components/GradientBackground';
 import Colors from '../../constants/Colors';
-import {copyArray, copyObject} from '../../utilities/extends/object.utils';
+import {copyObject} from '../../utilities/extends/object.utils';
 import {getAllUsers} from '../auth/users.service';
+import {ADD_COMMENT, LOAD_COMMENT_SUCCESS} from '../../constants/ActionTypes';
 
 const styles = StyleSheet.create({
     scroll: {
@@ -58,15 +59,17 @@ export class ListCommentsScreen extends AbstractGemScreen {
         super(props);
         this.state = {
             gem: props.navigation.state.params.gem,
-            comments: [],
             loading: false
         };
     }
 
     callForLoadComments = () => {
         getAllCom(this.state.gem).then((comments) => {
+            this.props.dispatch({
+                type: LOAD_COMMENT_SUCCESS,
+                comment: comments
+            });
             this.setState({
-                comments,
                 loading: false
             });
         });
@@ -82,7 +85,6 @@ export class ListCommentsScreen extends AbstractGemScreen {
     componentDidMount = () => {
         getAllUsers().then((users) => {
             this.setState({users});
-            this.callForLoadComments();
         });
     };
 
@@ -95,10 +97,9 @@ export class ListCommentsScreen extends AbstractGemScreen {
             createComments(this.state.gem, message).then((comment) => {
                 const copyComment = copyObject(comment);
                 copyComment.user = this.props.userStore;
-                const copyComments = copyArray(this.state.comments);
-                copyComments.push(copyComment);
-                this.setState({
-                    comments: copyComments
+                this.props.dispatch({
+                    type: ADD_COMMENT,
+                    comment: copyComment
                 });
             });
         }
@@ -113,10 +114,11 @@ export class ListCommentsScreen extends AbstractGemScreen {
     };
 
     render() {
+        console.log('render');
         return super.render(
             <KeyboardAwareScrollView style={styles.scroll}>
                 <View style={styles.container}>
-                    <ListView data={this.state.comments}
+                    {this.state.users ? <ListView data={this.props.commentStore}
                               loading={this.state.loading}
                               onRefresh={this.refreshList}
                               style={{
@@ -125,7 +127,7 @@ export class ListCommentsScreen extends AbstractGemScreen {
                                       backgroundColor: 'white'
                                   }
                               }}
-                              renderRow={this.renderRowView}/>
+                              renderRow={this.renderRowView}/> : null}
                     <GradientBackground style={styles.wrapperInput}>
                         <TextInput placeholder={'Add a comment'}
                                    style={styles.input}
@@ -146,7 +148,8 @@ export class ListCommentsScreen extends AbstractGemScreen {
 
 const mapStores = (store) => {
     return {
-        userStore: store.userReducer
+        userStore: store.userReducer,
+        commentStore: store.commentReducer
     };
 };
 

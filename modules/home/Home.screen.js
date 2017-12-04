@@ -56,6 +56,9 @@ export class HomeScreen extends AbstractGemScreen {
     };
 
     componentWillMount = () => {
+        this.props.dispatch({
+            type: types.RESET_CATEGORY_FILTER
+        });
         super.componentDidMount();
         this.callForLoadGem();
     };
